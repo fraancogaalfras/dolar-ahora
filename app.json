@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "dolar-ahora",
+    "slug": "dolar-ahora",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": ""
+    },
+    "plugins": [
+      ["expo-router"],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Virgil.ttf"]
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
