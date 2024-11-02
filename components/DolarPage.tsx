@@ -37,11 +37,12 @@ export default function DolarPage() {
 
   return (
     <View style={styles.main_wrapper}>
-      <View style={{ width: "100%", height: "100%" }}>
+      <View style={{ width: "100%", height: "100%"}}>
         <FlatList
           data={data}
           renderItem={({ item }) => <CardDolar data={item} />}
-          contentContainerStyle={{ gap: 30 }}
+          contentContainerStyle={{ gap: 30, alignItems: 'center'}}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -50,6 +51,7 @@ export default function DolarPage() {
 
 const styles = StyleSheet.create({
   main_wrapper: {
+    paddingVertical: 50,
     padding: 10,
     fontFamily: "Virgil",
     flex: 1,

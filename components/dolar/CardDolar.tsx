@@ -31,7 +31,7 @@ const CardDolar = ({ data }: { data: Idolares }) => {
 
 const styles = StyleSheet.create({
   main_wrapper: {
-    width: "80%",
+    width: 300,
     borderWidth: 2,
     borderColor: "#3a3a3a",
     height: 125,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   footer: {
-    height: 40,
+    height: 48,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    rowGap: 2,
     height: "100%",
   },
   right: {
@@ -84,10 +83,11 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   variation: {
-    backgroundColor: "#2f9e44",
+    // backgroundColor: "#2f9e44",
     padding: 2,
     paddingHorizontal: 5,
     borderRadius: 25,
+    marginTop: -5,
   },
   variation_text: {
     fontSize: 10,
