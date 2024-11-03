@@ -1,51 +1,23 @@
-import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import { Idolares } from "@/interfaces/types";
-import CardDolar from "./dolar/CardDolar";
-import { HandleDate } from "@/utils/date";
+import { FlatList, StyleSheet, View } from 'react-native';
+import { Idolares, IdolaresHistorico } from '@/interfaces/types';
+import CardDolar from './dolar/CardDolar';
+import getDolarVariation from '@/utils/variation';
+import { LinearGradient } from 'expo-linear-gradient';
 
-export default function DolarPage() {
-  const [data, setData] = useState<Idolares[]>([
-    {
-      moneda: "",
-      casa: "",
-      nombre: "",
-      compra: 0,
-      venta: 0,
-      fechaActualizacion: "",
-    },
-  ]);
-  const [error, setError] = useState("");
-
-  const getDolarData = async () => {
-    try {
-      const response = await fetch("https://dolarapi.com/v1/dolares");
-      if (!response.ok) {
-        setError("Error de conexion");
-        return;
-      }
-      const result = await response.json();
-      setData(result);
-    } catch (error) {
-      setError("Error interno");
-    }
-  };
-
-  useEffect(() => {
-    getDolarData();
-  }, []);
+export default function DolarPage({ dataToday, dataYesterday }: { dataToday: Idolares[]; dataYesterday: IdolaresHistorico[] }) {
+  const variations = getDolarVariation(dataToday, dataYesterday);
 
   return (
-    <View style={styles.main_wrapper}>
-      <View style={{ width: "100%", height: "100%"}}>
+    <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']} style={styles.main_wrapper}>
+      <View style={{ width: '100%', height: '100%' }}>
         <FlatList
-          data={data}
-          renderItem={({ item }) => <CardDolar data={item} />}
-          contentContainerStyle={{ gap: 30, alignItems: 'center'}}
+          data={dataToday}
+          renderItem={({ item }) => <CardDolar data={item} variation={variations[item.casa]} />}
+          contentContainerStyle={{ gap: 30, alignItems: 'center' }}
           showsVerticalScrollIndicator={false}
         />
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -53,10 +25,10 @@ const styles = StyleSheet.create({
   main_wrapper: {
     paddingVertical: 50,
     padding: 10,
-    fontFamily: "Virgil",
+    fontFamily: 'Virgil',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#191919",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(25 25 25)',
   },
 });
