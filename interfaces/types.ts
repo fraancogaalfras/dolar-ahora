@@ -1,4 +1,4 @@
-export interface Idolares {
+export interface Idolars {
   moneda: string;
   casa: string;
   nombre: string;
@@ -7,14 +7,14 @@ export interface Idolares {
   fechaActualizacion: string;
 }
 
-export interface IdolaresHistorico {
+export interface IhistoricDolars {
   casa: string;
   compra: number;
   venta: number;
   fecha: string;
 }
 
-export interface IdolaresBind {
+export interface IdolarsBind {
   moneda: string;
   casa: string;
   nombre: string;
@@ -28,4 +28,16 @@ export interface IdolaresBind {
       venta: number;
     };
   };
+}
+
+export interface IdolarsDates {
+  [fecha: string]: {
+    compra: number;
+    venta: number;
+  };
+}
+
+export interface Ierror {
+  message: string;
+  status: number;
 }

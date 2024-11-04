@@ -1,21 +1,13 @@
 import { FlatList, StyleSheet, View } from 'react-native';
-import { Idolares, IdolaresHistorico } from '@/interfaces/types';
 import CardDolar from './dolar/CardDolar';
-import getDolarVariation from '@/utils/variation';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Idolars, IdolarsBind } from '@/interfaces/types';
 
-export default function DolarPage({ dataToday, dataYesterday }: { dataToday: Idolares[]; dataYesterday: IdolaresHistorico[] }) {
-  const variations = getDolarVariation(dataToday, dataYesterday);
-
+export default function DolarPage({ data }: { data: IdolarsBind[]}) {
   return (
     <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']} style={styles.main_wrapper}>
       <View style={{ width: '100%', height: '100%' }}>
-        <FlatList
-          data={dataToday}
-          renderItem={({ item }) => <CardDolar data={item} variation={variations[item.casa]} />}
-          contentContainerStyle={{ gap: 30, alignItems: 'center' }}
-          showsVerticalScrollIndicator={false}
-        />
+        <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />
       </View>
     </LinearGradient>
   );

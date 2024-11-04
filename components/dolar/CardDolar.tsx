@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Idolares } from '@/interfaces/types';
+import { Idolars, IdolarsBind } from '@/interfaces/types';
 import VariationDolar from './VariationDolar';
 import GraphDolar from './GraphDolar';
 
-const CardDolar = ({ data, variation }: { data: Idolares; variation: string }) => {
+const CardDolar = ({ data }: { data: IdolarsBind }) => {
   return (
     <View key={data.nombre} style={styles.main_wrapper}>
       <View style={styles.header}>
@@ -13,12 +13,12 @@ const CardDolar = ({ data, variation }: { data: Idolares; variation: string }) =
             <Text style={[styles.text, styles.price_text]}>{data.venta}</Text>
           </View>
           <View style={styles.variation}>
-            <VariationDolar variation={variation} />
+            <VariationDolar variation={data.variacion} />
           </View>
         </View>
         <View style={styles.right}>
           <View style={styles.graph}>
-            <GraphDolar />
+            <GraphDolar data={data} />
           </View>
         </View>
       </View>
