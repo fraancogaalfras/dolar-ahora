@@ -1,32 +1,54 @@
 import { IdolarsBind } from '@/interfaces/types';
 import { HandleDate } from '@/utils/date';
-import { LineChart } from 'react-native-gifted-charts';
+import { useState } from 'react';
+import { View } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
 export default function GraphDolar({ data }: { data: IdolarsBind }) {
-  const graphData = [{ value: data?.venta }];
+  const [chartParentWidth, setChartParentWidth] = useState(0);
+  const [chartParentHeight, setChartParentHeight] = useState(0);
+  const graphData = [data?.venta];
   const date = new HandleDate();
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     date.subtractDays(1);
-    graphData.push({ value: data.historico[date.getFormattedDateDash()]?.venta });
+    graphData.push(data.historico[date.getFormattedDateDash()]?.venta);
   }
-  console.log(parseFloat(data.variacion));
-
   return (
-    <LineChart
-      data={graphData.toReversed()}
-      thickness={4}
-      color={parseFloat(data.variacion) > 0 ? 'red' : 'green'}
-      hideDataPoints
-      adjustToWidth
-      height={500}
-      width={100}
-      initialSpacing={0}
-      backgroundColor="transparent"
-      yAxisColor="transparent"
-      xAxisColor="transparent"
-      hideAxesAndRules
-      yAxisLabelWidth={10}
-      onPress={undefined}
-    />
+    <View
+      style={{ width: '100%', height: '100%' }}
+      onLayout={({ nativeEvent }) => {
+        setChartParentWidth(nativeEvent.layout.width - 10);
+        setChartParentHeight(nativeEvent.layout.height - 10);
+      }}
+    >
+      <LineChart
+        data={{
+          labels: ['', '', '', '', ''],
+          datasets: [
+            {
+              data: graphData.toReversed(),
+            },
+          ],
+        }}
+        width={chartParentWidth}
+        height={chartParentHeight}
+        yAxisLabel=""
+        yAxisSuffix=""
+        withHorizontalLines={false}
+        withVerticalLines={false}
+        withDots={false}
+        chartConfig={{
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientToOpacity: 0,
+          fillShadowGradientFrom: 'transparent',
+          fillShadowGradientTo: 'transparent',
+          fillShadowGradientFromOpacity: 0,
+          fillShadowGradientToOpacity: 0,
+          color: () => (parseFloat(data.variacion) > 0 ? 'rgb(255 0 0)' : 'rgb(0 255 49)'),
+        }}
+        style={{ paddingRight: 0, paddingBottom: 5 }}
+        bezier
+      />
+    </View>
   );
 }

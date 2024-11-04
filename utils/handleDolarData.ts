@@ -10,7 +10,7 @@ export class HandleDolarData {
   public bindPreviousData(previousData: IhistoricDolars[]) {
     let newDataMap = new Map<string, any>();
     const yesterday = new HandleDate();
-    yesterday.subtractDays(1);
+    yesterday.subtractDays(5);
 
     for (let i = 0; i < this.data.length; i++) {
       const currentCasa = this.data[i].casa;

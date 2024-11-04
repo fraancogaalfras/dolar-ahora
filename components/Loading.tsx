@@ -1,5 +1,5 @@
-import React from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import React from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 export default function Loading() {
   return (
@@ -12,7 +12,8 @@ export default function Loading() {
 const styles = StyleSheet.create({
   loading_wrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgb(25 25 25)',
   },
 });

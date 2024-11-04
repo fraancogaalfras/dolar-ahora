@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function VariationDolar({ variation }: { variation: string }) {
-  console.log(variation);
   if (parseFloat(variation) < 0) {
     return <Text style={[styles.text, styles.negative]}>{variation}%</Text>;
   }
@@ -22,12 +21,12 @@ const styles = StyleSheet.create({
     fontWeight: 200,
   },
   negative: {
-    color: 'rgb(0 255 49)',
+    color: 'rgba(0, 255, 49, 0.7)',
   },
   equal: {
-    color: '#ccc',
+    color: '#fff',
   },
   positive: {
-    color: 'rgb(255 0 0)',
+    color: 'rgba(255, 0, 33, 0.7)',
   },
 });
