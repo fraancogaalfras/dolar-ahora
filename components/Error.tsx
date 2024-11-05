@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function Error({ error }: { error: { message: string; status: number } }) {
   return (
     <View style={styles.error_wrapper}>
-      <Text>
+      <Text style={{ color: '#fff' }}>
         {error.message} {error.status}
       </Text>
     </View>
@@ -13,8 +13,9 @@ export default function Error({ error }: { error: { message: string; status: num
 const styles = StyleSheet.create({
   error_wrapper: {
     flex: 1,
+    height: '100%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(25 25 25)',
   },
 });

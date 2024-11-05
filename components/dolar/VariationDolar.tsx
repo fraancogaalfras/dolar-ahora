@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 export default function VariationDolar({ variation }: { variation: string }) {
   if (parseFloat(variation) < 0) {

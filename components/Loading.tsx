@@ -12,8 +12,9 @@ export default function Loading() {
 const styles = StyleSheet.create({
   loading_wrapper: {
     flex: 1,
+    height: '100%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(25 25 25)',
   },
 });

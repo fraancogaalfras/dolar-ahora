@@ -41,3 +41,13 @@ export interface Ierror {
   message: string;
   status: number;
 }
+
+export interface Ivalues {
+  oficial: string;
+  blue: string;
+  bolsa: string;
+  contadoconliqui: string;
+  mayorista: string;
+  cripto: string;
+  tarjeta: string;
+}

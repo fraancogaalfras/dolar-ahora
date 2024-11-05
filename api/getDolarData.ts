@@ -1,5 +1,4 @@
-import { IdolarsBind } from '@/interfaces/types';
-import { HandleDolarData } from './handleDolarData';
+import { HandleDolarData } from '@/classes/dolar';
 
 export const getDolarData = async () => {
   try {

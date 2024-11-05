@@ -1,26 +1,61 @@
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList } from 'react-native';
 import CardDolar from './dolar/CardDolar';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Idolars, IdolarsBind } from '@/interfaces/types';
+import { IdolarsBind, Ierror } from '@/interfaces/types';
+import { useEffect, useState } from 'react';
+import { getDolarData } from '@/api/getDolarData';
+import Loading from './Loading';
+import Error from './Error';
 
-export default function DolarPage({ data }: { data: IdolarsBind[]}) {
-  return (
-    <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']} style={styles.main_wrapper}>
-      <View style={{ width: '100%', height: '100%' }}>
-        <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />
-      </View>
-    </LinearGradient>
-  );
+export default function DolarPage() {
+  const [data, setData] = useState<IdolarsBind[]>([
+    {
+      moneda: '',
+      casa: '',
+      nombre: '',
+      compra: 0,
+      venta: 0,
+      fechaActualizacion: '',
+      variacion: '',
+      historico: {
+        '': {
+          compra: 0,
+          venta: 0,
+        },
+      },
+    },
+  ]);
+  const [error, setError] = useState<Ierror>({
+    message: '',
+    status: 0,
+  });
+  const [loading, setLoading] = useState<Boolean>(true);
+
+  useEffect(() => {
+    const getFetch = async () => {
+      const result = await getDolarData();
+      if (!result.ok) {
+        setError({
+          message: result.message,
+          status: result.status,
+        });
+        setLoading(false);
+        return;
+      }
+      if (result.data) {
+        setData(result.data);
+        setLoading(false);
+      }
+    };
+    getFetch();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error.message.length > 0) {
+    return <Error error={error} />;
+  }
+
+  return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
 }
-
-const styles = StyleSheet.create({
-  main_wrapper: {
-    paddingVertical: 50,
-    padding: 10,
-    fontFamily: 'Virgil',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(25 25 25)',
-  },
-});
