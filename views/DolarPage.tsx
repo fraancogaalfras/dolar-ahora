@@ -49,13 +49,13 @@ export default function DolarPage() {
     getFetch();
   }, []);
 
-  if (loading || !loading) {
+  if (loading) {
     return <Loading />;
   }
 
-  // if (error.message.length > 0) {
-  //   return <ErrorPage error={error} />;
-  // }
+  if (error.message.length > 0) {
+    return <ErrorPage error={error} />;
+  }
 
-  // return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
+  return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
 }

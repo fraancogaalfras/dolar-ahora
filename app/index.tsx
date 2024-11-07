@@ -3,11 +3,11 @@ import { ImageBackground, StyleSheet, View } from 'react-native';
 
 export default function App() {
   return (
-    // <ImageBackground source={require('../assets/images/background.png')} resizeMode="cover" style={styles.image_container}>
+    <ImageBackground source={require('../assets/images/background.png')} resizeMode="cover" style={styles.image_container}>
       <View style={styles.main_wrapper}>
         <DolarPage />
       </View>
-    // </ImageBackground>
+    </ImageBackground>
   );
 }
 
