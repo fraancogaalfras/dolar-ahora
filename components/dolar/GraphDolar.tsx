@@ -1,4 +1,4 @@
-import { IdolarsBind } from '@/interfaces/types';
+import { Idolars, IdolarsBind, IhistoricDolars } from '@/interfaces/types';
 import { HandleDate } from '@/classes/date';
 import { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
@@ -19,9 +19,9 @@ export default function GraphDolar({ data }: { data: IdolarsBind }) {
     const correctValue = HandleDolarData.getCorrectValue(data.casa);
     const graphData = [data[correctValue as keyof IdolarsBind]];
     const date = new HandleDate();
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       date.subtractDays(1);
-      graphData.push(data.historico[date.getFormattedDateDash()]?.compra);
+      graphData.push(data.historico[date.getFormattedDateDash()][correctValue as keyof { venta: string; compra: string }]);
     }
     return graphData.toReversed();
   }, [data]);
