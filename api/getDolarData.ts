@@ -2,8 +2,8 @@ import { HandleDolarData } from '@/classes/dolar';
 
 export const getDolarData = async () => {
   try {
-    const todayResponse = await fetch('https://dolarapi.com/v1/dolares');
-    const allResponse = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/`);
+    const todayResponse = await fetch('https://dolarapi.com/v1/dolares', {cache: "no-store"});
+    const allResponse = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/`, {cache: "no-store"});
 
     if (!todayResponse.ok || !allResponse.ok) {
       return {

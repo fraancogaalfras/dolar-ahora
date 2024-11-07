@@ -3,11 +3,11 @@ import { HandleDate } from './date';
 
 export const valuesToShow: Ivalues = {
   oficial: 'venta',
-  blue: 'compra',
-  bolsa: 'compra',
-  contadoconliqui: 'compra',
-  mayorista: 'compra',
-  cripto: 'compra',
+  blue: 'venta',
+  bolsa: 'venta',
+  contadoconliqui: 'venta',
+  mayorista: 'venta',
+  cripto: 'venta',
   tarjeta: 'venta',
 };
 

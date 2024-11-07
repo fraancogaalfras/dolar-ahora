@@ -4,10 +4,17 @@ import VariationDolar from './VariationDolar';
 import GraphDolar from './GraphDolar';
 import { valuesToShow } from '@/classes/dolar';
 import { memo } from 'react';
+import { colours } from '@/app/_layout';
 
 const CardDolar = ({ data }: { data: IdolarsBind }) => {
   return (
-    <View key={data.nombre} style={styles.main_wrapper}>
+    <View
+      key={data.nombre}
+      style={[
+        styles.main_wrapper,
+        parseFloat(data.variacion) > 0 ? { borderColor: colours.positive } : parseFloat(data.variacion) == 0 ? { borderColor: colours.equal } : { borderColor: colours.negative },
+      ]}
+    >
       <View style={styles.header}>
         <View style={styles.left}>
           <View style={styles.price}>
@@ -24,7 +31,7 @@ const CardDolar = ({ data }: { data: IdolarsBind }) => {
         </View>
       </View>
       <View style={styles.footer}>
-        <Text style={[styles.text, styles.dolar_text_name]}>Dolar {data.nombre.replace('Contado con liquidación', 'CCL')}</Text>
+        <Text style={[styles.text, styles.dolar_text_name]}>Dolar {data.nombre.replace('Contado con liquidación', 'CCL').replace('Bolsa', 'MEP')}</Text>
       </View>
     </View>
   );
@@ -33,13 +40,13 @@ const CardDolar = ({ data }: { data: IdolarsBind }) => {
 const styles = StyleSheet.create({
   main_wrapper: {
     width: 300,
-    borderWidth: 2,
-    borderColor: '#3a3a3a',
+    borderWidth: 4,
+    // borderColor: 'rgb(255 255 255)',
     height: 125,
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: 'rgb(17 18 18)',
+    backgroundColor: 'rgb(10 10 10)',
     borderRadius: 25,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },

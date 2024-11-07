@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { HandleDolarData } from '@/classes/dolar';
+import { colours } from '@/app/_layout';
 
 export default function GraphDolar({ data }: { data: IdolarsBind }) {
   const [chartParentWidth, setChartParentWidth] = useState(0);
@@ -18,18 +19,18 @@ export default function GraphDolar({ data }: { data: IdolarsBind }) {
     const correctValue = HandleDolarData.getCorrectValue(data.casa);
     const graphData = [data[correctValue as keyof IdolarsBind]];
     const date = new HandleDate();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 3; i++) {
       date.subtractDays(1);
       graphData.push(data.historico[date.getFormattedDateDash()]?.compra);
     }
     return graphData.toReversed();
-  }, []);
+  }, [data]);
 
   return (
     <View style={{ width: '100%', height: '100%' }} onLayout={onLayoutCallback}>
       <LineChart
         data={{
-          labels: ['', '', '', '', ''],
+          labels: [],
           datasets: [
             {
               data: memoizedGetData,
@@ -50,7 +51,7 @@ export default function GraphDolar({ data }: { data: IdolarsBind }) {
           fillShadowGradientTo: 'transparent',
           fillShadowGradientFromOpacity: 0,
           fillShadowGradientToOpacity: 0,
-          color: () => (parseFloat(data.variacion) > 0 ? 'rgb(255 0 0)' : 'rgb(0 255 49)'),
+          color: () => (parseFloat(data.variacion) > 0 ? colours.positive : colours.negative),
         }}
         style={{ paddingRight: 0, paddingBottom: 5 }}
         bezier

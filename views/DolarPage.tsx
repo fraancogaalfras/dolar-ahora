@@ -1,10 +1,10 @@
 import { FlatList } from 'react-native';
-import CardDolar from './dolar/CardDolar';
+import CardDolar from '@/components/dolar/CardDolar';
 import { IdolarsBind, Ierror } from '@/interfaces/types';
 import { useEffect, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
-import Loading from './Loading';
-import Error from './Error';
+import Loading from '@/components/Loading';
+import ErrorPage from '@/views/ErrorPage';
 
 export default function DolarPage() {
   const [data, setData] = useState<IdolarsBind[]>([
@@ -49,13 +49,13 @@ export default function DolarPage() {
     getFetch();
   }, []);
 
-  if (loading) {
+  if (loading || !loading) {
     return <Loading />;
   }
 
-  if (error.message.length > 0) {
-    return <Error error={error} />;
-  }
+  // if (error.message.length > 0) {
+  //   return <ErrorPage error={error} />;
+  // }
 
-  return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
+  // return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
 }

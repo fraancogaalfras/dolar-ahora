@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Error({ error }: { error: { message: string; status: number } }) {
+export default function ErrorPage({ error }: { error: { message: string; status: number } }) {
   return (
     <View style={styles.error_wrapper}>
       <Text style={{ color: '#fff' }}>

@@ -51,3 +51,9 @@ export interface Ivalues {
   cripto: string;
   tarjeta: string;
 }
+
+export interface IColours {
+  negative: string;
+  positive: string;
+  equal: string;
+}
