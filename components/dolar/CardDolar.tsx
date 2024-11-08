@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
   main_wrapper: {
     width: 300,
     borderWidth: 4,
-    // borderColor: 'rgb(255 255 255)',
     height: 125,
     alignItems: 'center',
     flexDirection: 'column',
