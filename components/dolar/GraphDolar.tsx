@@ -1,4 +1,4 @@
-import { Idolars, IdolarsBind, IhistoricDolars } from '@/interfaces/types';
+import { IdolarsBind } from '@/interfaces/types';
 import { HandleDate } from '@/classes/date';
 import { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';

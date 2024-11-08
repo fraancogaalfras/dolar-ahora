@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/Loading';
 import ErrorPage from '@/views/ErrorPage';
+import Billetes from '@/components/Test';
 
 export default function DolarPage() {
   const [data, setData] = useState<IdolarsBind[]>([
@@ -49,13 +50,14 @@ export default function DolarPage() {
     getFetch();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  return <Billetes />
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
-  if (error.message.length > 0) {
-    return <ErrorPage error={error} />;
-  }
+  // if (error.message.length > 0) {
+  //   return <ErrorPage error={error} />;
+  // }
 
-  return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
+  // return <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />;
 }
