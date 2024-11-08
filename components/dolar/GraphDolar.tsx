@@ -51,7 +51,7 @@ export default function GraphDolar({ data }: { data: IdolarsBind }) {
           fillShadowGradientTo: 'transparent',
           fillShadowGradientFromOpacity: 0,
           fillShadowGradientToOpacity: 0,
-          color: () => (parseFloat(data.variacion) > 0 ? colours.positive : colours.negative),
+          color: () => (parseFloat(data.variacion) > 0 ? colours.positive : parseFloat(data.variacion) == 0 ? colours.equal : colours.negative),
         }}
         style={{ paddingRight: 0, paddingBottom: 5 }}
         bezier
