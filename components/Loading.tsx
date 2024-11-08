@@ -1,10 +1,10 @@
-import React from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import SpinningBills from './SpinningBills';
 
 export default function Loading() {
   return (
     <View style={styles.loading_wrapper}>
-      <ActivityIndicator size="large" />
+      <SpinningBills />
     </View>
   );
 }
