@@ -1,12 +1,14 @@
-import { FlatList } from 'react-native';
+import { Dimensions, FlatList, StyleSheet } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { IdolarsBind, Ierror } from '@/interfaces/types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/Loading';
 import ErrorPage from '@/views/ErrorPage';
 
 export default function DolarPage() {
+  const windowWidth = Dimensions.get('window').width;
+
   const [data, setData] = useState<IdolarsBind[]>([
     {
       moneda: '',
@@ -49,11 +51,26 @@ export default function DolarPage() {
     getFetch();
   }, []);
 
+  const renderItem = useCallback(({ item }: { item: IdolarsBind }) => <CardDolar data={item} />, [data]);
+
   return loading ? (
     <Loading />
   ) : error.message.length > 0 ? (
     <ErrorPage error={error} />
   ) : (
-    <FlatList data={data} renderItem={({ item }) => <CardDolar data={item} />} contentContainerStyle={{ gap: 30, alignItems: 'center' }} showsVerticalScrollIndicator={false} />
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.nombre}
+      getItemLayout={(data, index) => ({ length: 125, offset: 125 * index, index })}
+      contentContainerStyle={{
+        gap: 30,
+        alignItems: 'center',
+      }}
+      numColumns={windowWidth > 1000 ? 3 : windowWidth > 500 ? 2 : 1}
+      columnWrapperStyle={windowWidth > 600 ? { columnGap: 30 } : null}
+      showsVerticalScrollIndicator={false}
+      initialNumToRender={7}
+    />
   );
 }

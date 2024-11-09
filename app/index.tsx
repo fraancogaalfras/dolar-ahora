@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   main_wrapper: {
-    paddingVertical: 50,
-    padding: 10,
+    paddingVertical: 30,
+    paddingHorizontal: 10,
     fontFamily: 'Virgil',
     flex: 1,
     height: '100%',

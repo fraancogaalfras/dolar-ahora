@@ -1,19 +1,30 @@
 {
   "expo": {
-    "name": "dolar-ahora",
+    "name": "Dolar Now",
+    "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
     "slug": "dolar-ahora",
     "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "githubUrl": "https://github.com/ruloosgaalfras/dolar-ahora",
     "orientation": "portrait",
+    "backgroundColor": "#000000",
+    "primaryColor": "#000000",
+    "androidStatusBar": {
+      "translucent": true
+    },
     "icon": "",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "supportsTablet": true
-    },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": ""
+      "favicon": "",
+      "lang": "es",
+      "display": "grid"
     },
     "plugins": [
       ["expo-router"],
