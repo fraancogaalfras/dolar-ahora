@@ -72,7 +72,7 @@ export default function DolarPage() {
           gap: 30,
           alignItems: 'center',
         },
-        height > 800 && {
+        height > 1000 && {
           justifyContent: 'center',
           height: '100%',
           width: '100%'
@@ -85,15 +85,3 @@ export default function DolarPage() {
     />
   );
 }
-
-// const style = StyleSheet.create({
-//     list_style_h: {
-//       gap: 30,
-//       alignItems: 'center',
-//       justifyContent: 'center'
-//     },
-//     list_style_v: {
-//       gap: 30,
-//       alignItems: 'center',
-//     }
-// })

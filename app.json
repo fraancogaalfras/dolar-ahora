@@ -9,7 +9,6 @@
       "android",
       "web"
     ],
-    "githubUrl": "https://github.com/ruloosgaalfras/dolar-ahora",
     "orientation": "portrait",
     "backgroundColor": "#000000",
     "primaryColor": "#000000",
@@ -30,7 +29,7 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Virgil.ttf"]
+          "fonts": ["./assets/fonts/Virgil.otf"]
         }
       ]
     ],

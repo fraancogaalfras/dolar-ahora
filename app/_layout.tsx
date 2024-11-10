@@ -1,4 +1,5 @@
 import { IColours } from '@/interfaces/types';
+import ErrorPage from '@/views/ErrorPage';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,7 +17,14 @@ export default function RootLayout() {
   });
 
   if (!loaded && !error) {
-    return null;
+    return (
+      <ErrorPage
+        error={{
+          message: 'Error al cargar la fuente.',
+          status: 500,
+        }}
+      />
+    );
   }
 
   return (
