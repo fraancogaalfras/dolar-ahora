@@ -16,15 +16,14 @@
     "androidStatusBar": {
       "translucent": true
     },
-    "icon": "",
+    "icon": "./assets/images/logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "",
-      "lang": "es",
-      "display": "grid"
+      "favicon": "./assets/images/logo.png",
+      "lang": "es"
     },
     "plugins": [
       ["expo-router"],
