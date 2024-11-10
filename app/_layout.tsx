@@ -12,7 +12,7 @@ export const colours: IColours = {
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
   const [loaded, error] = useFonts({
-    Virgil: require('../assets/fonts/Virgil.ttf'),
+    Virgil: require('../assets/fonts/Virgil.otf'),
   });
 
   if (!loaded && !error) {
