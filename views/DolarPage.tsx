@@ -75,7 +75,7 @@ export default function DolarPage() {
         height > 1000 && {
           justifyContent: 'center',
           height: '100%',
-          width: '100%'
+          width: '100%',
         },
       ]}
       numColumns={getNumColumns}

@@ -1,44 +1,36 @@
 import { IdolarsBind } from '@/interfaces/types';
 import { HandleDate } from '@/classes/date';
-import { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { HandleDolarData } from '@/classes/dolar';
 import { colours } from '@/app/_layout';
 
 export default function GraphDolar({ data }: { data: IdolarsBind }) {
-  const [chartParentWidth, setChartParentWidth] = useState(0);
-  const [chartParentHeight, setChartParentHeight] = useState(0);
-
-  const onLayoutCallback = useCallback(({ nativeEvent }: { nativeEvent: any }) => {
-    setChartParentWidth(nativeEvent.layout.width - 10);
-    setChartParentHeight(nativeEvent.layout.height - 10);
-  }, []);
-
-  const memoizedGetData = useMemo(() => {
+  const getData = () => {
     const correctValue = HandleDolarData.getCorrectValue(data.casa);
-    const graphData = [data[correctValue as keyof IdolarsBind]];
+    const graphData: number[] = [];
     const date = new HandleDate();
-    for (let i = 0; i < 5; i++) {
-      date.subtractDays(1);
+    date.subtractDays(6);
+    for (let i = 5; i > 0; i--) {
+      date.addDays(1);
       graphData.push(data.historico[date.getFormattedDateDash()][correctValue as keyof { venta: string; compra: string }]);
     }
-    return graphData.toReversed();
-  }, [data]);
+    return graphData;
+  };
 
   return (
-    <View style={{ width: '100%', height: '100%' }} onLayout={onLayoutCallback}>
+    <View style={{ width: '100%', height: '100%' }}>
       <LineChart
         data={{
           labels: [],
           datasets: [
             {
-              data: memoizedGetData,
+              data: getData(),
             },
           ],
         }}
-        width={chartParentWidth}
-        height={chartParentHeight}
+        width={125}
+        height={50}
         yAxisLabel=""
         yAxisSuffix=""
         withHorizontalLines={false}

@@ -50,8 +50,9 @@ export class HandleDolarData {
         }
       }
     }
-
+    
     this.data = Array.from(newDataMap.values());
+    
   }
 
   public getData(): IdolarsBind[] {

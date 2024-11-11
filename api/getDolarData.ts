@@ -2,8 +2,8 @@ import { HandleDolarData } from '@/classes/dolar';
 
 export const getDolarData = async () => {
   try {
-    const todayResponse = await fetch('https://dolarapi.com/v1/dolares', {cache: "no-store"});
-    const allResponse = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/`, {cache: "no-store"});
+    const todayResponse = await fetch('https://dolarapi.com/v1/dolares', { cache: 'no-store' });
+    const allResponse = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/`, { cache: 'no-store' });
 
     if (!todayResponse.ok || !allResponse.ok) {
       return {
@@ -14,11 +14,14 @@ export const getDolarData = async () => {
     }
 
     const todayResult = await todayResponse.json();
-    const allResult = await allResponse.json();
+    let allResult = await allResponse.json();
+    const lastFiveDaysResult = allResult.slice(allResult.length - 42);
+
+    allResult = null;
 
     const data = new HandleDolarData(todayResult);
-    data.bindPreviousData(allResult);
-
+    data.bindPreviousData(lastFiveDaysResult);
+    
     return {
       ok: true,
       message: 'ok',

@@ -1,7 +1,34 @@
 import DolarPage from '@/views/DolarPage';
 import { ImageBackground, StyleSheet, View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
+import ErrorPage from '@/views/ErrorPage';
+import { useEffect } from 'react';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [loaded, error] = useFonts({
+    Virgil: require('../assets/fonts/Virgil.otf'),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return (
+      <ErrorPage
+        error={{
+          message: 'Error al cargar la fuente.',
+          status: 500,
+        }}
+      />
+    );
+  }
+
   return (
     <ImageBackground source={require('../assets/images/background.png')} resizeMode="cover" style={styles.image_container}>
       <View style={styles.main_wrapper}>

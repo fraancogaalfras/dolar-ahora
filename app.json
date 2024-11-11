@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "Dolar Now",
+    "name": "Dolar Ahora",
     "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
     "slug": "dolar-ahora",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    "scheme": "dolarahora",
     "orientation": "portrait",
     "backgroundColor": "#000000",
     "primaryColor": "#000000",
@@ -16,8 +17,7 @@
       "translucent": true
     },
     "icon": "./assets/images/logo.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -25,16 +25,32 @@
       "lang": "es"
     },
     "plugins": [
-      ["expo-router"],
+      [
+        "expo-router"
+      ],
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Virgil.otf"]
+          "fonts": [
+            "./assets/fonts/Virgil.otf"
+          ]
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "de5f3556-85a3-4184-b809-0a0ed908e71f",
+        "versionCode": 1
+      }
+    },
+    "android": {
+      "package": "com.ruloosgaalfras.dolarahora"
     }
   }
 }
