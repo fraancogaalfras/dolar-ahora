@@ -1,36 +1,22 @@
-import { FlatList, useWindowDimensions } from 'react-native';
+import { FlatList, RefreshControl, useWindowDimensions } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { IdolarsBind, Ierror } from '@/interfaces/types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/Loading';
 import ErrorPage from '@/views/ErrorPage';
+import { colours } from '@/app/_layout';
 
 export default function DolarPage() {
   const { width, height } = useWindowDimensions();
-
-  const [data, setData] = useState<IdolarsBind[]>([
-    {
-      moneda: '',
-      casa: '',
-      nombre: '',
-      compra: 0,
-      venta: 0,
-      fechaActualizacion: '',
-      variacion: '',
-      historico: {
-        '': {
-          compra: 0,
-          venta: 0,
-        },
-      },
-    },
-  ]);
-  const [error, setError] = useState<Ierror>({
-    message: '',
-    status: 0,
-  });
+  const [data, setData] = useState<IdolarsBind[]>();
+  const [error, setError] = useState<Ierror>();
   const [loading, setLoading] = useState<Boolean>(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+  }, []);
 
   useEffect(() => {
     const getFetch = async () => {
@@ -41,15 +27,17 @@ export default function DolarPage() {
           status: result.status,
         });
         setLoading(false);
+        setRefreshing(false);
         return;
       }
       if (result.data) {
         setData(result.data);
         setLoading(false);
+        setRefreshing(false);
       }
     };
     getFetch();
-  }, []);
+  }, [refreshing]);
 
   const renderItem = useCallback(({ item }: { item: IdolarsBind }) => <CardDolar data={item} />, [data]);
   const getNumColumns = useMemo(() => {
@@ -58,7 +46,7 @@ export default function DolarPage() {
 
   return loading ? (
     <Loading />
-  ) : error.message.length > 0 ? (
+  ) : error ? (
     <ErrorPage error={error} />
   ) : (
     <FlatList
@@ -82,6 +70,16 @@ export default function DolarPage() {
       columnWrapperStyle={width > 600 ? { columnGap: 30 } : null}
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          colors={[colours.positive, colours.equal]}
+          progressBackgroundColor={'#000'}
+          tintColor={colours.positive}
+          title={'Buscando información...'}
+        />
+      }
     />
   );
 }
