@@ -55,7 +55,7 @@ export default function GraphDolar({ data }: { data: Idolars }) {
         withDots={false}
         chartConfig={chartConfig}
         style={{ paddingRight: 0 }}
-        // bezier
+        bezier
       />
     </View>
   );
