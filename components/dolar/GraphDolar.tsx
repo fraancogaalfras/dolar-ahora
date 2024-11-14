@@ -5,6 +5,16 @@ import { colours } from '@/app/_layout';
 import { useMemo } from 'react';
 
 export default function GraphDolar({ data }: { data: Idolars }) {
+  const getData = useMemo(() => {
+    if (parseFloat(data.variacion) < 0) {
+      return [100, 80, 60, 40, 20];
+    } else if (parseFloat(data.variacion) == 0) {
+      return [50, 50, 50, 50, 50];
+    } else {
+      return [20, 40, 60, 80, 100];
+    }
+  }, []);
+
   const chartConfig = useMemo(() => {
     return {
       backgroundGradientFromOpacity: 0,
@@ -16,6 +26,7 @@ export default function GraphDolar({ data }: { data: Idolars }) {
       color: () => (parseFloat(data.variacion) > 0 ? colours.positive : parseFloat(data.variacion) == 0 ? colours.equal : colours.negative),
     };
   }, [data]);
+
   return (
     <View style={{ width: '100%', height: '100%' }}>
       <LineChart
@@ -23,20 +34,28 @@ export default function GraphDolar({ data }: { data: Idolars }) {
           labels: [],
           datasets: [
             {
-              data: [data.ventaAnterior, data.venta],
+              data: getData,
+            },
+            {
+              data: [0],
+            },
+            {
+              data: [100],
             },
           ],
         }}
-        width={180}
+        width={140}
         height={50}
+        fromZero={parseFloat(data.variacion) == 0}
         yAxisLabel=""
         yAxisSuffix=""
         withHorizontalLines={false}
         withVerticalLines={false}
+        withVerticalLabels={true}
         withDots={false}
         chartConfig={chartConfig}
-        style={{ paddingRight: 0, paddingBottom: 5 }}
-        bezier
+        style={{ paddingRight: 0 }}
+        // bezier
       />
     </View>
   );
