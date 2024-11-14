@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "Dolar Ahora",
     "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
     "slug": "dolar-ahora",
@@ -25,7 +26,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "single",
       "favicon": "./assets/images/logo.png",
       "lang": "es"
     },
