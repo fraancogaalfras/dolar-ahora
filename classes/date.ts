@@ -4,58 +4,58 @@ export class HandleDate {
     this.date = date;
   }
 
-  addDays(days: number) {
+  addDays(days: number): Date {
     this.date.setDate(this.date.getDate() + days);
     return this.date;
   }
 
-  subtractDays(days: number) {
+  subtractDays(days: number): Date {
     this.date.setDate(this.date.getDate() - days);
     return this.date;
   }
 
-  getFirstDayOfMonth() {
+  getFirstDayOfMonth(): Date {
     return new Date(this.date.getFullYear(), this.date.getMonth(), 1);
   }
 
-  getLastDayOfMonth() {
+  getLastDayOfMonth(): Date {
     return new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
   }
 
-  getYear() {
+  getYear(): number {
     return this.date.getFullYear();
   }
 
-  getMonth() {
+  getMonth(): number {
     return this.date.getMonth() + 1;
   }
 
-  getDay() {
+  getDay(): number {
     return this.date.getDate();
   }
 
-  setDate(date: Date) {
+  setDate(date: Date): void {
     this.date = new Date(date);
   }
-  
-  getFormattedDateDash() {
+
+  getFormattedDateDash(): string {
     const year = this.date.getFullYear();
-    const month = String(this.date.getMonth() + 1).padStart(2, "0");
-    const day = String(this.date.getDate()).padStart(2, "0");
+    const month = String(this.date.getMonth() + 1).padStart(2, '0');
+    const day = String(this.date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
-  getFormattedDateBar() {
+  getFormattedDateBar(): string {
     const year = this.date.getFullYear();
-    const month = String(this.date.getMonth() + 1).padStart(2, "0");
-    const day = String(this.date.getDate()).padStart(2, "0");
+    const month = String(this.date.getMonth() + 1).padStart(2, '0');
+    const day = String(this.date.getDate()).padStart(2, '0');
     return `${year}/${month}/${day}`;
   }
 
-  getFormattedDateDot() {
+  getFormattedDateDot(): string {
     const year = this.date.getFullYear();
-    const month = String(this.date.getMonth() + 1).padStart(2, "0");
-    const day = String(this.date.getDate()).padStart(2, "0");
+    const month = String(this.date.getMonth() + 1).padStart(2, '0');
+    const day = String(this.date.getDate()).padStart(2, '0');
     return `${year}.${month}.${day}`;
   }
 }

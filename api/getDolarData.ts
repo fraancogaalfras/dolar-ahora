@@ -1,11 +1,16 @@
+import { HandleDate } from '@/classes/date';
 import { HandleDolarData } from '@/classes/dolar';
+import { Idolars } from '@/interfaces/types';
 
 export const getDolarData = async () => {
   try {
-    const todayResponse = await fetch('https://dolarapi.com/v1/dolares', { cache: 'no-store' });
-    const allResponse = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/`, { cache: 'no-store' });
+    const date: HandleDate = new HandleDate();
+    date.subtractDays(1);
 
-    if (!todayResponse.ok || !allResponse.ok) {
+    const todayResponse: Response = await fetch('https://dolarapi.com/v1/dolares', { cache: 'no-store' });
+    const yesterdayResponse: Response = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${date.getFormattedDateBar()}`, { cache: 'no-store' });
+
+    if (!todayResponse.ok || !yesterdayResponse.ok) {
       return {
         ok: false,
         message: 'Error de conexión',
@@ -13,15 +18,12 @@ export const getDolarData = async () => {
       };
     }
 
-    const todayResult = await todayResponse.json();
-    let allResult = await allResponse.json();
-    const lastFiveDaysResult = allResult.slice(allResult.length - 42);
+    const todayResult: Idolars[] = await todayResponse.json();
+    const yesterdayResult: Idolars[] = await yesterdayResponse.json();
 
-    allResult = null;
+    const data: HandleDolarData = new HandleDolarData(todayResult);
+    data.bindPreviousData(yesterdayResult);
 
-    const data = new HandleDolarData(todayResult);
-    data.bindPreviousData(lastFiveDaysResult);
-    
     return {
       ok: true,
       message: 'ok',

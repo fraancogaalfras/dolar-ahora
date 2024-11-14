@@ -3,24 +3,28 @@ import { ImageBackground, StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import ErrorPage from '@/views/ErrorPage';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 SplashScreen.preventAutoHideAsync();
+
+// SplashScreen.setOptions({
+//   duration: 1000,
+//   fade: true,
+// });
 
 export default function App() {
   const [loaded, error] = useFonts({
     Virgil: require('../assets/fonts/Virgil.otf'),
   });
 
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
+  const hideSplashOnLayout = useCallback(() => {
+    SplashScreen.hide();
+  }, []);
 
   if (!loaded && !error) {
     return (
       <ErrorPage
+        hideSplashOnLayout={hideSplashOnLayout}
         error={{
           message: 'Error al cargar la fuente.',
           status: 500,
@@ -31,7 +35,7 @@ export default function App() {
 
   return (
     <ImageBackground source={require('../assets/images/background.png')} resizeMode="cover" style={styles.image_container}>
-      <View style={styles.main_wrapper}>
+      <View style={styles.main_wrapper} onLayout={hideSplashOnLayout}>
         <DolarPage />
       </View>
     </ImageBackground>

@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { IdolarsBind, Ivalues } from '@/interfaces/types';
+import { Idolars } from '@/interfaces/types';
 import VariationDolar from './VariationDolar';
 import GraphDolar from './GraphDolar';
-import { valuesToShow } from '@/classes/dolar';
 import { memo } from 'react';
 import { colours } from '@/app/_layout';
 
-const CardDolar = ({ data }: { data: IdolarsBind }) => {
+const CardDolar = ({ data }: { data: Idolars }) => {
   return (
     <View
       key={data.nombre}
@@ -18,7 +17,7 @@ const CardDolar = ({ data }: { data: IdolarsBind }) => {
       <View style={styles.header}>
         <View style={styles.left}>
           <View style={styles.price}>
-            <Text style={[styles.text, styles.price_text]}>{data[valuesToShow[data.casa as keyof Ivalues] as keyof IdolarsBind]}</Text>
+            <Text style={[styles.text, styles.price_text]}>{data.venta}</Text>
           </View>
           <View style={styles.variation}>
             <VariationDolar variation={data.variacion} />

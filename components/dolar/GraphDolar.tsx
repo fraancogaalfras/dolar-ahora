@@ -1,23 +1,21 @@
-import { IdolarsBind } from '@/interfaces/types';
-import { HandleDate } from '@/classes/date';
+import { Idolars } from '@/interfaces/types';
 import { View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { HandleDolarData } from '@/classes/dolar';
 import { colours } from '@/app/_layout';
+import { useMemo } from 'react';
 
-export default function GraphDolar({ data }: { data: IdolarsBind }) {
-  const getData = () => {
-    const correctValue = HandleDolarData.getCorrectValue(data.casa);
-    const graphData: number[] = [];
-    const date = new HandleDate();
-    date.subtractDays(6);
-    for (let i = 5; i > 0; i--) {
-      date.addDays(1);
-      graphData.push(data.historico[date.getFormattedDateDash()][correctValue as keyof { venta: string; compra: string }]);
-    }
-    return graphData;
-  };
-
+export default function GraphDolar({ data }: { data: Idolars }) {
+  const chartConfig = useMemo(() => {
+    return {
+      backgroundGradientFromOpacity: 0,
+      backgroundGradientToOpacity: 0,
+      fillShadowGradientFrom: 'transparent',
+      fillShadowGradientTo: 'transparent',
+      fillShadowGradientFromOpacity: 0,
+      fillShadowGradientToOpacity: 0,
+      color: () => (parseFloat(data.variacion) > 0 ? colours.positive : parseFloat(data.variacion) == 0 ? colours.equal : colours.negative),
+    };
+  }, [data]);
   return (
     <View style={{ width: '100%', height: '100%' }}>
       <LineChart
@@ -25,26 +23,18 @@ export default function GraphDolar({ data }: { data: IdolarsBind }) {
           labels: [],
           datasets: [
             {
-              data: getData(),
+              data: [data.ventaAnterior, data.venta],
             },
           ],
         }}
-        width={125}
+        width={180}
         height={50}
         yAxisLabel=""
         yAxisSuffix=""
         withHorizontalLines={false}
         withVerticalLines={false}
         withDots={false}
-        chartConfig={{
-          backgroundGradientFromOpacity: 0,
-          backgroundGradientToOpacity: 0,
-          fillShadowGradientFrom: 'transparent',
-          fillShadowGradientTo: 'transparent',
-          fillShadowGradientFromOpacity: 0,
-          fillShadowGradientToOpacity: 0,
-          color: () => (parseFloat(data.variacion) > 0 ? colours.positive : parseFloat(data.variacion) == 0 ? colours.equal : colours.negative),
-        }}
+        chartConfig={chartConfig}
         style={{ paddingRight: 0, paddingBottom: 5 }}
         bezier
       />
