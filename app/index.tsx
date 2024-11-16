@@ -7,10 +7,10 @@ import { useCallback } from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
-// SplashScreen.setOptions({
-//   duration: 1000,
-//   fade: true,
-// });
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 export default function App() {
   const [loaded, error] = useFonts({
@@ -18,6 +18,7 @@ export default function App() {
   });
 
   const hideSplashOnLayout = useCallback(() => {
+    setTimeout(() => {}, 1000);
     SplashScreen.hide();
   }, []);
 

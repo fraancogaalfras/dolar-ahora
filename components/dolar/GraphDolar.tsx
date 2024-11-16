@@ -4,11 +4,11 @@ import { LineChart } from 'react-native-chart-kit';
 import { colours } from '@/app/_layout';
 import { useMemo } from 'react';
 
-export default function GraphDolar({ data }: { data: Idolars }) {
-  const getData = useMemo(() => {
-    if (parseFloat(data.variacion) < 0) {
+export default function GraphDolar({ variacion }: { variacion: string }) {
+  const getValues = useMemo(() => {
+    if (parseFloat(variacion) < 0) {
       return [100, 80, 60, 40, 20];
-    } else if (parseFloat(data.variacion) == 0) {
+    } else if (parseFloat(variacion) == 0) {
       return [50, 50, 50, 50, 50];
     } else {
       return [20, 40, 60, 80, 100];
@@ -23,9 +23,9 @@ export default function GraphDolar({ data }: { data: Idolars }) {
       fillShadowGradientTo: 'transparent',
       fillShadowGradientFromOpacity: 0,
       fillShadowGradientToOpacity: 0,
-      color: () => (parseFloat(data.variacion) > 0 ? colours.positive : parseFloat(data.variacion) == 0 ? colours.equal : colours.negative),
+      color: () => (parseFloat(variacion) > 0 ? colours.positive : parseFloat(variacion) == 0 ? colours.equal : colours.negative),
     };
-  }, [data]);
+  }, [variacion]);
 
   return (
     <View style={{ width: '100%', height: '100%' }}>
@@ -34,7 +34,7 @@ export default function GraphDolar({ data }: { data: Idolars }) {
           labels: [],
           datasets: [
             {
-              data: getData,
+              data: getValues,
             },
             {
               data: [0],
@@ -46,7 +46,7 @@ export default function GraphDolar({ data }: { data: Idolars }) {
         }}
         width={140}
         height={50}
-        fromZero={parseFloat(data.variacion) == 0}
+        fromZero={parseFloat(variacion) == 0}
         yAxisLabel=""
         yAxisSuffix=""
         withHorizontalLines={false}

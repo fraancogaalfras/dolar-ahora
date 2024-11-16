@@ -25,7 +25,7 @@ const CardDolar = ({ data }: { data: Idolars }) => {
         </View>
         <View style={styles.right}>
           <View style={styles.graph}>
-            <GraphDolar data={data} />
+            <GraphDolar variacion={data.variacion} />
           </View>
         </View>
       </View>
