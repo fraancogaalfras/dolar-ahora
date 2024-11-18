@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
-  duration: 1000,
+  duration: 2000,
   fade: true,
 });
 
@@ -18,7 +18,6 @@ export default function App() {
   });
 
   const hideSplashOnLayout = useCallback(() => {
-    setTimeout(() => {}, 1000);
     SplashScreen.hide();
   }, []);
 

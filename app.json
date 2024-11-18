@@ -8,8 +8,15 @@
     "platforms": ["ios", "android", "web"],
     "scheme": "dolarahora",
     "orientation": "portrait",
+    "backgroundColor": "#000000",
+    "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "translucent": true
+      "translucent": true,
+      "backgroundColor": "#00000000"
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#000000",
+      "barStyle": "light-content"
     },
     "icon": "./assets/images/logo.png",
     "web": {
@@ -25,12 +32,8 @@
         {
           "image": "./assets/images/splash.png",
           "backgroundColor": "#ffffff",
-          "dark": {
-            "image": "./assets/images/splash.png",
-            "backgroundColor": "#ffffff"
-          },
           "imageWidth": 300,
-          "resizeMode": "contain"
+          "resizeMode": "cover"
         }
       ],
       [
