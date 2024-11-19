@@ -11,12 +11,10 @@
     "backgroundColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "translucent": true,
-      "backgroundColor": "#00000000"
+      "backgroundColor": "#000000"
     },
     "androidNavigationBar": {
-      "backgroundColor": "#000000",
-      "barStyle": "light-content"
+      "backgroundColor": "#000000"
     },
     "icon": "./assets/images/logo.png",
     "web": {
