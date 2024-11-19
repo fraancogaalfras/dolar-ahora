@@ -7,11 +7,6 @@ import { useCallback } from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
-SplashScreen.setOptions({
-  duration: 2000,
-  fade: true,
-});
-
 export default function App() {
   const [loaded, error] = useFonts({
     Virgil: require('../assets/fonts/Virgil.otf'),
