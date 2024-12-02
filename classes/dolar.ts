@@ -18,6 +18,10 @@ export class HandleDolarData {
     }
   }
 
+  public static formatPrice(price: number): string {
+    return price.toString().replace('.', ',');
+  }
+
   public getData(): Idolars[] {
     return this.data;
   }

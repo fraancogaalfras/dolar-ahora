@@ -1,9 +1,10 @@
 import DolarPage from '@/views/DolarPage';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,21 +30,14 @@ export default function App() {
   }
 
   return (
-    <ImageBackground source={require('../assets/images/background.png')} resizeMode="cover" style={styles.image_container}>
-      <View style={styles.main_wrapper} onLayout={hideSplashOnLayout}>
-        <DolarPage />
-      </View>
-    </ImageBackground>
+    <LinearGradient colors={['rgb(5 5 5)', 'rgb(20 20 20)']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
+      <DolarPage />
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  image_container: {
-    flex: 1,
-    height: '100%',
-    width: '100%',
-  },
-  main_wrapper: {
+  mainWrapper: {
     paddingVertical: 30,
     paddingHorizontal: 10,
     fontFamily: 'Virgil',

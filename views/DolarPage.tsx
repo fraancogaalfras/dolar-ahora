@@ -1,13 +1,16 @@
-import { FlatList, RefreshControl, useWindowDimensions } from 'react-native';
+import { AppState, FlatList, RefreshControl, useWindowDimensions } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { Idolars, Ierror } from '@/interfaces/types';
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
-import Loading from '@/components/Loading';
+import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { colours } from '@/app/_layout';
 
 export default function DolarPage() {
+  const currentState = useRef(AppState.currentState);
+
+  const [appState, setAppState] = useState(currentState.current);
   const { width, height } = useWindowDimensions();
   const [data, setData] = useState<Idolars[]>();
   const [error, setError] = useState<Ierror>();
@@ -18,26 +21,41 @@ export default function DolarPage() {
     setRefreshing(true);
   }, []);
 
-  useLayoutEffect(() => {
-    const getFetch = async () => {
-      const result = await getDolarData();
-      if (!result.ok) {
-        setError({
-          message: result.message,
-          status: result.status,
-        });
-        setLoading(false);
-        setRefreshing(false);
-        return;
-      }
-      if (result.data) {
-        setData(result.data);
-        setLoading(false);
-        setRefreshing(false);
-      }
+  useEffect(() => {
+    const handleChange = AppState.addEventListener('change', (changedState) => {
+      currentState.current = changedState;
+      setAppState(currentState.current);
+    });
+
+    return () => {
+      handleChange.remove();
     };
-    getFetch();
-  }, [refreshing]);
+  }, []);
+
+  const getFetch = async () => {
+    const result = await getDolarData();
+    if (!result.ok) {
+      setError({
+        message: result.message,
+        status: result.status,
+      });
+      setLoading(false);
+      setRefreshing(false);
+      return;
+    }
+    if (result.data) {
+      setData(result.data);
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useLayoutEffect(() => {
+    if (appState == 'active') {
+      setLoading(true);
+      getFetch();
+    }
+  }, [refreshing, appState]);
 
   const renderItem = useCallback(({ item }: { item: Idolars }) => <CardDolar data={item} />, [data]);
   const getNumColumns = useMemo(() => {

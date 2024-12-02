@@ -27,7 +27,7 @@ const SpinningBills = () => {
 
   return (
     <Animated.View style={styles.container}>
-      <Animated.Image style={{ transform: [{ rotate: spin }, { scale: 0.2 }] }} source={require('../assets/images/rotate_bills.png')} />
+      <Animated.Image style={{ transform: [{ rotate: spin }, { scale: 0.2 }] }} source={require('@/assets/images/rotate_bills.png')} />
     </Animated.View>
   );
 };

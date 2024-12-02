@@ -3,14 +3,14 @@ import SpinningBills from './SpinningBills';
 
 export default function Loading() {
   return (
-    <View style={styles.loading_wrapper}>
+    <View style={styles.loadingWrapper}>
       <SpinningBills />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  loading_wrapper: {
+  loadingWrapper: {
     flex: 1,
     height: '100%',
     width: '100%',

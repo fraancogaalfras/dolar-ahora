@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function ErrorPage({ error, hideSplashOnLayout }: { error: { message: string; status: number }; hideSplashOnLayout?: VoidFunction }) {
   return (
-    <View style={styles.error_wrapper} onLayout={hideSplashOnLayout}>
+    <View style={styles.errorWrapper} onLayout={hideSplashOnLayout}>
       <Text style={{ color: '#fff' }}>{error.message}</Text>
       <Text style={{ color: '#fff' }}>{error.status}</Text>
     </View>
@@ -10,7 +10,7 @@ export default function ErrorPage({ error, hideSplashOnLayout }: { error: { mess
 }
 
 const styles = StyleSheet.create({
-  error_wrapper: {
+  errorWrapper: {
     flex: 1,
     height: '100%',
     width: '100%',

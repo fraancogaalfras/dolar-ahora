@@ -5,16 +5,15 @@
     "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
     "slug": "dolar-ahora",
     "version": "1.2.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["android", "web"],
     "scheme": "dolarahora",
     "orientation": "portrait",
     "backgroundColor": "#000000",
+    "primaryColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "backgroundColor": "#000000"
-    },
-    "androidNavigationBar": {
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "translucent": false
     },
     "icon": "./assets/images/logo.png",
     "web": {
@@ -28,8 +27,8 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash.png",
-          "backgroundColor": "#ffffff",
+          "image": "./assets/images/splash-dark.png",
+          "backgroundColor": "#000000",
           "imageWidth": 300,
           "resizeMode": "cover"
         }

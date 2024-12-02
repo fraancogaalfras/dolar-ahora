@@ -3,12 +3,15 @@ import { HandleDolarData } from '@/classes/dolar';
 import { Idolars } from '@/interfaces/types';
 
 export const getDolarData = async () => {
+  const DOLLAR_API = 'https://dolarapi.com/v1/dolares';
+  const HISTORIC_DOLLAR_API = 'https://api.argentinadatos.com/v1/cotizaciones/dolares';
+
   try {
     const date: HandleDate = new HandleDate();
     date.subtractDays(1);
 
-    const todayResponse: Response = await fetch('https://dolarapi.com/v1/dolares', { cache: 'no-store' });
-    const yesterdayResponse: Response = await fetch(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${date.getFormattedDateBar()}`, { cache: 'no-store' });
+    const todayResponse: Response = await fetch(DOLLAR_API, { cache: 'no-store' });
+    const yesterdayResponse: Response = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`, { cache: 'no-store' });
 
     if (!todayResponse.ok || !yesterdayResponse.ok) {
       return {

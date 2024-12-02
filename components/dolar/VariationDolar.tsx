@@ -12,7 +12,7 @@ export default function VariationDolar({ variation }: { variation: string }) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'Virgil',
     fontWeight: 200,
   },

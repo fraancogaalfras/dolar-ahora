@@ -4,20 +4,21 @@ import VariationDolar from './VariationDolar';
 import GraphDolar from './GraphDolar';
 import { memo } from 'react';
 import { colours } from '@/app/_layout';
+import { HandleDolarData } from '@/classes/dolar';
 
 const CardDolar = ({ data }: { data: Idolars }) => {
   return (
     <View
       key={data.nombre}
       style={[
-        styles.main_wrapper,
+        styles.mainWrapper,
         parseFloat(data.variacion) > 0 ? { borderColor: colours.positive } : parseFloat(data.variacion) == 0 ? { borderColor: colours.equal } : { borderColor: colours.negative },
       ]}
     >
       <View style={styles.header}>
         <View style={styles.left}>
           <View style={styles.price}>
-            <Text style={[styles.text, styles.price_text]}>{data.venta}</Text>
+            <Text style={[styles.text, styles.priceText]}>{HandleDolarData.formatPrice(data.venta)}</Text>
           </View>
           <View style={styles.variation}>
             <VariationDolar variation={data.variacion} />
@@ -25,21 +26,21 @@ const CardDolar = ({ data }: { data: Idolars }) => {
         </View>
         <View style={styles.right}>
           <View style={styles.graph}>
-            <GraphDolar variacion={data.variacion} />
+            <GraphDolar variation={data.variacion} />
           </View>
         </View>
       </View>
       <View style={styles.footer}>
-        <Text style={[styles.text, styles.dolar_text_name]}>Dolar {data.nombre.replace('Contado con liquidación', 'CCL').replace('Bolsa', 'MEP')}</Text>
+        <Text style={[styles.text, styles.dolarText]}>Dólar {data.nombre.replace('Contado con liquidación', 'CCL').replace('Bolsa', 'MEP')}</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  main_wrapper: {
+  mainWrapper: {
     width: 300,
-    borderWidth: 4,
+    borderWidth: 2,
     height: 125,
     alignItems: 'center',
     flexDirection: 'column',
@@ -65,11 +66,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   footer: {
-    height: 48,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  dolar_text_name: {
+  dolarText: {
     fontSize: 20,
   },
   left: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   price: {},
-  price_text: {
+  priceText: {
     fontSize: 28,
   },
   variation: {
