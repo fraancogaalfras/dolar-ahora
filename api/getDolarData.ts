@@ -9,15 +9,14 @@ export const getDolarData = async () => {
   try {
     const date: HandleDate = new HandleDate();
     date.subtractDays(1);
-
     const todayResponse: Response = await fetch(DOLLAR_API, { cache: 'no-store' });
     const yesterdayResponse: Response = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`, { cache: 'no-store' });
 
     if (!todayResponse.ok || !yesterdayResponse.ok) {
       return {
         ok: false,
-        message: 'Error de conexión',
-        status: 408,
+        message: 'Servicio temporalmente inactivo.',
+        status: 503,
       };
     }
 
@@ -36,8 +35,8 @@ export const getDolarData = async () => {
   } catch (error) {
     return {
       ok: false,
-      message: 'Error interno',
-      status: 503,
+      message: 'Compruebe su conexión e intente nuevamente.',
+      status: 408,
     };
   }
 };

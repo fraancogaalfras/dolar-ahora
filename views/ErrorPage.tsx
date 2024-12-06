@@ -4,7 +4,7 @@ export default function ErrorPage({ error, hideSplashOnLayout }: { error: { mess
   return (
     <View style={styles.errorWrapper} onLayout={hideSplashOnLayout}>
       <Text style={styles.text}>{error.message}</Text>
-      <Text style={styles.text}>{error.status}</Text>
+      <Text style={styles.text}>Error {error.status}</Text>
     </View>
   );
 }
@@ -17,9 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    rowGap: 5,
+    rowGap: 10,
   },
   text: {
+    fontSize: 15,
     fontFamily: 'Rubik',
     color: '#fff',
   },

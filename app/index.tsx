@@ -1,5 +1,5 @@
 import DolarPage from '@/views/DolarPage';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import ErrorPage from '@/views/ErrorPage';
@@ -31,6 +31,10 @@ export default function App() {
 
   return (
     <LinearGradient colors={['#070a10', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
+      <View style={styles.logoContainer}>
+        <Image style={styles.logo} resizeMode="contain" source={require('@/assets/images/logo-without-bg.png')}></Image>
+        <Text style={styles.text}>ólar ahora</Text>
+      </View>
       <DolarPage />
     </LinearGradient>
   );
@@ -38,10 +42,28 @@ export default function App() {
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    paddingVertical: 30,
+    paddingVertical: 20,
     paddingHorizontal: 10,
     flex: 1,
     height: '100%',
     width: '100%',
+    rowGap: 10,
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 2,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    marginRight: -9,
+    marginBottom: 8,
+  },
+  text: {
+    color: '#fff',
+    fontFamily: 'Rubik',
+    fontSize: 35,
   },
 });
