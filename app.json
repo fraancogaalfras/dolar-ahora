@@ -32,12 +32,6 @@
           "imageWidth": 300,
           "resizeMode": "cover"
         }
-      ],
-      [
-        "expo-font",
-        {
-          "fonts": ["./assets/fonts/Virgil.otf"]
-        }
       ]
     ],
     "experiments": {
@@ -53,7 +47,7 @@
       }
     },
     "android": {
-      "package": "com.ruloosgaalfras.dolarahora"
+      "package": "com.fraancogaalfras.dolarahora"
     }
   }
 }

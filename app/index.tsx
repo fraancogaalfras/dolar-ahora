@@ -1,7 +1,7 @@
 import DolarPage from '@/views/DolarPage';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font';
+import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -10,7 +10,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loaded, error] = useFonts({
-    Virgil: require('../assets/fonts/Virgil.otf'),
+    Rubik,
   });
 
   const hideSplashOnLayout = useCallback(() => {
@@ -30,7 +30,7 @@ export default function App() {
   }
 
   return (
-    <LinearGradient colors={['rgb(5 5 5)', 'rgb(20 20 20)']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
+    <LinearGradient colors={['#070a10', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
       <DolarPage />
     </LinearGradient>
   );
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   mainWrapper: {
     paddingVertical: 30,
     paddingHorizontal: 10,
-    fontFamily: 'Virgil',
     flex: 1,
     height: '100%',
     width: '100%',

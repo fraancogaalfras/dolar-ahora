@@ -3,9 +3,9 @@ import { Stack } from 'expo-router';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const colours: IColours = {
-  negative: 'rgb(255 0 0)',
-  positive: 'rgb(0 255 49)',
-  equal: 'rgb(255 255 255)',
+  negative: '#ef4444',
+  positive: '#22c55e',
+  equal: '#fff',
 };
 
 export default function RootLayout() {
