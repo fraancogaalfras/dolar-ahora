@@ -15,11 +15,11 @@
       "backgroundColor": "#000000",
       "translucent": false
     },
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/isotipo.png",
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/logo.png",
+      "favicon": "./assets/images/isotipo.png",
       "lang": "es"
     },
     "plugins": [

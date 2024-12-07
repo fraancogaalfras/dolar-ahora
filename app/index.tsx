@@ -30,10 +30,9 @@ export default function App() {
   }
 
   return (
-    <LinearGradient colors={['#070a10', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
+    <LinearGradient colors={['#0a0e16', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} resizeMode="contain" source={require('@/assets/images/logo-without-bg.png')}></Image>
-        <Text style={styles.text}>ólar ahora</Text>
+        <Image style={styles.logo} resizeMode="contain" source={require('@/assets/images/isologo.png')}></Image>
       </View>
       <DolarPage />
     </LinearGradient>
@@ -47,19 +46,16 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    rowGap: 10,
+    rowGap: 20,
   },
   logoContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 2,
+    height: 60,
   },
   logo: {
-    width: 40,
-    height: 40,
-    marginRight: -9,
-    marginBottom: 8,
+    width: 200,
+    height: 200,
   },
   text: {
     color: '#fff',
