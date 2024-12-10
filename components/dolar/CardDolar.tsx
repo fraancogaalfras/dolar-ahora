@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#080e1a',
+    backgroundColor: '#030712',
     borderRadius: 25,
     shadowColor: '#030712',
     shadowOffset: { width: 0, height: 10 },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   dolarText: {
-    fontSize: 19,
+    fontSize: 20,
   },
   left: {
     flex: 1,
