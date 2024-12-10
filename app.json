@@ -12,8 +12,11 @@
     "primaryColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "backgroundColor": "#000000",
-      "translucent": false
+      "backgroundColor": "#0a0e16",
+      "translucent": true
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#000000"
     },
     "icon": "./assets/images/isotipo.png",
     "web": {
