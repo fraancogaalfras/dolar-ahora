@@ -12,17 +12,17 @@
     "primaryColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "backgroundColor": "#0a0e16",
+      "backgroundColor": "#000000",
       "translucent": true
     },
     "androidNavigationBar": {
       "backgroundColor": "#000000"
     },
-    "icon": "./assets/images/isotipo.png",
+    "icon": "./assets/images/isotipo-dark.png",
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/isotipo.png",
+      "favicon": "./assets/images/isotipo-dark.png",
       "lang": "es"
     },
     "plugins": [
