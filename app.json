@@ -12,8 +12,10 @@
     "primaryColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "backgroundColor": "#000000",
-      "translucent": false
+      "translucent": true
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#000000"
     },
     "icon": "./assets/images/isotipo.png",
     "web": {
@@ -27,8 +29,8 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-dark.png",
-          "backgroundColor": "#000000",
+          "image": "./assets/images/isotipo.png",
+          "backgroundColor": "#080e1a",
           "imageWidth": 300,
           "resizeMode": "cover"
         }
