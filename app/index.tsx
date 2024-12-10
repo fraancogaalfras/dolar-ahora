@@ -5,6 +5,7 @@ import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,8 +23,8 @@ export default function App() {
       <ErrorPage
         hideSplashOnLayout={hideSplashOnLayout}
         error={{
-          message: 'Error al cargar la fuente.',
-          status: 500,
+          message: 'La aplicación no está soportada en tu dispositivo.',
+          status: 400,
         }}
       />
     );
@@ -31,6 +32,7 @@ export default function App() {
 
   return (
     <LinearGradient colors={['#0a0e16', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
+      <StatusBar backgroundColor="#0a0e16" />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} resizeMode="contain" source={require('@/assets/images/isologo.png')}></Image>
       </View>
