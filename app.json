@@ -4,7 +4,7 @@
     "name": "Dólar Ahora",
     "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
     "slug": "dolar-ahora",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "platforms": ["android", "web"],
     "scheme": "dolarahora",
     "orientation": "portrait",
@@ -46,7 +46,7 @@
       },
       "eas": {
         "projectId": "de5f3556-85a3-4184-b809-0a0ed908e71f",
-        "versionCode": 1
+        "versionCode": 2
       }
     },
     "android": {
