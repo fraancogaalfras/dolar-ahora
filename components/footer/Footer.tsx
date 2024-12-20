@@ -1,8 +1,7 @@
-import React from 'react';
 import MadeBy from './MadeBy';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Links from './Links';
-import LastUpdate from '../misc/LastUpdate';
+import LastUpdate from './LastUpdate';
 
 export default function Footer() {
   return (

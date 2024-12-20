@@ -6,7 +6,7 @@ import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { colours } from '@/app/_layout';
-import LastUpdate from '@/components/misc/LastUpdate';
+import LastUpdate from '@/components/footer/LastUpdate';
 import Footer from '@/components/footer/Footer';
 
 export default function DolarPage() {

@@ -12,7 +12,6 @@
     "primaryColor": "#000000",
     "userInterfaceStyle": "dark",
     "androidStatusBar": {
-      "backgroundColor": "#000000",
       "translucent": true
     },
     "androidNavigationBar": {
