@@ -1,4 +1,4 @@
-import { AppState, FlatList, RefreshControl, Text, useWindowDimensions } from 'react-native';
+import { AppState, FlatList, Platform, RefreshControl, Text, useWindowDimensions } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { Idolars, Ierror } from '@/interfaces/types';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -6,7 +6,8 @@ import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { colours } from '@/app/_layout';
-import LastUpdate from '@/components/LastUpdate';
+import LastUpdate from '@/components/misc/LastUpdate';
+import Footer from '@/components/footer/Footer';
 
 export default function DolarPage() {
   const currentState = useRef(AppState.currentState);
@@ -53,7 +54,9 @@ export default function DolarPage() {
 
   useLayoutEffect(() => {
     if (appState == 'active') {
-      setLoading(true);
+      if (Platform.OS != 'web') {
+        setLoading(true);
+      }
       getFetch();
     }
   }, [refreshing, appState]);
@@ -90,7 +93,7 @@ export default function DolarPage() {
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
-      ListFooterComponent={<LastUpdate />}
+      ListFooterComponent={<Footer />}
     />
   );
 }
