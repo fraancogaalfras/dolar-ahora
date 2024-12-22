@@ -1,4 +1,4 @@
-import { AppState, FlatList, Platform, RefreshControl, Text, useWindowDimensions } from 'react-native';
+import { AppState, FlatList, Platform, RefreshControl, useWindowDimensions } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { Idolars, Ierror } from '@/interfaces/types';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -6,7 +6,6 @@ import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { colours } from '@/app/_layout';
-import LastUpdate from '@/components/footer/LastUpdate';
 import Footer from '@/components/footer/Footer';
 
 export default function DolarPage() {
@@ -63,7 +62,7 @@ export default function DolarPage() {
 
   const renderItem = useCallback(({ item }: { item: Idolars }) => <CardDolar data={item} />, [data]);
   const getNumColumns = useMemo(() => {
-    return width > 1000 ? 3 : width > 500 ? 2 : 1;
+    return width > 1000 ? 3 : width > 675 ? 2 : 1;
   }, [width]);
 
   return loading ? (
@@ -89,7 +88,7 @@ export default function DolarPage() {
         },
       ]}
       numColumns={getNumColumns}
-      columnWrapperStyle={width > 600 ? { columnGap: 30 } : null}
+      columnWrapperStyle={width > 675 ? { columnGap: 30 } : null}
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}

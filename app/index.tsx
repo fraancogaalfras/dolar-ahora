@@ -6,7 +6,6 @@ import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import Footer from '@/components/footer/Footer';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,11 +53,11 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
+    height: Platform.OS == 'web' ? 80 : 60,
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: Platform.OS == 'web' ? 225 : 200,
+    height: Platform.OS == 'web' ? 225 : 200,
   },
   text: {
     color: '#fff',

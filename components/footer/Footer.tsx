@@ -1,5 +1,5 @@
 import MadeBy from './MadeBy';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import Links from './Links';
 import LastUpdate from './LastUpdate';
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    rowGap: 20,
+    rowGap: Platform.OS == 'web' ? 30 : 20,
   },
   container: {
     width: 'auto',
