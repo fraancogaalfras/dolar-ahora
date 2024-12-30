@@ -40,7 +40,7 @@ const CardDolar = ({ data }: { data: Idolars }) => {
 const styles = StyleSheet.create({
   mainWrapper: {
     width: 300,
-    borderWidth: 2,
+    borderWidth: 1,
     height: 125,
     alignItems: 'center',
     flexDirection: 'column',
