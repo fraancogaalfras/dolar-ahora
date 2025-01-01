@@ -9,14 +9,6 @@ export default function Logo() {
 }
 
 const styles = StyleSheet.create({
-  mainWrapper: {
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    flex: 1,
-    height: '100%',
-    width: '100%',
-    rowGap: 20,
-  },
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
