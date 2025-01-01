@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 10,
     elevation: 5,
+    marginBottom: 30,
   },
   text: {
     color: 'white',

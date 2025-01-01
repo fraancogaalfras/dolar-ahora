@@ -1,4 +1,4 @@
-import { AppState, FlatList, Platform, RefreshControl, useWindowDimensions } from 'react-native';
+import { AppState, FlatList, Platform, RefreshControl, SectionList, StyleProp, useWindowDimensions, ViewStyle } from 'react-native';
 import CardDolar from '@/components/dolar/CardDolar';
 import { Idolars, Ierror } from '@/interfaces/types';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -61,34 +61,50 @@ export default function DolarPage() {
   }, [refreshing, appState]);
 
   const renderItem = useCallback(({ item }: { item: Idolars }) => <CardDolar data={item} />, [data]);
+  const keyExtractor = useCallback((item: Idolars) => item.casa, []);
   const getNumColumns = useMemo(() => {
     return width > 1000 ? 3 : width > 675 ? 2 : 1;
   }, [width]);
+  const getItemLayout = useCallback((_: any, index: number) => ({ length: 125, offset: (125 + 30) * index, index }), []);
+  const contentContainerStyle: StyleProp<ViewStyle> = [
+    {
+      alignItems: 'center',
+    },
+    height > 1000 && {
+      justifyContent: 'center',
+      height: '100%',
+      width: '100%',
+    },
+  ];
+  const columnWrapperStyle = width > 675 && { columnGap: 30 };
 
   return loading ? (
     <Loading />
   ) : error ? (
     <ErrorPage error={error} />
-  ) : (
+  ) : width > 675 ? (
     <FlatList
       data={data}
       renderItem={renderItem}
       key={getNumColumns}
-      keyExtractor={(item) => item.casa}
-      getItemLayout={(data, index) => ({ length: 125, offset: 125 * index, index })}
-      contentContainerStyle={[
-        {
-          gap: 30,
-          alignItems: 'center',
-        },
-        height > 1000 && {
-          justifyContent: 'center',
-          height: '100%',
-          width: '100%',
-        },
-      ]}
+      keyExtractor={keyExtractor}
+      getItemLayout={getItemLayout}
+      contentContainerStyle={contentContainerStyle}
       numColumns={getNumColumns}
-      columnWrapperStyle={width > 675 ? { columnGap: 30 } : null}
+      columnWrapperStyle={columnWrapperStyle}
+      showsVerticalScrollIndicator={false}
+      initialNumToRender={7}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
+      ListFooterComponent={<Footer />}
+    />
+  ) : (
+    <SectionList
+      sections={[{ data: data as Idolars[] }]}
+      renderItem={renderItem}
+      key={getNumColumns}
+      keyExtractor={keyExtractor}
+      getItemLayout={getItemLayout}
+      contentContainerStyle={contentContainerStyle}
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}

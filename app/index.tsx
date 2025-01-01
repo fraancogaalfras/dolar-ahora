@@ -5,7 +5,7 @@ import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StatusBar } from 'expo-status-bar';
+import Logo from '@/components/logo/Logo';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,10 +32,7 @@ export default function App() {
 
   return (
     <LinearGradient colors={['#0a0e16', '#000000']} style={styles.mainWrapper} onLayout={hideSplashOnLayout}>
-      <StatusBar backgroundColor="#0a0e16" />
-      <View style={styles.logoContainer}>
-        <Image style={styles.logo} resizeMode="contain" source={require('@/assets/images/isologo.png')}></Image>
-      </View>
+      <Logo />
       <DolarPage />
     </LinearGradient>
   );
@@ -58,10 +55,5 @@ const styles = StyleSheet.create({
   logo: {
     width: Platform.OS == 'web' ? 225 : 200,
     height: Platform.OS == 'web' ? 225 : 200,
-  },
-  text: {
-    color: '#fff',
-    fontFamily: 'Rubik',
-    fontSize: 35,
   },
 });

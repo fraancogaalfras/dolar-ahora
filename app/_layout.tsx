@@ -1,5 +1,6 @@
 import { IColours } from '@/interfaces/types';
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const colours: IColours = {
@@ -20,6 +21,7 @@ export default function RootLayout() {
         paddingRight: insets.right,
       }}
     >
+      <StatusBar backgroundColor="#0a0e16" translucent={true} />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
