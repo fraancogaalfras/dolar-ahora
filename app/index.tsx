@@ -1,8 +1,7 @@
 import DolarPage from '@/views/DolarPage';
-import { Image, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
-import ErrorPage from '@/views/ErrorPage';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '@/components/logo/Logo';
@@ -19,15 +18,7 @@ export default function App() {
   }, []);
 
   if (!loaded && !error) {
-    return (
-      <ErrorPage
-        hideSplashOnLayout={hideSplashOnLayout}
-        error={{
-          message: 'La aplicación no está soportada en tu dispositivo.',
-          status: 400,
-        }}
-      />
-    );
+    return null;
   }
 
   return (

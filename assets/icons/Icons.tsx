@@ -1,4 +1,3 @@
-import { TouchableOpacity } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
 export function IconCoffee() {

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function ErrorPage({ error, hideSplashOnLayout }: { error: { message: string; status: number }; hideSplashOnLayout?: VoidFunction }) {
+export default function ErrorPage({ error }: { error: { message: string; status: number } }) {
   return (
-    <View style={styles.errorWrapper} onLayout={hideSplashOnLayout}>
+    <View style={styles.errorWrapper}>
       <Text style={styles.text}>{error.message}</Text>
       <Text style={styles.text}>Error {error.status}</Text>
     </View>
