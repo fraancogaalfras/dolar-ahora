@@ -1,13 +1,12 @@
 import { StyleSheet, Text } from 'react-native';
 
-export default function LastUpdate() {
-  const lastUpdate = new Date().toLocaleString('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-
-  return <Text style={styles.text}>Última actualización: {lastUpdate}</Text>;
+export default function LastUpdate({ lastUpdate }: { lastUpdate: string }) {
+  return (
+    <Text style={styles.text}>
+      Última actualización:<br></br>
+      {lastUpdate}
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -16,5 +15,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik',
     fontSize: 13,
     paddingBottom: 5,
+    textAlign: 'center',
+    lineHeight: 18,
   },
 });

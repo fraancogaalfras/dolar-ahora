@@ -1,7 +1,7 @@
 import DolarPage from '@/views/DolarPage';
 import { Platform, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
+import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import { useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import Logo from '@/components/logo/Logo';
@@ -10,6 +10,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loaded, error] = useFonts({
+    Rubik_Light,
     Rubik,
   });
 

@@ -20,7 +20,7 @@
     "icon": "./assets/images/isotipo-dark.png",
     "web": {
       "bundler": "metro",
-      "output": "single",
+      "output": "static",
       "favicon": "./assets/images/isotipo-dark.png",
       "lang": "es"
     },

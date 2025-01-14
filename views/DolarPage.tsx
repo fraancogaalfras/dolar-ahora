@@ -14,6 +14,7 @@ export default function DolarPage() {
   const [appState, setAppState] = useState(currentState.current);
   const { width, height } = useWindowDimensions();
   const [data, setData] = useState<Idolars[]>();
+  const [lastUpdate, setLastUpdate] = useState<string>('');
   const [error, setError] = useState<Ierror>();
   const [loading, setLoading] = useState<Boolean>(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -46,8 +47,27 @@ export default function DolarPage() {
     }
     if (result.data) {
       setData(result.data);
+      getLastUpdate(result.data);
       setLoading(false);
       setRefreshing(false);
+    }
+  };
+
+  const getLastUpdate = (data: Idolars[]) => {
+    try {
+      // Se toma el CCL como referencia.
+      const lastUpdate = data[3].fechaActualizacion;
+      const lastUpdateFormatted = new Date(lastUpdate).toLocaleString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      setLastUpdate(lastUpdateFormatted);
+    } catch (e) {
+      setLastUpdate('Cargando información...');
     }
   };
 
@@ -95,7 +115,7 @@ export default function DolarPage() {
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
-      ListFooterComponent={<Footer />}
+      ListFooterComponent={<Footer lastUpdate={lastUpdate} />}
     />
   ) : (
     <SectionList
@@ -108,7 +128,7 @@ export default function DolarPage() {
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
-      ListFooterComponent={<Footer />}
+      ListFooterComponent={<Footer lastUpdate={lastUpdate} />}
     />
   );
 }
