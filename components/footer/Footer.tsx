@@ -17,6 +17,7 @@ export default function Footer({ lastUpdate }: { lastUpdate: string }) {
 
 const styles = StyleSheet.create({
   footer: {
+    marginTop: Platform.OS == 'web' ? 10 : undefined,
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,5 +1,5 @@
 import DolarPage from '@/views/DolarPage';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
 import { useCallback } from 'react';
@@ -38,14 +38,5 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     rowGap: 20,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: Platform.OS == 'web' ? 80 : 60,
-  },
-  logo: {
-    width: Platform.OS == 'web' ? 225 : 200,
-    height: Platform.OS == 'web' ? 225 : 200,
   },
 });
