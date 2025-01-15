@@ -39,7 +39,7 @@ const CardDolar = ({ data }: { data: Idolars }) => {
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    width: 300,
+    width: 285,
     borderWidth: 1,
     height: 125,
     alignItems: 'center',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   dolarText: {
-    fontSize: 19,
+    fontSize: 18,
   },
   left: {
     flex: 1,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   price: {},
   priceText: {
-    fontSize: 28,
+    fontSize: 26,
   },
   variation: {
     padding: 2,
