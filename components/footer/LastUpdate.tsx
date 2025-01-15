@@ -3,8 +3,8 @@ import { StyleSheet, Text } from 'react-native';
 export default function LastUpdate({ lastUpdate }: { lastUpdate: string }) {
   return (
     <Text style={styles.text}>
-      Última actualización:<br></br>
-      {lastUpdate}
+      Última actualización:{'\n'}
+      <Text style={{ fontSize: 14 }}>{lastUpdate}</Text>
     </Text>
   );
 }
@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     paddingBottom: 5,
     textAlign: 'center',
-    lineHeight: 18,
+    lineHeight: 20,
   },
 });

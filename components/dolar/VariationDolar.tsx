@@ -13,6 +13,6 @@ export default function VariationDolar({ variation }: { variation: string }) {
 const styles = StyleSheet.create({
   text: {
     fontSize: 13,
-    fontFamily: 'Rubik_Light',
+    fontFamily: 'Rubik',
   },
 });
