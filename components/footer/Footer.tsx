@@ -8,7 +8,6 @@ export default function Footer({ lastUpdate }: { lastUpdate: string }) {
     <View style={styles.footer}>
       <LastUpdate lastUpdate={lastUpdate} />
       <View style={styles.container}>
-        <Links />
         <MadeBy />
       </View>
     </View>
@@ -17,11 +16,10 @@ export default function Footer({ lastUpdate }: { lastUpdate: string }) {
 
 const styles = StyleSheet.create({
   footer: {
-    marginTop: Platform.OS == 'web' ? 10 : undefined,
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    rowGap: Platform.OS == 'web' ? 30 : 20,
+    rowGap: 5,
   },
   container: {
     width: 'auto',

@@ -1,59 +1,42 @@
-import { AppState, FlatList, Platform, RefreshControl, SectionList, StyleProp, useWindowDimensions, ViewStyle } from 'react-native';
-import CardDolar from '@/components/dolar/CardDolar';
-import { Idolars, Ierror } from '@/interfaces/types';
+import { AppState, Platform, RefreshControl, SectionList, StyleProp, ViewStyle } from 'react-native';
+import Card from '@/components/dolar/Card';
+import { IDollars } from '@/interfaces/types';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
-import { colours } from '@/app/_layout';
+import { COLOURS } from '@/constants/constants';
 import Footer from '@/components/footer/Footer';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import LastUpdate from '@/components/footer/LastUpdate';
 
 export default function DolarPage() {
   const currentState = useRef(AppState.currentState);
-
   const [appState, setAppState] = useState(currentState.current);
-  const { width, height } = useWindowDimensions();
-  const [data, setData] = useState<Idolars[]>();
+  const [refreshing, setRefreshing] = useState<boolean>(false);
   const [lastUpdate, setLastUpdate] = useState<string>('');
-  const [error, setError] = useState<Ierror>();
-  const [loading, setLoading] = useState<Boolean>(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-  }, []);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
-    const handleChange = AppState.addEventListener('change', (changedState) => {
+    const appStateListener = AppState.addEventListener('change', (changedState) => {
       currentState.current = changedState;
       setAppState(currentState.current);
     });
 
     return () => {
-      handleChange.remove();
+      appStateListener.remove();
     };
   }, []);
 
-  const getFetch = async () => {
-    const result = await getDolarData();
-    if (!result.ok) {
-      setError({
-        message: result.message,
-        status: result.status,
-      });
-      setLoading(false);
-      setRefreshing(false);
-      return;
+  useLayoutEffect(() => {
+    if (appState == 'active') {
+      if (Platform.OS != 'web') {
+        queryClient.refetchQueries({ queryKey: ['dollars'] });
+      }
     }
-    if (result.data) {
-      setData(result.data);
-      getLastUpdate(result.data);
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
+  }, [refreshing, appState]);
 
-  const getLastUpdate = (data: Idolars[]) => {
+  const getLastUpdate = async (data: IDollars[]) => {
     try {
       // Se toma el CCL como referencia.
       const lastUpdate = data[3].fechaActualizacion;
@@ -66,69 +49,56 @@ export default function DolarPage() {
         second: '2-digit',
       });
       setLastUpdate(lastUpdateFormatted);
-    } catch (e) {
+    } catch (e: any) {
       setLastUpdate('Cargando información...');
     }
   };
 
-  useLayoutEffect(() => {
-    if (appState == 'active') {
-      if (Platform.OS != 'web') {
-        setLoading(true);
-      }
-      getFetch();
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+  }, []);
+
+  const getDollars = async () => {
+    try {
+      const data = await getDolarData();
+      await getLastUpdate(data);
+      return data;
+    } catch (e: any) {
+      throw new Error(e.message);
+    } finally {
+      setRefreshing(false);
     }
-  }, [refreshing, appState]);
+  };
 
-  const renderItem = useCallback(({ item }: { item: Idolars }) => <CardDolar data={item} />, [data]);
-  const keyExtractor = useCallback((item: Idolars) => item.casa, []);
-  const getNumColumns = useMemo(() => {
-    return width > 1000 ? 3 : width > 675 ? 2 : 1;
-  }, [width]);
+  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, refetchInterval: 900000 });
+
+  const renderItem = useCallback(({ item }: { item: IDollars }) => <Card data={item} />, [data]);
+  const keyExtractor = useCallback((item: IDollars) => item.casa, []);
   const getItemLayout = useCallback((_: any, index: number) => ({ length: 125, offset: (125 + 30) * index, index }), []);
-  const contentContainerStyle: StyleProp<ViewStyle> = [
-    {
-      alignItems: 'center',
-    },
-    height > 1000 && {
-      justifyContent: 'center',
-      height: '100%',
-      width: '100%',
-    },
-  ];
-  const columnWrapperStyle = width > 675 && { columnGap: 30 };
+  const contentContainerStyle: StyleProp<ViewStyle> = {
+    alignItems: 'center',
+    paddingBottom: 70,
+    paddingTop: 25,
+    // paddingVertical: 25,
+    backgroundColor: 'rgb(10 14 20)',
+  };
 
-  return loading ? (
+  return isPending ? (
     <Loading />
-  ) : error ? (
-    <ErrorPage error={error} />
-  ) : width > 675 ? (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      key={getNumColumns}
-      keyExtractor={keyExtractor}
-      getItemLayout={getItemLayout}
-      contentContainerStyle={contentContainerStyle}
-      numColumns={getNumColumns}
-      columnWrapperStyle={columnWrapperStyle}
-      showsVerticalScrollIndicator={false}
-      initialNumToRender={7}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
-      ListFooterComponent={<Footer lastUpdate={lastUpdate} />}
-    />
+  ) : isError ? (
+    <ErrorPage error={error.message} />
   ) : (
     <SectionList
-      sections={[{ data: data as Idolars[] }]}
+      sections={[{ data: data as any }]}
       renderItem={renderItem}
-      key={getNumColumns}
       keyExtractor={keyExtractor}
       getItemLayout={getItemLayout}
       contentContainerStyle={contentContainerStyle}
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colours.positive, colours.equal]} progressBackgroundColor={'#000'} tintColor={colours.positive} />}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={'#000'} tintColor={COLOURS.positive} />}
       ListFooterComponent={<Footer lastUpdate={lastUpdate} />}
+      ListFooterComponentStyle={{marginTop: -5}}
     />
   );
 }

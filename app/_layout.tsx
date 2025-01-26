@@ -1,16 +1,13 @@
-import { IColours } from '@/interfaces/types';
+import { BACKGROUND_COLOR } from '@/constants/constants';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-
-export const colours: IColours = {
-  negative: '#ef4444',
-  positive: '#22c55e',
-  equal: '#fff',
-};
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
+  const [queryClient] = useState<QueryClient>(() => new QueryClient());
 
   return (
     <SafeAreaProvider
@@ -21,10 +18,12 @@ export default function RootLayout() {
         paddingRight: insets.right,
       }}
     >
-      <StatusBar backgroundColor="#0a0e16" translucent={true} />
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
+      <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
+      <QueryClientProvider client={queryClient}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />
+        </Stack>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }

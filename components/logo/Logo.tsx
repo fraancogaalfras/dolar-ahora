@@ -1,4 +1,4 @@
-import { Image, Platform, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 export default function Logo() {
   return (
@@ -12,10 +12,9 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: Platform.OS == 'web' ? 80 : 60,
   },
   logo: {
-    width: Platform.OS == 'web' ? 225 : 200,
-    height: Platform.OS == 'web' ? 225 : 200,
+    width: 140,
+    height: 50,
   },
 });

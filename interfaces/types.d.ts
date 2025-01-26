@@ -1,4 +1,4 @@
-export interface Idolars {
+export interface IDollars {
   moneda: string;
   casa: string;
   nombre: string;

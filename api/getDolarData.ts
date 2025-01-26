@@ -1,6 +1,6 @@
 import { HandleDate } from '@/classes/date';
 import { HandleDolarData } from '@/classes/dolar';
-import { Idolars } from '@/interfaces/types';
+import { IDollars } from '@/interfaces/types';
 
 export const getDolarData = async () => {
   const DOLLAR_API = 'https://dolarapi.com/v1/dolares';
@@ -14,30 +14,17 @@ export const getDolarData = async () => {
     const yesterdayResponse = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`, { cache: 'no-store' });
 
     if (!todayResponse.ok || !yesterdayResponse.ok) {
-      return {
-        ok: false,
-        message: 'Servicio temporalmente inactivo.',
-        status: 503,
-      };
+      throw new Error('Servicio temporalmente inactivo.');
     }
 
-    const todayResult: Idolars[] = await todayResponse.json();
-    const yesterdayResult: Idolars[] = await yesterdayResponse.json();
+    const todayResult: IDollars[] = await todayResponse.json();
+    const yesterdayResult: IDollars[] = await yesterdayResponse.json();
 
     const data: HandleDolarData = new HandleDolarData(todayResult);
     data.bindPreviousData(yesterdayResult);
 
-    return {
-      ok: true,
-      message: 'ok',
-      status: 200,
-      data: data.getData(),
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      message: 'Compruebe su conexión e intente nuevamente.',
-      status: 408,
-    };
+    return data.getData();
+  } catch (e: any) {
+    throw new Error('Compruebe su conexión e intente nuevamente.');
   }
 };

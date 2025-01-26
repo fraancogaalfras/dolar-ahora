@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
+    gap: 5,
   },
 });

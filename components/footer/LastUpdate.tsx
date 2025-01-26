@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     color: '#9f9f9f',
     fontFamily: 'Rubik',
     fontSize: 13,
-    paddingBottom: 5,
     textAlign: 'center',
     lineHeight: 20,
   },

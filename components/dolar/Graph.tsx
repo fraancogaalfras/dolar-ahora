@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { colours } from '@/app/_layout';
+import { COLOURS } from '@/constants/constants';
 import { useMemo } from 'react';
 
-export default function GraphDolar({ variation }: { variation: string }) {
+export default function Graph({ variation }: { variation: string }) {
   const getValues = useMemo(() => {
     if (parseFloat(variation) < 0) {
       return [100, 80, 60, 40, 20];
@@ -22,7 +22,7 @@ export default function GraphDolar({ variation }: { variation: string }) {
       fillShadowGradientTo: 'transparent',
       fillShadowGradientFromOpacity: 0,
       fillShadowGradientToOpacity: 0,
-      color: () => (parseFloat(variation) > 0 ? colours.positive : parseFloat(variation) == 0 ? colours.equal : colours.negative),
+      color: () => (parseFloat(variation) > 0 ? COLOURS.positive : parseFloat(variation) == 0 ? COLOURS.equal : COLOURS.negative),
     };
   }, [variation]);
 

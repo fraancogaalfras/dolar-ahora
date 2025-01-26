@@ -1,8 +1,31 @@
 import Svg, { G, Path } from 'react-native-svg';
 
+export function IconDollar({ opacity = 1 }) {
+  return (
+    <Svg width="35" height="35" viewBox="0 0 48 48" opacity={opacity}>
+      <Path
+        fill="#fff"
+        fillRule="evenodd"
+        d="M26 8a2 2 0 1 0-4 0v2a8 8 0 1 0 0 16v8a4 4 0 0 1-3.773-2.666a2 2 0 0 0-3.771 1.332A8 8 0 0 0 22 38v2a2 2 0 1 0 4 0v-2a8 8 0 1 0 0-16v-8a4 4 0 0 1 3.773 2.666a2 2 0 0 0 3.771-1.332A8 8 0 0 0 26 10zm-4 6a4 4 0 0 0 0 8zm4 12v8a4 4 0 0 0 0-8"
+        clipRule="evenodd"
+      />
+    </Svg>
+  );
+}
+
+export function IconConverter({ opacity = 1 }) {
+  return (
+    <Svg width="30" height="30" viewBox="0 0 24 24" opacity={opacity}>
+      <Path
+        d="M6 22h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zm3-3H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V9h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm4 8h-2v-6h2v6zm0-8h-2V9h2v2zM6 4h12v3H6V4z"
+        fill="#fff"
+      />
+    </Svg>
+  );
+}
 export function IconCoffee() {
   return (
-    <Svg width="50" height="50" viewBox="0 0 24 24">
+    <Svg width="30" height="30" viewBox="0 0 24 24">
       <Path
         fill="#9f9f9f"
         opacity={0.3}
@@ -14,7 +37,7 @@ export function IconCoffee() {
 
 export function IconGithub() {
   return (
-    <Svg width="50" height="50" viewBox="0 0 24 24">
+    <Svg width="30" height="30" viewBox="0 0 24 24">
       <Path
         fill="#9f9f9f"
         opacity={0.3}

@@ -1,12 +1,12 @@
-import { Idolars } from '@/interfaces/types';
+import { IDollars } from '@/interfaces/types';
 
 export class HandleDolarData {
-  data: Idolars[];
-  constructor(data: Idolars[]) {
+  data: IDollars[];
+  constructor(data: IDollars[]) {
     this.data = data;
   }
 
-  public bindPreviousData(previousData: Idolars[]): void {
+  public bindPreviousData(previousData: IDollars[]): void {
     for (let i = 0; i < this.data.length; i++) {
       for (let j = 0; j < previousData.length; j++) {
         if (this.data[i].casa == previousData[j].casa) {
@@ -22,7 +22,7 @@ export class HandleDolarData {
     return price.toString().replace('.', ',');
   }
 
-  public getData(): Idolars[] {
+  public getData(): IDollars[] {
     return this.data;
   }
 
