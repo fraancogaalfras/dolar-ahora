@@ -42,7 +42,7 @@ export class HandleDate {
     const year = this.date.getFullYear();
     const month = String(this.date.getMonth() + 1).padStart(2, '0');
     const day = String(this.date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return `${day}-${month}-${year}`;
   }
 
   getFormattedDateBar(): string {
@@ -56,6 +56,17 @@ export class HandleDate {
     const year = this.date.getFullYear();
     const month = String(this.date.getMonth() + 1).padStart(2, '0');
     const day = String(this.date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
+    return `${day}.${month}.${year}`;
+  }
+
+  getFormattedDateBarWithTime(): string {
+    return this.date.toLocaleString('de-DE', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
   }
 }

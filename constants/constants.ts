@@ -1,6 +1,6 @@
 import { IColours } from '@/interfaces/types';
 
-export const BACKGROUND_COLOR = '#0a0e16';
+export const BACKGROUND_COLOR = 'rgba(9,9,11,1)';
 export const LINE_COLOR = '#2f3336';
 
 export const COLOURS: IColours = {

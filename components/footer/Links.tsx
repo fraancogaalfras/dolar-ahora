@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 5,
+    marginTop: 2
   },
 });

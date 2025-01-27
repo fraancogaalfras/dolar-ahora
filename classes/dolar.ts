@@ -22,6 +22,10 @@ export class HandleDolarData {
     return price.toString().replace('.', ',');
   }
 
+  public static formatName(name: string): string {
+    return name.replace('Contado con liquidación', 'CCL').replace('Bolsa', 'MEP').replace('Mayorista', 'MULC');
+  }
+
   public getData(): IDollars[] {
     return this.data;
   }

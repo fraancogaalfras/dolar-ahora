@@ -1,13 +1,12 @@
-import { View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { COLOURS } from '@/constants/constants';
 import { useMemo } from 'react';
+import { COLOURS } from '@/constants/constants';
 
-export default function Graph({ variation }: { variation: string }) {
+export default function Graph({ variation }: { variation: number }) {
   const getValues = useMemo(() => {
-    if (parseFloat(variation) < 0) {
+    if (variation < 0) {
       return [100, 80, 60, 40, 20];
-    } else if (parseFloat(variation) == 0) {
+    } else if (variation == 0) {
       return [50, 50, 50, 50, 50];
     } else {
       return [20, 40, 60, 80, 100];
@@ -22,40 +21,37 @@ export default function Graph({ variation }: { variation: string }) {
       fillShadowGradientTo: 'transparent',
       fillShadowGradientFromOpacity: 0,
       fillShadowGradientToOpacity: 0,
-      color: () => (parseFloat(variation) > 0 ? COLOURS.positive : parseFloat(variation) == 0 ? COLOURS.equal : COLOURS.negative),
+      color: () => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative),
     };
-  }, [variation]);
+  }, []);
 
   return (
-    <View style={{ width: '100%', height: '100%' }}>
-      <LineChart
-        data={{
-          labels: [],
-          datasets: [
-            {
-              data: getValues,
-            },
-            {
-              data: [0],
-            },
-            {
-              data: [100],
-            },
-          ],
-        }}
-        width={140}
-        height={50}
-        fromZero={parseFloat(variation) == 0}
-        yAxisLabel=""
-        yAxisSuffix=""
-        withHorizontalLines={false}
-        withVerticalLines={false}
-        withVerticalLabels={true}
-        withDots={false}
-        chartConfig={chartConfig}
-        style={{ paddingRight: 0 }}
-        bezier
-      />
-    </View>
+    <LineChart
+      data={{
+        labels: [],
+        datasets: [
+          {
+            data: getValues,
+          },
+          {
+            data: [0],
+          },
+          {
+            data: [100],
+          },
+        ],
+      }}
+      width={100}
+      height={70}
+      fromZero={variation == 0}
+      withHorizontalLines={false}
+      withHorizontalLabels={false}
+      withVerticalLines={false}
+      withVerticalLabels={false}
+      withDots={false}
+      chartConfig={chartConfig}
+      style={{ paddingRight: 0, paddingLeft: 6, marginTop: 5, marginBottom: 12 }}
+      bezier
+    />
   );
 }

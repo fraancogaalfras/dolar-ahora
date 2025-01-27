@@ -1,13 +1,17 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Logo from '../logo/Logo';
 import { LINE_COLOR } from '@/constants/constants';
 import Links from '../footer/Links';
+import { HandleDate } from '@/classes/date';
 
 export default function Header() {
+  const todayDate = new HandleDate().getFormattedDateDot();
+
   return (
     <View style={styles.header}>
       <Logo />
-      <Links />
+      <Text style={styles.dateText}>{todayDate}</Text>
+      {/* <Links /> */}
     </View>
   );
 }
@@ -21,5 +25,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  dateText: {
+    color: '#fff',
+    fontFamily: 'Rubik',
+    fontSize: 16,
+    marginTop: 12,
+    opacity: 0.7,
   },
 });

@@ -8,7 +8,7 @@ export default function Footer({ lastUpdate }: { lastUpdate: string }) {
     <View style={styles.footer}>
       <LastUpdate lastUpdate={lastUpdate} />
       <View style={styles.container}>
-        <MadeBy />
+        <Links />
       </View>
     </View>
   );
