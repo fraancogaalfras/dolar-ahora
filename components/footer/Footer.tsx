@@ -1,12 +1,9 @@
-import MadeBy from './MadeBy';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Links from './Links';
-import LastUpdate from './LastUpdate';
 
-export default function Footer({ lastUpdate }: { lastUpdate: string }) {
+export default function Footer() {
   return (
     <View style={styles.footer}>
-      <LastUpdate lastUpdate={lastUpdate} />
       <View style={styles.container}>
         <Links />
       </View>

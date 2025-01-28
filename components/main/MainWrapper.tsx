@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../header/Header';
 import { StyleSheet, View } from 'react-native';
-import { BACKGROUND_COLOR } from '@/constants/constants';
+import { TAB_COLOR } from '@/constants/constants';
 
 export default function MainWrapper({ children, hideSplashOnLayout }: { children: React.ReactNode; hideSplashOnLayout?: () => void }) {
   return (
@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: BACKGROUND_COLOR,
+    backgroundColor: TAB_COLOR,
   },
 });

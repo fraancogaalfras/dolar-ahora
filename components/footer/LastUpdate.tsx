@@ -1,6 +1,9 @@
+import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function LastUpdate({ lastUpdate }: { lastUpdate: string }) {
+export default function LastUpdate() {
+  const { lastUpdate = 'Cargando información...' } = useLocalSearchParams<{ lastUpdate: string }>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -13,7 +16,7 @@ export default function LastUpdate({ lastUpdate }: { lastUpdate: string }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 25,
+    paddingBottom: 20,
   },
   text: {
     color: '#9f9f9f',

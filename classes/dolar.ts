@@ -1,12 +1,13 @@
-import { IDollars } from '@/interfaces/types';
+import { IDollar } from '@/interfaces/IDollar';
+import { HandleDate } from './date';
 
 export class HandleDolarData {
-  data: IDollars[];
-  constructor(data: IDollars[]) {
+  data: IDollar[];
+  constructor(data: IDollar[]) {
     this.data = data;
   }
 
-  public bindPreviousData(previousData: IDollars[]): void {
+  public bindPreviousData(previousData: IDollar[]): void {
     for (let i = 0; i < this.data.length; i++) {
       for (let j = 0; j < previousData.length; j++) {
         if (this.data[i].casa == previousData[j].casa) {
@@ -26,7 +27,7 @@ export class HandleDolarData {
     return name.replace('Contado con liquidación', 'CCL').replace('Bolsa', 'MEP').replace('Mayorista', 'MULC');
   }
 
-  public getData(): IDollars[] {
+  public getData(): IDollar[] {
     return this.data;
   }
 

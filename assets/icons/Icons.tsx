@@ -23,6 +23,17 @@ export function IconConverter({ opacity = 1 }) {
     </Svg>
   );
 }
+
+export function IconReverse({ opacity = 1 }) {
+  return (
+    <Svg width="30" height="30" viewBox="0 0 24 24" opacity={opacity}>
+      <Path
+        fill="#fff"
+        d="M5 6.09v12l-1.29-1.3a1 1 0 0 0-1.42 1.42l3 3a1 1 0 0 0 1.42 0l3-3a1 1 0 0 0 0-1.42a1 1 0 0 0-1.42 0L7 18.09v-12A1.56 1.56 0 0 1 8.53 4.5H11a1 1 0 0 0 0-2H8.53A3.56 3.56 0 0 0 5 6.09m9.29-.3a1 1 0 0 0 1.42 1.42L17 5.91v12a1.56 1.56 0 0 1-1.53 1.59H13a1 1 0 0 0 0 2h2.47A3.56 3.56 0 0 0 19 17.91v-12l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42l-3-3a1 1 0 0 0-1.42 0Z"
+      />
+    </Svg>
+  );
+}
 export function IconCoffee() {
   return (
     <Svg width="30" height="30" viewBox="0 0 24 24">

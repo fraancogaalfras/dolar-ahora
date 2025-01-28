@@ -1,4 +1,4 @@
-import { BACKGROUND_COLOR } from '@/constants/constants';
+import { TAB_COLOR } from '@/constants/constants';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -18,7 +18,7 @@ export default function RootLayout() {
         paddingRight: insets.right,
       }}
     >
-      <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
+      <StatusBar backgroundColor={TAB_COLOR} translucent={true} />
       <QueryClientProvider client={queryClient}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />

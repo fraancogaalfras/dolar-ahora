@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { IDollars } from '@/interfaces/types';
 import { memo } from 'react';
-import { COLOURS, LINE_COLOR } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
 import { HandleDolarData } from '@/classes/dolar';
 import Variation from './Variation';
 import Graph from './Graph';
+import { IDollar } from '@/interfaces/IDollar';
 
-const Card = ({ data }: { data: IDollars }) => {
+const Card = ({ data }: { data: IDollar }) => {
   return (
     <View key={data.nombre} style={styles.card}>
       <View style={styles.left}>
         <View style={styles.stockTextContainer}>
-          <Text style={[{ color: '#fff' }, styles.stockText]}>{HandleDolarData.formatName(data.nombre)}</Text>
-          <Text style={[{ color: '#fff' }, styles.exchangeText]}>BCBA (AR)</Text>
+          <Text style={styles.stockText}>{HandleDolarData.formatName(data.nombre)}</Text>
+          <Text style={styles.exchangeText}>BCBA (AR)</Text>
         </View>
       </View>
       <View style={styles.center}>
@@ -20,7 +20,7 @@ const Card = ({ data }: { data: IDollars }) => {
       </View>
       <View style={styles.right}>
         <View style={styles.stockValues}>
-          <Text style={[{ color: '#fff' }, styles.priceText]}>${HandleDolarData.formatPrice(data.venta)}</Text>
+          <Text style={styles.priceText}>${HandleDolarData.formatPrice(data.venta)}</Text>
           <Variation variation={data.variacion} />
         </View>
       </View>
@@ -31,8 +31,8 @@ const Card = ({ data }: { data: IDollars }) => {
 const styles = StyleSheet.create({
   card: {
     width: 315,
-    backgroundColor: '#191d27',
-    borderRadius: 20,
+    backgroundColor: CARD_BACKGROUND_COLOR,
+    borderRadius: CARD_BORDER_RADIUS,
     height: 100,
     paddingHorizontal: 5,
     alignItems: 'center',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderWidth: 1,
     borderColor: LINE_COLOR,
-    boxShadow: '0px 8px 10px rgba(15, 15, 15, 0.8)',
+    boxShadow: '0px 8px 10px ' + CARD_SHADOW_COLOR,
   },
   left: {
     alignItems: 'center',
@@ -60,10 +60,12 @@ const styles = StyleSheet.create({
     rowGap: 5,
   },
   stockText: {
+    color: '#fff',
     fontFamily: 'Rubik',
     fontSize: 19,
   },
   exchangeText: {
+    color: '#fff',
     fontFamily: 'Rubik_Light',
     opacity: 0.5,
     fontSize: 12,
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   priceText: {
+    color: '#fff',
     fontFamily: 'Rubik',
     fontSize: 18,
     letterSpacing: 1.1,

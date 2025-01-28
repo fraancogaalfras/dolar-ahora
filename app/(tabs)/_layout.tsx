@@ -1,5 +1,5 @@
 import { IconConverter, IconDollar } from '@/assets/icons/Icons';
-import { BACKGROUND_COLOR, LINE_COLOR } from '@/constants/constants';
+import { LINE_COLOR, DOLAR_PAGE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { Tabs } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
@@ -8,8 +8,8 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: BACKGROUND_COLOR,
-          height: 70,
+          backgroundColor: DOLAR_PAGE_COLOR,
+          height: PADDING_TAB_BOTTOM,
           position: 'absolute',
           justifyContent: 'space-between',
           paddingHorizontal: 50,
