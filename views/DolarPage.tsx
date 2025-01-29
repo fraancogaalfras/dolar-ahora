@@ -5,7 +5,6 @@ import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { COLOURS, DOLAR_PAGE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import LastUpdate from '@/components/footer/LastUpdate';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { getDollars } from '@/services/getDolarData';

@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import '@/reanimatedConfig.js';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
@@ -13,6 +14,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider
       style={{
+        backgroundColor: TAB_COLOR,
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
@@ -24,6 +26,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />
         </Stack>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </SafeAreaProvider>
   );
