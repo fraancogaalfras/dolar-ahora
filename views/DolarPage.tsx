@@ -1,20 +1,20 @@
 import { AppState, Platform, RefreshControl, SectionList, StyleProp, ViewStyle } from 'react-native';
 import Card from '@/components/dolar/Card';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { getDolarData } from '@/api/getDolarData';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { COLOURS, DOLAR_PAGE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import LastUpdate from '@/components/footer/LastUpdate';
-import { HandleDate } from '@/classes/date';
 import { IDollar } from '@/interfaces/IDollar';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
+import { getDollars } from '@/services/getDolarData';
 
 export default function DolarPage() {
+  const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -36,33 +36,11 @@ export default function DolarPage() {
     }
   }, [refreshing, appState]);
 
-  const getLastUpdate = (data: IDollar[]) => {
-    try {
-      // Se toma el CCL como referencia.
-      const lastUpdateFormatted = new HandleDate(new Date(data[3].fechaActualizacion)).getFormattedDateBarWithTime();
-      router.setParams({ lastUpdate: lastUpdateFormatted });
-    } catch (e: any) {
-      router.setParams({ lastUpdate: 'Cargando información...' });
-    }
-  };
-
   const onRefresh = useCallback(() => {
-    setRefreshing(true);
+    router.setParams({ refreshing: 'true' });
   }, []);
 
-  const getDollars = async () => {
-    try {
-      const data = await getDolarData();
-      getLastUpdate(data);
-      return data;
-    } catch (e: any) {
-      throw new Error(e.message);
-    } finally {
-      setRefreshing(false);
-    }
-  };
-
-  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, retry: false, refetchInterval: 900000 });
+  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, refetchInterval: 900000 });
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card data={item} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.casa, []);
@@ -70,7 +48,7 @@ export default function DolarPage() {
   const contentContainerStyle: StyleProp<ViewStyle> = useMemo(() => {
     return {
       alignItems: 'center',
-      paddingBottom: PADDING_TAB_BOTTOM,
+      paddingBottom: PADDING_TAB_BOTTOM - 8,
       paddingTop: 20,
       backgroundColor: DOLAR_PAGE_COLOR,
     };
@@ -89,9 +67,9 @@ export default function DolarPage() {
       contentContainerStyle={contentContainerStyle}
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={'#000'} tintColor={COLOURS.positive} />}
-      ListFooterComponent={<LastUpdate />}
-      ListFooterComponentStyle={{ marginTop: -5 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={'#000'} tintColor={COLOURS.positive} />
+      }
     />
   );
 }

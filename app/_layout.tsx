@@ -4,6 +4,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import '@/reanimatedConfig.js';
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();

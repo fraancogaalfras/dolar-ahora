@@ -16,12 +16,12 @@ export default function LastUpdate() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 20,
+    // paddingBottom: 20,
   },
   text: {
     color: '#9f9f9f',
     fontFamily: 'Rubik',
-    fontSize: 13,
+    fontSize: 12,
     textAlign: 'center',
     lineHeight: 20,
   },

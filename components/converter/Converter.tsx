@@ -19,12 +19,17 @@ export default function Converter({ data }: { data: IDollar[] }) {
       </View>
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} value={String(valueFirstCurrency)}></TextInput>
+        <Text style={styles.currencyInsideInput}>{firstCurrency}</Text>
       </View>
       <View style={styles.reverse}>
         <IconReverse />
       </View>
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} value={String(valueSecondCurrency)}></TextInput>
+        <Text style={styles.currencyInsideInput}>{secondCurrency}</Text>
+      </View>
+      <View style={styles.conversionContainer}>
+        <Text style={styles.textConversion}>1 ARS = 1230 USD BLUE</Text>
       </View>
     </View>
   );
@@ -47,17 +52,34 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     borderWidth: 1,
     borderColor: LINE_COLOR,
     boxShadow: '0px 8px 10px ' + CARD_SHADOW_COLOR,
   },
+
   input: {
     fontFamily: 'Rubik',
     fontSize: 16,
     color: '#fff',
     paddingHorizontal: 15,
-    width: '100%',
+    width: '80%',
+  },
+  currencyInsideInput: {
+    fontFamily: 'Rubik',
+    color: '#fff',
+    fontSize: 14,
+    width: '20%',
+    textAlign: 'center',
+  },
+  conversionContainer: {
+    alignItems: 'center',
+    width: 300,
+  },
+  textConversion: {
+    fontFamily: 'Rubik',
+    color: '#fff',
+    opacity: 0.5,
   },
   reverse: {},
 });

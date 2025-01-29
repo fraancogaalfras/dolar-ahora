@@ -3,6 +3,7 @@ import Logo from '../logo/Logo';
 import { LINE_COLOR } from '@/constants/constants';
 import Links from '../footer/Links';
 import { HandleDate } from '@/classes/date';
+import LastUpdate from '../footer/LastUpdate';
 
 export default function Header() {
   const todayDate = new HandleDate().getFormattedDateDot();
@@ -10,7 +11,8 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <Logo />
-      <Text style={styles.dateText}>{todayDate}</Text>
+      {/* <Text style={styles.dateText}>{todayDate}</Text> */}
+      <LastUpdate />
       {/* <Links /> */}
     </View>
   );
