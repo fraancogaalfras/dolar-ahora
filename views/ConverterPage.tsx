@@ -2,11 +2,10 @@ import Loading from '@/components/loading/Loading';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { AppState, Platform, Text, View } from 'react-native';
 import ErrorPage from './ErrorPage';
-import Converter from '@/components/converter/Converter';
 import { PADDING_TAB_BOTTOM } from '@/constants/constants';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getDollars } from '@/services/getDolarData';
+import Converter from '@/components/converter/Converter';
 
 export default function ConverterPage() {
   const currentState = useRef(AppState.currentState);

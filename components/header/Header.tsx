@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Logo from '../logo/Logo';
+import Logo from './Logo';
 import { LINE_COLOR } from '@/constants/constants';
-import Links from '../footer/Links';
 import { HandleDate } from '@/classes/date';
-import LastUpdate from '../footer/LastUpdate';
+import LastUpdate from './LastUpdate';
 
 export default function Header() {
   const todayDate = new HandleDate().getFormattedDateDot();

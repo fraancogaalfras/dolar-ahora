@@ -11,7 +11,7 @@ const Card = ({ data }: { data: IDollar }) => {
     <View key={data.nombre} style={styles.card}>
       <View style={styles.left}>
         <View style={styles.stockTextContainer}>
-          <Text style={styles.stockText}>{HandleDolarData.formatName(data.nombre)}</Text>
+          <Text style={styles.stockText}>{data.nombre}</Text>
           <Text style={styles.exchangeText}>BCBA (AR)</Text>
         </View>
       </View>
@@ -20,7 +20,7 @@ const Card = ({ data }: { data: IDollar }) => {
       </View>
       <View style={styles.right}>
         <View style={styles.stockValues}>
-          <Text style={styles.priceText}>${HandleDolarData.formatPrice(data.venta)}</Text>
+          <Text style={styles.priceText}>${data.venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
           <Variation variation={data.variacion} />
         </View>
       </View>

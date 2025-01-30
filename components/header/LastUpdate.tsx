@@ -1,5 +1,6 @@
 import { getLastUpdate } from '@/services/getDolarData';
 import { useQuery } from '@tanstack/react-query';
+
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function LastUpdate() {

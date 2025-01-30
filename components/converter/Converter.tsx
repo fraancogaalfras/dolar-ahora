@@ -1,70 +1,87 @@
 import { IconReverse } from '@/assets/icons/Icons';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
+import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { useState } from 'react';
-import { NativeSyntheticEvent, StyleSheet, Text, TextInput, TextInputChangeEventData, TouchableOpacity, View } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function Converter({ data }: { data: IDollar[] }) {
-  const [firstCurrency, setFirstCurrency] = useState({
+  const [arsCurrency, setArsCurrency] = useState<ICurrency>({
+    amount: 1,
     name: 'ARS',
-    currency: '',
-    value: 1000,
   });
-
-  const [secondCurrency, setSecondCurrency] = useState({
-    name: 'Blue',
-    currency: 'USD',
-    value: data[2].venta,
+  const [usdCurrency, setUsdCurrency] = useState<ICurrency>({
+    amount: data[1].venta || 0,
+    name: 'USD ' + data[1].nombre || '',
   });
+  const [exchangeRate, setExchangeRate] = useState(1 / usdCurrency.amount);
+  const [isReverse, setIsReverse] = useState(false);
 
-  const [unityConversion, setUnityConversion] = useState({
-    value: (1 / secondCurrency.value).toFixed(5),
-  });
-
-  const handleOnChange = (event: NativeSyntheticEvent<TextInputChangeEventData>, id: string) => {
-    const text = event.nativeEvent.text;
-
-    if (id === 'firstCurrency') {
-      setFirstCurrency({ ...firstCurrency, value: Number(text) });
+  const handleArsChange = (value: string) => {
+    if (value == '') {
+      value = '0';
     }
+    value = value.replace(/\D/g, '');
+    setArsCurrency({
+      ...arsCurrency,
+      amount: parseFloat(value),
+    });
+    setUsdCurrency({
+      ...usdCurrency,
+      amount: parseFloat(value) * exchangeRate,
+    });
+  };
+
+  const handleUsdChange = (value: string) => {
+    if (value == '') {
+      value = '0';
+    }
+    value = value.replace(/\D/g, '');
+    setUsdCurrency({
+      ...usdCurrency,
+      amount: parseFloat(value),
+    });
+    setArsCurrency({
+      ...arsCurrency,
+      amount: parseFloat(value) / exchangeRate,
+    });
   };
 
   const handleReverse = () => {
-    const temp = { ...secondCurrency };
-    setSecondCurrency(firstCurrency);
-    setFirstCurrency(temp);
+    setIsReverse(!isReverse);
   };
-  console.log(firstCurrency.value, secondCurrency.value, (firstCurrency.value / secondCurrency.value).toFixed(2));
 
   return (
     <View style={styles.wrapper}>
       <View>
-        <Text style={styles.title}>
-          {firstCurrency.name} a {secondCurrency.name}
-        </Text>
+        <Text style={styles.title}>{isReverse ? `${usdCurrency.name} a ${arsCurrency.name}` : `${arsCurrency.name} a ${usdCurrency.name}`}</Text>
       </View>
       <View style={styles.inputContainer}>
-        <TextInput id={'firstCurrency'} inputMode={'numeric'} value={String(firstCurrency.value)} style={styles.input} onChange={(e) => handleOnChange(e, 'firstCurrency')}></TextInput>
-        <Text style={styles.currencyInsideInput}>{firstCurrency.name}</Text>
+        <TextInput
+          style={styles.input}
+          inputMode="numeric"
+          value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+          onChangeText={isReverse ? handleUsdChange : handleArsChange}
+        />
+        <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
       </View>
       <TouchableOpacity style={styles.reverse} onPress={handleReverse}>
         <IconReverse />
       </TouchableOpacity>
       <View style={styles.inputContainer}>
         <TextInput
-          id={'secondCurrency'}
-          inputMode={'numeric'}
-          value={(firstCurrency.value / secondCurrency.value).toFixed(2)}
           style={styles.input}
-          onChange={(e) => handleOnChange(e, 'secondCurrency')}
-        ></TextInput>
-        <Text style={styles.currencyInsideInput}>{secondCurrency.name}</Text>
+          inputMode="numeric"
+          value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+          onChangeText={isReverse ? handleArsChange : handleUsdChange}
+        />
+        <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
       </View>
-      <View style={styles.conversionContainer}>
+      {/* <View style={styles.conversionContainer}>
         <Text style={styles.textConversion}>
           1 {firstCurrency.currency} {firstCurrency.name} = {unityConversion.value} {secondCurrency.currency} {secondCurrency.name}
         </Text>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -90,20 +107,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: LINE_COLOR,
     boxShadow: '0px 8px 10px ' + CARD_SHADOW_COLOR,
+    paddingLeft: 15,
   },
-
   input: {
     fontFamily: 'Rubik',
     fontSize: 16,
     color: '#fff',
-    paddingHorizontal: 15,
-    width: '80%',
+    width: '70%',
   },
   currencyInsideInput: {
     fontFamily: 'Rubik',
     color: '#fff',
     fontSize: 14,
-    width: '20%',
+    width: '30%',
     textAlign: 'center',
   },
   conversionContainer: {

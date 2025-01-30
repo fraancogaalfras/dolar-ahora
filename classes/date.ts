@@ -34,6 +34,14 @@ export class HandleDate {
     return this.date.getDate();
   }
 
+  getTime(): string {
+    return this.date.toLocaleString('de-DE', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+  }
+
   setDate(date: Date): void {
     this.date = new Date(date);
   }
