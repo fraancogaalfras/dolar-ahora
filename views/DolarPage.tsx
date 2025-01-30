@@ -53,8 +53,6 @@ export default function DolarPage() {
     };
   }, []);
 
-  console.log(data);
-
   return isPending ? (
     <Loading />
   ) : isError ? (
