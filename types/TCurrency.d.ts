@@ -1,0 +1,1 @@
+export type TCurrency = 'Oficial' | 'Blue' | 'MEP' | 'CCL' | 'MULC' | 'Cripto' | 'Tarjeta';

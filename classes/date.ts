@@ -35,7 +35,7 @@ export class HandleDate {
   }
 
   getTime(): string {
-    return this.date.toLocaleString('de-DE', {
+    return this.date.toLocaleString('es-AR', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
