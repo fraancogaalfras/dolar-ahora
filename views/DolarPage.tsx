@@ -39,7 +39,7 @@ export default function DolarPage() {
     router.setParams({ refreshing: 'true' });
   }, []);
 
-  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, refetchInterval: 900000 });
+  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, staleTime: 900000, refetchInterval: 900000 });
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card data={item} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.casa, []);

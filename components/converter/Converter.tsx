@@ -1,10 +1,10 @@
-import { IconReverse } from '@/assets/icons/Icons';
+import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
 import { useMemo, useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
 export default function Converter({ data }: { data: IDollar[] }) {
@@ -51,15 +51,20 @@ export default function Converter({ data }: { data: IDollar[] }) {
   };
 
   const handleSelectorChange = (index: number) => {
-    setSelectedIndex(index);
+    const newExchangeRate = 1 / data[index].venta;
+    const newSelectedIndex = index;
+
+    setSelectedIndex(newSelectedIndex);
+    setExchangeRate(newExchangeRate);
+
     if (!isReverse) {
       setUsdCurrency({
-        amount: arsCurrency.amount / data[index].venta,
-        name: data[index].nombre,
+        amount: arsCurrency.amount * newExchangeRate,
+        name: data[newSelectedIndex].nombre,
       });
     } else {
       setArsCurrency({
-        amount: usdCurrency.amount * data[index].venta,
+        amount: usdCurrency.amount / newExchangeRate,
         name: 'ARS',
       });
     }
@@ -74,9 +79,14 @@ export default function Converter({ data }: { data: IDollar[] }) {
     return options;
   }, []);
 
+  // console.log(data);
+
+  // console.log({ ARS: arsCurrency.amount, USD: usdCurrency.amount, ER: exchangeRate });
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.headContainer}>
+        {/* <Button onPress={() => handleSelectorChange(Math.round(Math.random() * 5))} title="click" color={'#fff'}></Button> */}
         {isReverse ? (
           <View style={styles.titleContainer}>
             <WheelPicker
@@ -90,11 +100,13 @@ export default function Converter({ data }: { data: IDollar[] }) {
               options={wheelOptions}
               onChange={handleSelectorChange}
             />
-            <Text style={styles.title}>{`a ${arsCurrency.name}`}</Text>
+            <IconArrowRight />
+            <Text style={styles.title}>{arsCurrency.name}</Text>
           </View>
         ) : (
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{`${arsCurrency.name} a`}</Text>
+            <Text style={styles.title}>{arsCurrency.name}</Text>
+            <IconArrowRight />
             <WheelPicker
               visibleRest={2}
               itemHeight={40}

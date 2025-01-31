@@ -1,5 +1,5 @@
 import Loading from '@/components/loading/Loading';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AppState, Platform, Text, View } from 'react-native';
 import ErrorPage from './ErrorPage';
 import { PADDING_TAB_BOTTOM } from '@/constants/constants';
@@ -32,7 +32,7 @@ export default function ConverterPage() {
     }
   }, [appState]);
 
-  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, refetchInterval: 900000 });
+  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, staleTime: 900000, placeholderData: keepPreviousData, refetchInterval: 900000 });
 
   return isPending ? (
     <Loading />
