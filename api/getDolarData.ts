@@ -10,8 +10,8 @@ export const getDolarData = async () => {
     const date: HandleDate = new HandleDate();
     date.subtractDays(1);
 
-    const todayResponse = await fetch(DOLLAR_API, { cache: 'no-store' });
-    const yesterdayResponse = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`, { cache: 'no-store' });
+    const todayResponse = await fetch(DOLLAR_API);
+    const yesterdayResponse = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`);
 
     if (!todayResponse.ok || !yesterdayResponse.ok) {
       throw new Error('Servicio temporalmente inactivo.');
