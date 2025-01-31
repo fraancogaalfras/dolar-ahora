@@ -20,7 +20,7 @@ const Card = ({ data }: { data: IDollar }) => {
       </View>
       <View style={styles.right}>
         <View style={styles.stockValues}>
-          <Text style={styles.priceText}>${data.venta.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
+          <Text style={styles.priceText}>${data.venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
           <Variation variation={data.variacion} />
         </View>
       </View>

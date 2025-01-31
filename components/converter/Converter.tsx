@@ -71,20 +71,20 @@ export default function Converter({ data }: { data: IDollar[] }) {
     <View style={styles.wrapper}>
       <View style={styles.headContainer}>
         {isReverse ? (
-          <Text style={styles.title}>
+          <View style={styles.titleContainer}>
             <WheelPicker
               visibleRest={2}
               itemHeight={40}
               itemStyle={{ backgroundColor: 'rgba(0,0,0,0)', padding: 0 }}
               itemTextStyle={{ fontSize: 23, color: '#fff' }}
-              containerStyle={{ paddingLeft: 20, margin: 0 }}
+              containerStyle={{ padding: 0, margin: 0 }}
               selectedIndicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0 }}
               selectedIndex={selectedIndex}
               options={wheelOptions}
               onChange={handleSelectorChange}
             />
-            {`a ${arsCurrency.name}`}
-          </Text>
+            <Text style={styles.title}>{`a ${arsCurrency.name}`}</Text>
+          </View>
         ) : (
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{`${arsCurrency.name} a`}</Text>
@@ -93,7 +93,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
               itemHeight={40}
               itemStyle={{ backgroundColor: 'rgba(0,0,0,0)', padding: 0 }}
               itemTextStyle={{ fontSize: 23, color: '#fff' }}
-              containerStyle={{ paddingLeft: 20, margin: 0 }}
+              containerStyle={{ padding: 0, margin: 0 }}
               selectedIndicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0 }}
               selectedIndex={selectedIndex}
               options={wheelOptions}
@@ -107,7 +107,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
           <TextInput
             style={styles.input}
             inputMode="numeric"
-            value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+            value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
             onChangeText={isReverse ? handleUsdChange : handleArsChange}
           />
           <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
@@ -119,7 +119,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
           <TextInput
             style={styles.input}
             inputMode="numeric"
-            value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+            value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
             onChangeText={isReverse ? handleArsChange : handleUsdChange}
           />
           <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
@@ -137,7 +137,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    gap: 70,
+    gap: 20,
   },
   title: {
     fontFamily: 'Rubik',
@@ -149,10 +149,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-  titleContainer: { width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center' },
-  // selectorContainer: {
-
-  // },
+  titleContainer: {
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
   mainContainer: {
     alignItems: 'center',
     gap: 20,
