@@ -59,7 +59,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
       });
     } else {
       setArsCurrency({
-        amount: usdCurrency.amount / exchangeRate,
+        amount: usdCurrency.amount * data[index].venta,
         name: 'ARS',
       });
     }
