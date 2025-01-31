@@ -79,6 +79,19 @@ export default function Converter({ data }: { data: IDollar[] }) {
     return options;
   }, []);
 
+  const staticWheelProps = useMemo(
+    () => ({
+      visibleRest: 2,
+      itemHeight: 40,
+      itemStyle: { backgroundColor: 'rgba(0,0,0,0)', padding: 0 },
+      itemTextStyle: { fontSize: 25, color: '#fff', fontFamily: 'Rubik', padding: 0, margin: 0 },
+      containerStyle: { padding: 0, margin: 0 },
+      selectedIndicatorStyle: { backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0, padding: 0, margin: 0 },
+      options: wheelOptions,
+    }),
+    []
+  );
+
   // console.log(data);
 
   // console.log({ ARS: arsCurrency.amount, USD: usdCurrency.amount, ER: exchangeRate });
@@ -86,38 +99,21 @@ export default function Converter({ data }: { data: IDollar[] }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.headContainer}>
-        {/* <Button onPress={() => handleSelectorChange(Math.round(Math.random() * 5))} title="click" color={'#fff'}></Button> */}
         {isReverse ? (
           <View style={styles.titleContainer}>
-            <WheelPicker
-              visibleRest={2}
-              itemHeight={40}
-              itemStyle={{ backgroundColor: 'rgba(0,0,0,0)', padding: 0 }}
-              itemTextStyle={{ fontSize: 23, color: '#fff' }}
-              containerStyle={{ padding: 0, margin: 0 }}
-              selectedIndicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0 }}
-              selectedIndex={selectedIndex}
-              options={wheelOptions}
-              onChange={handleSelectorChange}
-            />
-            <IconArrowRight />
+            <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
+            <View style={{ marginRight: 10 }}>
+              <IconArrowRight />
+            </View>
             <Text style={styles.title}>{arsCurrency.name}</Text>
           </View>
         ) : (
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{arsCurrency.name}</Text>
-            <IconArrowRight />
-            <WheelPicker
-              visibleRest={2}
-              itemHeight={40}
-              itemStyle={{ backgroundColor: 'rgba(0,0,0,0)', padding: 0 }}
-              itemTextStyle={{ fontSize: 23, color: '#fff' }}
-              containerStyle={{ padding: 0, margin: 0 }}
-              selectedIndicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0 }}
-              selectedIndex={selectedIndex}
-              options={wheelOptions}
-              onChange={handleSelectorChange}
-            />
+            <View style={{ marginLeft: 10 }}>
+              <IconArrowRight />
+            </View>
+            <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
           </View>
         )}
       </View>
@@ -157,6 +153,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     gap: 20,
+    width: '100%',
   },
   title: {
     fontFamily: 'Rubik',
@@ -166,13 +163,11 @@ const styles = StyleSheet.create({
   headContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
   titleContainer: {
-    width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   mainContainer: {
     alignItems: 'center',
