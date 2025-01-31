@@ -52,10 +52,17 @@ export default function Converter({ data }: { data: IDollar[] }) {
 
   const handleSelectorChange = (index: number) => {
     setSelectedIndex(index);
-    setUsdCurrency({
-      amount: arsCurrency.amount / data[index].venta,
-      name: data[index].nombre,
-    });
+    if (!isReverse) {
+      setUsdCurrency({
+        amount: arsCurrency.amount / data[index].venta,
+        name: data[index].nombre,
+      });
+    } else {
+      setArsCurrency({
+        amount: usdCurrency.amount / exchangeRate,
+        name: 'ARS',
+      });
+    }
   };
 
   const handleReverse = () => {
