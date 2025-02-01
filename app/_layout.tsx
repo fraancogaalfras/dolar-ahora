@@ -1,4 +1,4 @@
-import { TAB_COLOR } from '@/constants/constants';
+import { BACKGROUND_COLOR } from '@/constants/constants';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -16,14 +16,14 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider
       style={{
-        backgroundColor: TAB_COLOR,
+        backgroundColor: BACKGROUND_COLOR,
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
         paddingRight: insets.right,
       }}
     >
-      <StatusBar backgroundColor={TAB_COLOR} translucent={true} />
+      <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
       <QueryClientProvider client={queryClient}>
         <DollarProvider>
           <Stack>

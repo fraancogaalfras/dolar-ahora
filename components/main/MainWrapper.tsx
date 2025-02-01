@@ -1,11 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import { TAB_COLOR } from '@/constants/constants';
+import { BACKGROUND_COLOR, TAB_COLOR } from '@/constants/constants';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MainWrapper({ children, hideSplashOnLayout }: { children: React.ReactNode; hideSplashOnLayout?: () => void }) {
   return (
-    <View style={styles.mainWrapper} onLayout={hideSplashOnLayout ? hideSplashOnLayout : undefined}>
+    <LinearGradient colors={[BACKGROUND_COLOR, TAB_COLOR, TAB_COLOR]} style={styles.mainWrapper} onLayout={hideSplashOnLayout ? hideSplashOnLayout : undefined}>
       {children}
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -14,6 +15,5 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: TAB_COLOR,
   },
 });

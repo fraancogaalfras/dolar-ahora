@@ -1,5 +1,5 @@
 import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     borderWidth: 1,
     borderColor: LINE_COLOR,
-    boxShadow: '0px 8px 10px ' + CARD_SHADOW_COLOR,
+    boxShadow: CARD_BOX_SHADOW,
     paddingLeft: 15,
   },
   input: {

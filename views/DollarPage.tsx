@@ -3,7 +3,7 @@ import Card from '@/components/dolar/Card';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
-import { COLOURS, DOLAR_PAGE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
+import { COLOURS, PADDING_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
@@ -46,7 +46,6 @@ export default function DollarPage() {
       alignItems: 'center',
       paddingBottom: PADDING_TAB_BOTTOM - 8,
       paddingTop: 20,
-      backgroundColor: DOLAR_PAGE_COLOR,
     };
   }, []);
 
@@ -64,7 +63,7 @@ export default function DollarPage() {
       showsVerticalScrollIndicator={false}
       initialNumToRender={7}
       refreshControl={
-        <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={'#000'} tintColor={COLOURS.positive} />
+        <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={TAB_COLOR} tintColor={COLOURS.positive} />
       }
     />
   );

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { memo } from 'react';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_HEIGHT, CARD_SHADOW_COLOR, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_HEIGHT, CARD_SHADOW_COLOR, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
 import Variation from './Variation';
 import Graph from './Graph';
 import { IDollar } from '@/interfaces/IDollar';
@@ -40,26 +40,20 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderWidth: 1,
     borderColor: LINE_COLOR,
-    boxShadow: '0px 8px 10px ' + CARD_SHADOW_COLOR,
+    boxShadow: CARD_BOX_SHADOW,
   },
   left: {
     alignItems: 'center',
     flex: 1.5,
-    // borderWidth: 1,
-    // borderColor: 'red',
   },
   center: {
     flex: 1,
-    // borderWidth: 1,
-    // borderColor: 'yellow',
   },
   right: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1.5,
-    // borderWidth: 1,
-    // borderColor: 'green',
   },
   stockTextContainer: {
     alignItems: 'center',

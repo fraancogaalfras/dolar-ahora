@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Logo from './Logo';
-import { LINE_COLOR, TAB_COLOR } from '@/constants/constants';
+import { BACKGROUND_COLOR, LINE_COLOR, TAB_COLOR } from '@/constants/constants';
 import LastUpdate from './LastUpdate';
 
 export default function Header() {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   header: {
     borderWidth: StyleSheet.hairlineWidth,
     borderBottomColor: LINE_COLOR,
-    backgroundColor: TAB_COLOR,
+    backgroundColor: BACKGROUND_COLOR,
     height: 70,
     paddingHorizontal: 20,
     flexDirection: 'row',
