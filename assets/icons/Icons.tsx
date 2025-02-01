@@ -37,7 +37,7 @@ export function IconReverse() {
 
 export function IconArrowRight() {
   return (
-    <Svg width="30" height="30" viewBox="0 0 24 24">
+    <Svg width="40" height="40" viewBox="0 0 24 24">
       <Path fill="#fff" d="M14.707 7.293a1 1 0 1 0-1.414 1.414L15.586 11H6a1 1 0 1 0 0 2h9.586l-2.293 2.293a1 1 0 0 0 1.414 1.414l4-4a1 1 0 0 0 0-1.414z" />
     </Svg>
   );

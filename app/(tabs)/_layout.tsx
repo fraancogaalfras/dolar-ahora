@@ -21,14 +21,14 @@ export default function TabLayout() {
           marginTop: 15,
         },
         header: () => <Header />,
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0,
-          shadowColor: 'transparent',
-          borderBottomWidth: 0,
-          borderBottomColor: 'transparent',
-        },
-        headerShadowVisible: false,
+        // headerStyle: {
+        //   elevation: 0,
+        //   shadowOpacity: 0,
+        //   shadowColor: 'transparent',
+        //   borderBottomWidth: 0,
+        //   borderBottomColor: 'transparent',
+        // },
+        // headerShadowVisible: false,
         tabBarShowLabel: false,
       }}
     >

@@ -15,7 +15,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
   });
   const [usdCurrency, setUsdCurrency] = useState<ICurrency>({
     amount: arsCurrency.amount / data[selectedIndex].venta,
-    name: 'USD ' + data[selectedIndex].nombre,
+    name: data[selectedIndex].nombre,
   });
   const [exchangeRate, setExchangeRate] = useState(1 / data[selectedIndex].venta);
   const [isReverse, setIsReverse] = useState(false);
@@ -63,6 +63,10 @@ export default function Converter({ data }: { data: IDollar[] }) {
         name: data[newSelectedIndex].nombre,
       });
     } else {
+      setUsdCurrency({
+        ...usdCurrency,
+        name: data[newSelectedIndex].nombre,
+      });
       setArsCurrency({
         amount: usdCurrency.amount / newExchangeRate,
         name: 'ARS',
@@ -84,7 +88,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
       visibleRest: 2,
       itemHeight: 40,
       itemStyle: { backgroundColor: 'rgba(0,0,0,0)', padding: 0 },
-      itemTextStyle: { fontSize: 25, color: '#fff', fontFamily: 'Rubik', padding: 0, margin: 0 },
+      itemTextStyle: { fontSize: 25, color: '#fff', fontFamily: 'Rubik_500Medium', padding: 0, margin: 0 },
       containerStyle: { padding: 0, margin: 0 },
       selectedIndicatorStyle: { backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0, padding: 0, margin: 0 },
       options: wheelOptions,
@@ -92,20 +96,14 @@ export default function Converter({ data }: { data: IDollar[] }) {
     []
   );
 
-  // console.log(data);
-
-  // console.log({ ARS: arsCurrency.amount, USD: usdCurrency.amount, ER: exchangeRate });
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.headContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{arsCurrency.name}</Text>
-          <View style={[{ marginLeft: 10 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
-            <IconArrowRight />
-          </View>
-          <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
+        <Text style={styles.title}>{arsCurrency.name}</Text>
+        <View style={[{ marginLeft: 20, marginRight: 0 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
+          <IconArrowRight />
         </View>
+        <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
       </View>
       <View style={styles.mainContainer}>
         <View style={styles.inputContainer}>
@@ -117,7 +115,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
           />
           <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
         </View>
-        <TouchableOpacity style={styles.reverse} onPress={handleReverse}>
+        <TouchableOpacity onPress={handleReverse}>
           <IconReverse />
         </TouchableOpacity>
         <View style={styles.inputContainer}>
@@ -129,11 +127,11 @@ export default function Converter({ data }: { data: IDollar[] }) {
           />
           <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
         </View>
-        {/* <View style={styles.conversionContainer}>
-        <Text style={styles.textConversion}>
-          1 {firstCurrency.currency} {firstCurrency.name} = {unityConversion.value} {secondCurrency.currency} {secondCurrency.name}
-        </Text>
-      </View> */}
+        <View style={styles.conversionContainer}>
+          <Text style={styles.textConversion}>
+            1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -142,7 +140,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    gap: 20,
+    gap: 30,
     width: '100%',
   },
   title: {
@@ -152,12 +150,9 @@ const styles = StyleSheet.create({
   },
   headContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleContainer: {
-    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingLeft: 20,
   },
   mainContainer: {
     alignItems: 'center',
@@ -183,7 +178,7 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   currencyInsideInput: {
-    fontFamily: 'Rubik',
+    fontFamily: 'Rubik_500Medium',
     color: '#fff',
     fontSize: 14,
     width: '30%',
@@ -198,5 +193,4 @@ const styles = StyleSheet.create({
     color: '#fff',
     opacity: 0.5,
   },
-  reverse: {},
 });

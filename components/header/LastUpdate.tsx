@@ -1,5 +1,5 @@
 import { HandleDate } from '@/classes/date';
-import { useDollarQuery } from '@/hooks/useDollarQuery';
+import { useDollarContext } from '@/context/DollarContext';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function LastUpdate() {
@@ -17,7 +17,7 @@ export default function LastUpdate() {
     }
   };
 
-  const { isPending, data } = useDollarQuery();
+  const { data, isPending } = useDollarContext();
 
   return (
     <View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#9f9f9f',
     fontFamily: 'Rubik',
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'center',
     lineHeight: 18,
   },

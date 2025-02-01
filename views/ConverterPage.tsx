@@ -1,18 +1,16 @@
 import Loading from '@/components/loading/Loading';
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AppState, Platform, Text, View } from 'react-native';
+import { AppState, Platform, View } from 'react-native';
 import ErrorPage from './ErrorPage';
 import { PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { getDollars } from '@/services/getDolarData';
 import Converter from '@/components/converter/Converter';
-import { useDollarQuery } from '@/hooks/useDollarQuery';
+import { useDollarContext } from '@/context/DollarContext';
 
 export default function ConverterPage() {
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
-  const queryClient = useQueryClient();
+  const { data, isPending, isError, error, retryFn, refetchFn } = useDollarContext();
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {
@@ -28,12 +26,10 @@ export default function ConverterPage() {
   useLayoutEffect(() => {
     if (appState == 'active') {
       if (Platform.OS != 'web') {
-        queryClient.refetchQueries({ queryKey: ['dollars'] });
+        refetchFn();
       }
     }
   }, [appState]);
-
-  const { isPending, isError, error, data, retryFn } = useDollarQuery();
 
   return isPending ? (
     <Loading />

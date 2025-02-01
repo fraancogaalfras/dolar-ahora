@@ -1,5 +1,5 @@
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik } from '@expo-google-fonts/rubik';
+import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik, Rubik_500Medium } from '@expo-google-fonts/rubik';
 import { useCallback } from 'react';
 import MainWrapper from '@/components/main/MainWrapper';
 import DollarPage from '@/views/DollarPage';
@@ -10,6 +10,7 @@ export default function App() {
   const [loaded, error] = useFonts({
     Rubik_Light,
     Rubik,
+    Rubik_500Medium,
   });
 
   const hideSplashOnLayout = useCallback(() => {

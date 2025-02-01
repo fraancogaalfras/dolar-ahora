@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { COLOURS } from '@/constants/constants';
 
 export default function Graph({ variation }: { variation: number }) {
+  
   const getValues = useMemo(() => {
     if (variation < 0) {
       return [100, 80, 60, 40, 20];
@@ -41,7 +42,7 @@ export default function Graph({ variation }: { variation: number }) {
           },
         ],
       }}
-      width={100}
+      width={80}
       height={70}
       fromZero={variation == 0}
       withHorizontalLines={false}
@@ -50,7 +51,7 @@ export default function Graph({ variation }: { variation: number }) {
       withVerticalLabels={false}
       withDots={false}
       chartConfig={chartConfig}
-      style={{ paddingRight: 0, paddingLeft: 6, marginTop: 5, marginBottom: 12 }}
+      style={{ paddingRight: 0, paddingLeft: 4, marginTop: 5, marginLeft: 0, marginBottom: 12 }}
       bezier
     />
   );

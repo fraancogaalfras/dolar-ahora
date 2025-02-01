@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { memo } from 'react';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_HEIGHT, CARD_SHADOW_COLOR, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
-import { HandleDolarData } from '@/classes/dolar';
 import Variation from './Variation';
 import Graph from './Graph';
 import { IDollar } from '@/interfaces/IDollar';
@@ -20,7 +19,7 @@ const Card = ({ data }: { data: IDollar }) => {
       </View>
       <View style={styles.right}>
         <View style={styles.stockValues}>
-          <Text style={styles.priceText}>${data.venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
+          <Text style={styles.priceText}>${data.venta.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</Text>
           <Variation variation={data.variacion} />
         </View>
       </View>
@@ -45,24 +44,31 @@ const styles = StyleSheet.create({
   },
   left: {
     alignItems: 'center',
-    flex: 1,
+    flex: 1.5,
+    // borderWidth: 1,
+    // borderColor: 'red',
   },
   center: {
     flex: 1,
+    // borderWidth: 1,
+    // borderColor: 'yellow',
   },
   right: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    flex: 1.5,
+    // borderWidth: 1,
+    // borderColor: 'green',
   },
   stockTextContainer: {
-    rowGap: 5,
+    alignItems: 'center',
+    rowGap: 3,
   },
   stockText: {
     color: '#fff',
-    fontFamily: 'Rubik',
-    fontSize: 19,
+    fontFamily: 'Rubik_500Medium',
+    fontSize: 20,
   },
   exchangeText: {
     color: '#fff',
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     color: '#fff',
-    fontFamily: 'Rubik',
+    fontFamily: 'Rubik_500Medium',
     fontSize: 18,
     letterSpacing: 1.1,
   },

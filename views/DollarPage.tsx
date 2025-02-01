@@ -4,18 +4,16 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { COLOURS, DOLAR_PAGE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
-import { getDollars } from '@/services/getDolarData';
-import { useDollarQuery } from '@/hooks/useDollarQuery';
+import { useDollarContext } from '@/context/DollarContext';
 
 export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
-  const queryClient = useQueryClient();
+  const { data, isPending, isError, error, retryFn, refetchFn } = useDollarContext();
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {
@@ -31,7 +29,7 @@ export default function DollarPage() {
   useLayoutEffect(() => {
     if (appState == 'active') {
       if (Platform.OS != 'web') {
-        queryClient.refetchQueries({ queryKey: ['dollars'] });
+        refetchFn();
       }
     }
   }, [refreshing, appState]);
@@ -39,8 +37,6 @@ export default function DollarPage() {
   const onRefresh = useCallback(() => {
     router.setParams({ refreshing: 'true' });
   }, []);
-
-  const { isPending, isError, error, data, retryFn } = useDollarQuery();
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card data={item} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.casa, []);

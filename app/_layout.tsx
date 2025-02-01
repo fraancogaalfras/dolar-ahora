@@ -7,6 +7,7 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 import '@/reanimatedConfig.js';
 import { Platform } from 'react-native';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { DollarProvider } from '@/context/DollarContext';
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
@@ -24,10 +25,12 @@ export default function RootLayout() {
     >
       <StatusBar backgroundColor={TAB_COLOR} translucent={true} />
       <QueryClientProvider client={queryClient}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />
-        </Stack>
-        {Platform.OS === 'web' && <ReactQueryDevtools initialIsOpen={false} />}
+        <DollarProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />
+          </Stack>
+          {Platform.OS === 'web' && <ReactQueryDevtools initialIsOpen={false} />}
+        </DollarProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
   );

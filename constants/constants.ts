@@ -8,8 +8,8 @@ export const PADDING_TAB_BOTTOM = 70;
 export const CARD_BACKGROUND_COLOR = '#191d27';
 export const CARD_SHADOW_COLOR = 'rgba(15, 15, 15, 0.8)';
 export const CARD_BORDER_RADIUS = 20;
-export const CARD_WIDTH = 315;
-export const CARD_HEIGHT = 100;
+export const CARD_WIDTH = 325;
+export const CARD_HEIGHT = 95;
 
 export const COLOURS: IColour = {
   negative: '#ef4444',

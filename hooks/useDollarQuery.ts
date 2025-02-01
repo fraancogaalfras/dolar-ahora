@@ -8,11 +8,15 @@ export const useDollarQuery = () => {
     queryClient.fetchQuery({ queryKey: ['dollars'] });
   };
 
+  const refetchFn = () => {
+    queryClient.refetchQueries({ queryKey: ['dollars'] });
+  };
+
   const query = useQuery({
     queryKey: ['dollars'],
     queryFn: getDollars,
     refetchInterval: 900000,
   });
 
-  return { ...query, retryFn };
+  return { ...query, retryFn, refetchFn };
 };
