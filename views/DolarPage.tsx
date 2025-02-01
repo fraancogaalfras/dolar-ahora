@@ -56,7 +56,7 @@ export default function DolarPage() {
   return isPending ? (
     <Loading />
   ) : isError ? (
-    <ErrorPage error={{ message: error.message }} />
+    <ErrorPage error={{ message: error.message, retry: () => queryClient.fetchQuery({ queryKey: ['dollars'] }) }} />
   ) : (
     <SectionList
       sections={[{ data: data as any }]}

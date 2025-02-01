@@ -99,23 +99,13 @@ export default function Converter({ data }: { data: IDollar[] }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.headContainer}>
-        {isReverse ? (
-          <View style={styles.titleContainer}>
-            <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
-            <View style={{ marginRight: 10 }}>
-              <IconArrowRight />
-            </View>
-            <Text style={styles.title}>{arsCurrency.name}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{arsCurrency.name}</Text>
+          <View style={[{ marginLeft: 10 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
+            <IconArrowRight />
           </View>
-        ) : (
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{arsCurrency.name}</Text>
-            <View style={{ marginLeft: 10 }}>
-              <IconArrowRight />
-            </View>
-            <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
-          </View>
-        )}
+          <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
+        </View>
       </View>
       <View style={styles.mainContainer}>
         <View style={styles.inputContainer}>

@@ -1,3 +1,4 @@
+import { NetworkError } from '@/classes/customError';
 import { HandleDate } from '@/classes/date';
 import { HandleDolarData } from '@/classes/dolar';
 import { IDollar } from '@/interfaces/IDollar';
@@ -14,7 +15,7 @@ export const getDolarData = async () => {
     const yesterdayResponse = await fetch(`${HISTORIC_DOLLAR_API}/${date.getFormattedDateBar()}`);
 
     if (!todayResponse.ok || !yesterdayResponse.ok) {
-      throw new Error('Servicio temporalmente inactivo.');
+      throw new NetworkError('Servicio temporalmente inactivo.');
     }
 
     const todayResult: IDollar[] = await todayResponse.json();
@@ -25,6 +26,9 @@ export const getDolarData = async () => {
 
     return data.getData();
   } catch (e: any) {
-    throw new Error(e.message);
+    if (e instanceof NetworkError) {
+      throw new Error(e.message);
+    }
+    throw new Error('Compruebe su conexión e intente nuevamente');
   }
 };

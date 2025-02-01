@@ -37,7 +37,7 @@ export default function ConverterPage() {
   return isPending ? (
     <Loading />
   ) : isError ? (
-    <ErrorPage error={{ message: error.message }} />
+    <ErrorPage error={{ message: error.message, retry: () => queryClient.fetchQuery({ queryKey: ['dollars'] }) }} />
   ) : (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: PADDING_TAB_BOTTOM }}>
       <Converter data={data} />
