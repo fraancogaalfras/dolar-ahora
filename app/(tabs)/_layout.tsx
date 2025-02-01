@@ -29,7 +29,6 @@ export default function TabLayout() {
           borderBottomColor: 'transparent',
         },
         headerShadowVisible: false,
-        // headerShown: false,
         tabBarShowLabel: false,
       }}
     >

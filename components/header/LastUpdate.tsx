@@ -1,35 +1,29 @@
 import { HandleDate } from '@/classes/date';
-import { IDollar } from '@/interfaces/IDollar';
-import { getDollars } from '@/services/getDolarData';
-import { useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useDollarQuery } from '@/hooks/useDollarQuery';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function LastUpdate() {
-  const queryClient = useQueryClient();
-  const [lastUpdate, setLastUpdate] = useState('Cargando información...');
-
-  const getLastUpdate = async () => {
+  const getLastUpdate = () => {
     try {
       // Se toma el CCL como referencia.
-      const data: IDollar[] = await queryClient.ensureQueryData({ queryKey: ['dollars'], queryFn: getDollars, retry: 3 });
+      if (!data) {
+        throw new Error('Cargando...');
+      }
       const todayDate = new HandleDate();
       const lastUpdate = new HandleDate(new Date(data[3].fechaActualizacion));
-      setLastUpdate(todayDate.getFormattedDateBar() === lastUpdate.getFormattedDateBar() ? `Hoy, ${lastUpdate.getTime()}` : lastUpdate.getFormattedDateBarWithTime());
+      return todayDate.getFormattedDateBar() === lastUpdate.getFormattedDateBar() ? `Hoy, ${lastUpdate.getTime()}` : lastUpdate.getFormattedDateBarWithTime();
     } catch (e: any) {
-      setLastUpdate('Error al obtener información...');
+      return 'Cargando...';
     }
   };
 
-  useEffect(() => {
-    getLastUpdate();
-  }, []);
+  const { isPending, data } = useDollarQuery();
 
   return (
     <View>
       <Text style={styles.text}>
         Última actualización:{'\n'}
-        <Text style={{ fontSize: 14.5 }}>{lastUpdate}</Text>
+        <Text style={{ fontSize: 14.5 }}>{isPending ? 'Cargando...' : getLastUpdate()}</Text>
       </Text>
     </View>
   );
@@ -41,6 +35,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik',
     fontSize: 12,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 18,
   },
 });

@@ -6,6 +6,7 @@ import { PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getDollars } from '@/services/getDolarData';
 import Converter from '@/components/converter/Converter';
+import { useDollarQuery } from '@/hooks/useDollarQuery';
 
 export default function ConverterPage() {
   const currentState = useRef(AppState.currentState);
@@ -32,12 +33,12 @@ export default function ConverterPage() {
     }
   }, [appState]);
 
-  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, staleTime: 900000, placeholderData: keepPreviousData, refetchInterval: 900000 });
+  const { isPending, isError, error, data, retryFn } = useDollarQuery();
 
   return isPending ? (
     <Loading />
   ) : isError ? (
-    <ErrorPage error={{ message: error.message, retry: () => queryClient.fetchQuery({ queryKey: ['dollars'] }) }} />
+    <ErrorPage error={{ message: error.message, retry: retryFn }} />
   ) : (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: PADDING_TAB_BOTTOM }}>
       <Converter data={data} />

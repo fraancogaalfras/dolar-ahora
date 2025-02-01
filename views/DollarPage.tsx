@@ -8,8 +8,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { getDollars } from '@/services/getDolarData';
+import { useDollarQuery } from '@/hooks/useDollarQuery';
 
-export default function DolarPage() {
+export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
@@ -39,7 +40,7 @@ export default function DolarPage() {
     router.setParams({ refreshing: 'true' });
   }, []);
 
-  const { isPending, isError, error, data } = useQuery({ queryKey: ['dollars'], queryFn: getDollars, staleTime: 900000, refetchInterval: 900000 });
+  const { isPending, isError, error, data, retryFn } = useDollarQuery();
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card data={item} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.casa, []);
@@ -56,7 +57,7 @@ export default function DolarPage() {
   return isPending ? (
     <Loading />
   ) : isError ? (
-    <ErrorPage error={{ message: error.message, retry: () => queryClient.fetchQuery({ queryKey: ['dollars'] }) }} />
+    <ErrorPage error={{ message: error.message, retry: retryFn }} />
   ) : (
     <SectionList
       sections={[{ data: data as any }]}
