@@ -7,13 +7,13 @@ export default function LastUpdate() {
     try {
       // Se toma el CCL como referencia.
       if (!data) {
-        return 'Cargando...';
+        return '  Cargando...';
       }
       const todayDate = new HandleDate();
       const lastUpdate = new HandleDate(new Date(data[3].fechaActualizacion));
       return todayDate.getFormattedDateBar() === lastUpdate.getFormattedDateBar() ? `Hoy, ${lastUpdate.getTime()}` : lastUpdate.getFormattedDateBarWithTime();
     } catch (e: any) {
-      return 'Cargando...';
+      return '  Cargando...';
     }
   };
 
@@ -21,10 +21,10 @@ export default function LastUpdate() {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text]} textBreakStrategy={'simple'}>Última actualización:
+      <Text style={[styles.text]}>  Última actualización:
       </Text>
-      <Text style={[styles.text, { fontSize: 14.5 }]} textBreakStrategy={'simple'}>
-        {isPending ? 'Cargando...' : getLastUpdate()}
+      <Text style={[styles.text, { fontSize: 14.5 }]}>
+        {isPending ? '  Cargando...' : '  ' + getLastUpdate()}
       </Text>
     </View>
   );
