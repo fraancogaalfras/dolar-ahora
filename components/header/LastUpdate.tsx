@@ -21,15 +21,17 @@ export default function LastUpdate() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Última actualización:</Text>
-      <Text style={[styles.text, { fontSize: 14.5 }]}>{isPending ? 'Cargando...' : getLastUpdate()}</Text>
+      <Text style={[styles.text]} textBreakStrategy={'simple'}>Última actualización:
+      </Text>
+      <Text style={[styles.text, { fontSize: 14.5 }]} textBreakStrategy={'simple'}>
+        {isPending ? 'Cargando...' : getLastUpdate()}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 5,
     marginTop: 2,
   },
   text: {
