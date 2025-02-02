@@ -8,7 +8,7 @@ import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button } from 'rea
 import WheelPicker from 'react-native-wheely';
 
 export default function Converter({ data }: { data: IDollar[] }) {
-  const [selectedIndex, setSelectedIndex] = useState(2);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [arsCurrency, setArsCurrency] = useState<ICurrency>({
     amount: 1000,
     name: 'ARS',

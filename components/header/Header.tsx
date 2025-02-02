@@ -23,11 +23,4 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  dateText: {
-    color: '#fff',
-    fontFamily: 'Rubik',
-    fontSize: 16,
-    marginTop: 12,
-    opacity: 0.7,
-  },
 });

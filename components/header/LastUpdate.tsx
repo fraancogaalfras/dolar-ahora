@@ -7,7 +7,7 @@ export default function LastUpdate() {
     try {
       // Se toma el CCL como referencia.
       if (!data) {
-        throw new Error('Cargando...');
+        return 'Cargando...';
       }
       const todayDate = new HandleDate();
       const lastUpdate = new HandleDate(new Date(data[3].fechaActualizacion));
@@ -20,16 +20,18 @@ export default function LastUpdate() {
   const { data, isPending } = useDollarContext();
 
   return (
-    <View>
-      <Text style={styles.text}>
-        Última actualización:{'\n'}
-        <Text style={{ fontSize: 14.5 }}>{isPending ? 'Cargando...' : getLastUpdate()}</Text>
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Última actualización:</Text>
+      <Text style={[styles.text, { fontSize: 14.5 }]}>{isPending ? 'Cargando...' : getLastUpdate()}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 5,
+    marginTop: 2,
+  },
   text: {
     color: '#9f9f9f',
     fontFamily: 'Rubik',

@@ -21,6 +21,9 @@ export default function TabLayout() {
           marginTop: 15,
         },
         header: () => <Header />,
+        headerStyle: {
+          height: 70,
+        },
         tabBarShowLabel: false,
       }}
     >
