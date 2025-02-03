@@ -1,10 +1,10 @@
 import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_SHADOW_COLOR, LINE_COLOR } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_SHADOW_COLOR, LINE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
 import { useMemo, useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button, ScrollView, KeyboardAvoidingView } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
 export default function Converter({ data }: { data: IDollar[] }) {
@@ -85,12 +85,11 @@ export default function Converter({ data }: { data: IDollar[] }) {
 
   const staticWheelProps = useMemo(
     () => ({
-      visibleRest: 2,
-      itemHeight: 40,
       itemStyle: { backgroundColor: 'rgba(0,0,0,0)', padding: 0 },
       itemTextStyle: { fontSize: 25, color: '#fff', fontFamily: 'Rubik_500Medium', padding: 0, margin: 0 },
       containerStyle: { padding: 0, margin: 0 },
       selectedIndicatorStyle: { backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0, padding: 0, margin: 0 },
+      flatListProps: { nestedScrollEnabled: true },
       options: wheelOptions,
     }),
     []
@@ -98,49 +97,49 @@ export default function Converter({ data }: { data: IDollar[] }) {
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.headContainer}>
-        <Text style={styles.title}>{arsCurrency.name}</Text>
-        <View style={[{ marginLeft: 20, marginRight: 0 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
-          <IconArrowRight />
+      <ScrollView contentContainerStyle={{ gap: 50 }} showsVerticalScrollIndicator={false}>
+        <View style={styles.headContainer}>
+          <Text style={styles.title}>{arsCurrency.name}</Text>
+          <View style={[{ marginLeft: 20, marginRight: 5 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
+            <IconArrowRight />
+          </View>
+          <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
         </View>
-        <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
-      </View>
-      <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            inputMode="numeric"
-            value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-            onChangeText={isReverse ? handleUsdChange : handleArsChange}
-          />
-          <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
+        <View style={styles.mainContainer}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              inputMode="numeric"
+              value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+              onChangeText={isReverse ? handleUsdChange : handleArsChange}
+            />
+            <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
+          </View>
+          <TouchableOpacity onPress={handleReverse}>
+            <IconReverse />
+          </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              inputMode="numeric"
+              value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+              onChangeText={isReverse ? handleArsChange : handleUsdChange}
+            />
+            <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
+          </View>
+          <View style={styles.conversionContainer}>
+            <Text style={styles.textConversion}>
+              1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
+            </Text>
+          </View>
         </View>
-        <TouchableOpacity onPress={handleReverse}>
-          <IconReverse />
-        </TouchableOpacity>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            inputMode="numeric"
-            value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-            onChangeText={isReverse ? handleArsChange : handleUsdChange}
-          />
-          <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
-        </View>
-        <View style={styles.conversionContainer}>
-          <Text style={styles.textConversion}>
-            1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
-          </Text>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
-    gap: 30,
     width: '100%',
   },
   title: {
@@ -149,6 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   headContainer: {
+    // paddingTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
   conversionContainer: {
     alignItems: 'center',
     width: 300,
+    marginBottom: 20,
   },
   textConversion: {
     fontFamily: 'Rubik',

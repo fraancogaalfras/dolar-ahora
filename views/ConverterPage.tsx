@@ -1,5 +1,5 @@
 import Loading from '@/components/loading/Loading';
-import { AppState, Platform, View } from 'react-native';
+import { AppState, KeyboardAvoidingView, Platform, View } from 'react-native';
 import ErrorPage from './ErrorPage';
 import { PADDING_TAB_BOTTOM } from '@/constants/constants';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -36,8 +36,8 @@ export default function ConverterPage() {
   ) : isError ? (
     <ErrorPage error={{ message: error.message, retry: retryFn }} />
   ) : (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: PADDING_TAB_BOTTOM }}>
+    <KeyboardAvoidingView style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: PADDING_TAB_BOTTOM }}>
       <Converter data={data} />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
