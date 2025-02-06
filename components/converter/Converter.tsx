@@ -4,7 +4,7 @@ import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
 import { useMemo, useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button, ScrollView, KeyboardAvoidingView, FlatList } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
 export default function Converter({ data }: { data: IDollar[] }) {
@@ -95,6 +95,10 @@ export default function Converter({ data }: { data: IDollar[] }) {
     []
   );
 
+  const emptyArray = useMemo(() => {
+    return [];
+  }, []);
+
   return (
     <View style={styles.wrapper}>
       <ScrollView contentContainerStyle={{ gap: 50 }} showsVerticalScrollIndicator={false}>
@@ -103,7 +107,14 @@ export default function Converter({ data }: { data: IDollar[] }) {
           <View style={[{ marginLeft: 20, marginRight: 5 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
             <IconArrowRight />
           </View>
-          <WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />
+          <FlatList
+            scrollEnabled={false}
+            horizontal
+            data={emptyArray}
+            renderItem={null}
+            ListEmptyComponent={<WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />}
+            style={{ flexGrow: 0 }}
+          />
         </View>
         <View style={styles.mainContainer}>
           <View style={styles.inputContainer}>
@@ -148,7 +159,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   headContainer: {
-    // paddingTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',

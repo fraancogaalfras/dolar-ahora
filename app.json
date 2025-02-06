@@ -2,26 +2,32 @@
   "expo": {
     "newArchEnabled": true,
     "name": "Dólar Ahora",
-    "description": "App que muestra el precio de los dolares financieros argentinos y sus variaciones.",
+    "description": "'Dólar Ahora' te permite conocer al instante el valor de los distintos dólares financieros en Argentina. Además, cuenta con un convertidor integrado para calcular fácilmente montos en distintas cotizaciones. Simple, rápida y siempre actualizada.",
     "slug": "dolar-ahora",
     "version": "1.7.0",
-    "platforms": ["android", "web"],
+    "platforms": ["android"],
     "scheme": "dolarahora",
     "orientation": "portrait",
-    "backgroundColor": "#000000",
     "primaryColor": "#000000",
+    "backgroundColor": "#000000",
     "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.fraancogaalfras.dolarahora",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon/foreground.png",
+        "backgroundColor": "#000000"
+      }
+    },
     "androidStatusBar": {
       "translucent": true
     },
     "androidNavigationBar": {
       "backgroundColor": "#000000"
     },
-    "icon": "./assets/images/isotipo-dark.png",
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/isotipo-dark.png",
+      "favicon": "./assets/images/icon.png",
       "lang": "es"
     },
     "plugins": [
@@ -29,7 +35,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-dark.png",
+          "image": "./assets/images/splash.png",
           "backgroundColor": "#000000",
           "imageWidth": 300,
           "resizeMode": "cover"
@@ -42,14 +48,7 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "de5f3556-85a3-4184-b809-0a0ed908e71f",
-        "versionCode": 7
       }
-    },
-    "android": {
-      "package": "com.fraancogaalfras.dolarahora"
     }
   }
 }

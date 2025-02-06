@@ -7,6 +7,7 @@ import { COLOURS, PADDING_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
+import LastUpdate from '@/components/header/LastUpdate';
 
 export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
@@ -44,7 +45,7 @@ export default function DollarPage() {
   const contentContainerStyle: StyleProp<ViewStyle> = useMemo(() => {
     return {
       alignItems: 'center',
-      paddingBottom: PADDING_TAB_BOTTOM - 8,
+      paddingBottom: PADDING_TAB_BOTTOM,
       paddingTop: 20,
     };
   }, []);
@@ -65,6 +66,7 @@ export default function DollarPage() {
       refreshControl={
         <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={TAB_COLOR} tintColor={COLOURS.positive} />
       }
+      ListFooterComponent={<LastUpdate />}
     />
   );
 }

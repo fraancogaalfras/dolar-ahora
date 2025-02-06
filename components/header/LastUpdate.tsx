@@ -1,44 +1,31 @@
-import { HandleDate } from '@/classes/date';
 import { useDollarContext } from '@/context/DollarContext';
+import { getLastUpdate } from '@/services/getLastUpdate';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function LastUpdate() {
-  const getLastUpdate = () => {
-    try {
-      // Se toma el CCL como referencia.
-      if (!data) {
-        return '  Cargando...';
-      }
-      const todayDate = new HandleDate();
-      const lastUpdate = new HandleDate(new Date(data[3].fechaActualizacion));
-      return todayDate.getFormattedDateBar() === lastUpdate.getFormattedDateBar() ? `Hoy, ${lastUpdate.getTime()}` : lastUpdate.getFormattedDateBarWithTime();
-    } catch (e: any) {
-      return '  Cargando...';
-    }
-  };
-
   const { data, isPending } = useDollarContext();
+  const lastUpdate = getLastUpdate(data);
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text]}>  Última actualización:
-      </Text>
-      <Text style={[styles.text, { fontSize: 14.5 }]}>
-        {isPending ? '  Cargando...' : '  ' + getLastUpdate()}
-      </Text>
+      <Text style={styles.text}>Última actualización:</Text>
+      <Text style={styles.text}>{isPending ? 'Cargando...' : lastUpdate}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 2,
+    marginTop: -10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   text: {
-    color: '#9f9f9f',
+    color: '#fff',
     fontFamily: 'Rubik',
-    fontSize: 13,
-    textAlign: 'center',
-    lineHeight: 18,
+    fontSize: 13.5,
+    lineHeight: 20,
+    opacity: 0.5,
   },
 });

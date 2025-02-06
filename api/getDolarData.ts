@@ -21,6 +21,10 @@ export const getDolarData = async () => {
     const todayResult: IDollar[] = await todayResponse.json();
     const yesterdayResult: IDollar[] = await yesterdayResponse.json();
 
+    if (todayResult.length == 0 || yesterdayResult.length == 0) {
+      throw new NetworkError('Servicio temporalmente inactivo.');
+    }
+
     const data: HandleDolarData = new HandleDolarData(todayResult);
     data.bindPreviousData(yesterdayResult);
 

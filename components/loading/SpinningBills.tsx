@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { Animated, StyleSheet, Easing } from 'react-native';
 
 const SpinningBills = () => {
@@ -27,7 +27,7 @@ const SpinningBills = () => {
 
   return (
     <Animated.View style={styles.container}>
-      <Animated.Image style={{ transform: [{ rotate: spin }, { scale: 0.2 }] }} source={require('@/assets/images/rotate_bills.png')} />
+      <Animated.Image style={{ transform: [{ rotate: spin }, { scale: 0.2 }] }} source={require('@/assets/images/loading/rotate_bills.png')} />
     </Animated.View>
   );
 };
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SpinningBills;
+export default memo(SpinningBills);
