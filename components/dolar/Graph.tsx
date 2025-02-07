@@ -12,7 +12,7 @@ export default function Graph({ variation }: { variation: number }) {
     } else {
       return [20, 40, 60, 80, 100];
     }
-  }, []);
+  }, [variation]);
 
   const chartConfig = useMemo(() => {
     return {
@@ -24,7 +24,7 @@ export default function Graph({ variation }: { variation: number }) {
       fillShadowGradientToOpacity: 0,
       color: () => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative),
     };
-  }, []);
+  }, [variation]);
 
   return (
     <LineChart

@@ -3,7 +3,7 @@ import { IColour } from '@/interfaces/IColour';
 export const TAB_COLOR = 'rgba(9,9,11,1)';
 export const BACKGROUND_COLOR = '#08090e';
 export const LINE_COLOR = '#2f3336';
-export const PADDING_TAB_BOTTOM = 70;
+export const MARGIN_TAB_BOTTOM = 70;
 
 export const CARD_BACKGROUND_COLOR = '#191d27';
 export const CARD_SHADOW_COLOR = 'rgba(47, 51, 54, 0.3)';

@@ -1,13 +1,14 @@
-import { AppState, Platform, RefreshControl, SectionList, StyleProp, ViewStyle } from 'react-native';
+import { AppState, Platform, RefreshControl, SectionList, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import Card from '@/components/dolar/Card';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
-import { COLOURS, PADDING_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
+import { COLOURS, MARGIN_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
 import LastUpdate from '@/components/header/LastUpdate';
+import Header from '@/components/header/Header';
 
 export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
@@ -45,7 +46,6 @@ export default function DollarPage() {
   const contentContainerStyle: StyleProp<ViewStyle> = useMemo(() => {
     return {
       alignItems: 'center',
-      paddingBottom: PADDING_TAB_BOTTOM,
       paddingTop: 20,
     };
   }, []);
@@ -55,18 +55,27 @@ export default function DollarPage() {
   ) : isError ? (
     <ErrorPage error={{ message: error.message, retry: retryFn }} />
   ) : (
-    <SectionList
-      sections={[{ data: data as any }]}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-      getItemLayout={getItemLayout}
-      contentContainerStyle={contentContainerStyle}
-      showsVerticalScrollIndicator={false}
-      initialNumToRender={7}
-      refreshControl={
-        <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={TAB_COLOR} tintColor={COLOURS.positive} />
-      }
-      ListFooterComponent={<LastUpdate />}
-    />
+    <View style={styles.wrapper}>
+      <SectionList
+        sections={[{ data: data as any }]}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        getItemLayout={getItemLayout}
+        contentContainerStyle={contentContainerStyle}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={7}
+        refreshControl={
+          <RefreshControl refreshing={refreshing === 'true'} onRefresh={onRefresh} colors={[COLOURS.positive, COLOURS.equal]} progressBackgroundColor={TAB_COLOR} tintColor={COLOURS.positive} />
+        }
+        ListFooterComponent={<LastUpdate />}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    marginBottom: MARGIN_TAB_BOTTOM,
+  },
+});

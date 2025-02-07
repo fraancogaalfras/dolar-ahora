@@ -1,4 +1,4 @@
-import { PADDING_TAB_BOTTOM } from '@/constants/constants';
+import { MARGIN_TAB_BOTTOM } from '@/constants/constants';
 import { Ierror } from '@/interfaces/IError';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
-    paddingBottom: PADDING_TAB_BOTTOM,
+    paddingBottom: MARGIN_TAB_BOTTOM,
   },
   errorContainer: {
     paddingHorizontal: 20,

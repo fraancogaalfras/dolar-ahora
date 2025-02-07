@@ -1,10 +1,10 @@
 import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_SHADOW_COLOR, LINE_COLOR, PADDING_TAB_BOTTOM } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR, MARGIN_TAB_BOTTOM } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
 import { useMemo, useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, Button, ScrollView, KeyboardAvoidingView, FlatList } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
 export default function Converter({ data }: { data: IDollar[] }) {
@@ -100,58 +100,58 @@ export default function Converter({ data }: { data: IDollar[] }) {
   }, []);
 
   return (
-    <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={{ gap: 50 }} showsVerticalScrollIndicator={false}>
-        <View style={styles.headContainer}>
-          <Text style={styles.title}>{arsCurrency.name}</Text>
-          <View style={[{ marginLeft: 20, marginRight: 5 }, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
-            <IconArrowRight />
-          </View>
-          <FlatList
-            scrollEnabled={false}
-            horizontal
-            data={emptyArray}
-            renderItem={null}
-            ListEmptyComponent={<WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />}
-            style={{ flexGrow: 0 }}
+    <ScrollView contentContainerStyle={styles.scrollViewWrapper} showsVerticalScrollIndicator={true}>
+      <View style={styles.headContainer}>
+        <Text style={styles.title}>{arsCurrency.name}</Text>
+        <View style={[styles.arrowRight, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
+          <IconArrowRight />
+        </View>
+        <FlatList
+          scrollEnabled={false}
+          horizontal
+          data={emptyArray}
+          renderItem={null}
+          ListEmptyComponent={<WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />}
+          style={{ flexGrow: 0 }}
+        />
+      </View>
+      <View style={styles.mainContainer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            inputMode="numeric"
+            value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+            onChangeText={isReverse ? handleUsdChange : handleArsChange}
           />
+          <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
         </View>
-        <View style={styles.mainContainer}>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              inputMode="numeric"
-              value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-              onChangeText={isReverse ? handleUsdChange : handleArsChange}
-            />
-            <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
-          </View>
-          <TouchableOpacity onPress={handleReverse}>
-            <IconReverse />
-          </TouchableOpacity>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              inputMode="numeric"
-              value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-              onChangeText={isReverse ? handleArsChange : handleUsdChange}
-            />
-            <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
-          </View>
-          <View style={styles.conversionContainer}>
-            <Text style={styles.textConversion}>
-              1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
-            </Text>
-          </View>
+        <TouchableOpacity accessible={true} accessibilityLabel={'Cambiar orden de conversion'} onPress={handleReverse}>
+          <IconReverse />
+        </TouchableOpacity>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            inputMode="numeric"
+            value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+            onChangeText={isReverse ? handleArsChange : handleUsdChange}
+          />
+          <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
         </View>
-      </ScrollView>
-    </View>
+        <View style={styles.conversionContainer}>
+          <Text style={styles.textConversion}>
+            1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
+          </Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  scrollViewWrapper: {
+    flexGrow: 1,
     width: '100%',
+    gap: 30,
   },
   title: {
     fontFamily: 'Rubik',
@@ -159,10 +159,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   headContainer: {
+    marginTop: 50,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingLeft: 20,
+    paddingLeft: 30,
+  },
+  arrowRight: {
+    marginLeft: 20,
+    marginRight: -2,
   },
   mainContainer: {
     alignItems: 'center',
@@ -186,11 +191,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     width: '70%',
+    height: '100%',
   },
   currencyInsideInput: {
     fontFamily: 'Rubik_500Medium',
     color: '#fff',
-    fontSize: 14,
+    fontSize: 16,
     width: '30%',
     textAlign: 'center',
   },
