@@ -20,7 +20,6 @@ export default function TabLayout() {
         tabBarIconStyle: {
           marginTop: 15,
         },
-        // headerShown: false,
         header: () => <Header />,
         headerStyle: {
           height: 70,

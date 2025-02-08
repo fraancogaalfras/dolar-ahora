@@ -3,7 +3,7 @@ export interface IDollar {
   casa: string;
   nombre: string;
   compra: number;
-  variacion: string;
+  variacion: number;
   venta: number;
   ventaAnterior: number;
   fechaActualizacion: string;

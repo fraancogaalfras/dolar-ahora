@@ -1,6 +1,6 @@
 import { IDollar } from '@/interfaces/IDollar';
 
-export class HandleDolarData {
+export class Dollar {
   data: IDollar[];
   constructor(data: IDollar[]) {
     this.data = data;
@@ -10,7 +10,7 @@ export class HandleDolarData {
     for (let i = 0; i < this.data.length; i++) {
       for (let j = 0; j < previousData.length; j++) {
         if (this.data[i].casa == previousData[j].casa) {
-          const variation: string = this.getVariation(this.data[i].venta, previousData[j].venta);
+          const variation = this.getVariation(this.data[i].venta, previousData[j].venta);
           this.data[i] = { ...this.data[i], variacion: variation, ventaAnterior: previousData[j].venta, nombre: this.formatName(this.data[i].nombre) };
           break;
         }
@@ -18,16 +18,16 @@ export class HandleDolarData {
     }
   }
 
-  public static formatPrice(price: number): string {
-    return price.toString().replace('.', ',');
+  public static formatNumber(number: number, minimumFractionDigits = 1, maximumFractionDigits = 1): string {
+    return number.toLocaleString('de-DE', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits });
   }
 
   public getData(): IDollar[] {
     return this.data;
   }
 
-  private getVariation(priceToday: number, priceYesterday: number): string {
-    return ((priceToday / priceYesterday - 1) * 100).toFixed(2);
+  private getVariation(priceToday: number, priceYesterday: number): number {
+    return (priceToday / priceYesterday - 1) * 100;
   }
 
   private formatName(casa: string): string {

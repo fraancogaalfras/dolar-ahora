@@ -1,10 +1,14 @@
 import { useDollarContext } from '@/context/DollarContext';
 import { getLastUpdate } from '@/services/getLastUpdate';
+import { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function LastUpdate() {
   const { data, isPending } = useDollarContext();
-  const lastUpdate = getLastUpdate(data);
+
+  const lastUpdate = useMemo(() => {
+    return getLastUpdate(data);
+  }, [data]);
 
   return (
     <View style={styles.container}>

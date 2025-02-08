@@ -1,4 +1,5 @@
-export interface Ierror {
-  message: string;
-  retry: () => void;
+export interface IError {
+  error?: Error;
+  customError?: Error;
+  retry?: () => void;
 }

@@ -1,14 +1,23 @@
 import { IconCoffee, IconGithub } from '@/assets/icons/Icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as Linking from 'expo-linking';
+import { useCallback } from 'react';
 
 export default function Links() {
+  const handleCafecitoPress = useCallback(() => {
+    Linking.openURL('https://cafecito.app/fraancogaalfras');
+  }, []);
+
+  const handleGithubPress = useCallback(() => {
+    Linking.openURL('https://github.com/fraancogaalfras');
+  }, []);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity accessible={true} accessibilityLabel={'Comprame un cafecito'} onPress={() => Linking.openURL('https://cafecito.app/fraancogaalfras')}>
+      <TouchableOpacity accessible={true} accessibilityLabel={'Comprame un cafecito'} onPress={handleCafecitoPress}>
         <IconCoffee />
       </TouchableOpacity>
-      <TouchableOpacity accessible={true} accessibilityLabel={'Mira mi github y mis proyectos'} onPress={() => Linking.openURL('https://github.com/fraancogaalfras')}>
+      <TouchableOpacity accessible={true} accessibilityLabel={'Mira mi github y mis proyectos'} onPress={handleGithubPress}>
         <IconGithub />
       </TouchableOpacity>
     </View>

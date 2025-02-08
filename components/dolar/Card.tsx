@@ -1,26 +1,26 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { memo } from 'react';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_HEIGHT, CARD_SHADOW_COLOR, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_HEIGHT, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
 import Variation from './Variation';
 import Graph from './Graph';
-import { IDollar } from '@/interfaces/IDollar';
+import { Dollar } from '@/classes/dolar';
 
-const Card = ({ data }: { data: IDollar }) => {
+const Card = ({ nombre = '', venta = 0, variacion = 0 }) => {
   return (
-    <View key={data.nombre} style={styles.card}>
+    <View key={nombre} style={styles.card}>
       <View style={styles.left}>
         <View style={styles.stockTextContainer}>
-          <Text style={styles.stockText}>{data.nombre}</Text>
+          <Text style={styles.stockText}>{nombre}</Text>
           <Text style={styles.exchangeText}>BCBA (AR)</Text>
         </View>
       </View>
       <View style={styles.center}>
-        <Graph variation={parseFloat(data.variacion)} />
+        <Graph variation={variacion} />
       </View>
       <View style={styles.right}>
         <View style={styles.stockValues}>
-          <Text style={styles.priceText}>${data.venta.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</Text>
-          <Variation variation={data.variacion} />
+          <Text style={styles.priceText}>${Dollar.formatNumber(venta)}</Text>
+          <Variation variation={variacion} />
         </View>
       </View>
     </View>

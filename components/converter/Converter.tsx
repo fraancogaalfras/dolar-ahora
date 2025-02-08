@@ -1,5 +1,5 @@
 import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
-import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR, MARGIN_TAB_BOTTOM } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';

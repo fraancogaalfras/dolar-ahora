@@ -9,7 +9,9 @@ export const getLastUpdate = (data: any) => {
     }
     const todayDate = new HandleDate();
     const lastUpdate = new HandleDate(new Date(data[3].fechaActualizacion));
+
     const areDatesEquals = todayDate.getFormattedDateBar() === lastUpdate.getFormattedDateBar();
+    
     return areDatesEquals ? `Hoy, ${lastUpdate.getTime()}` : lastUpdate.getFormattedDateBarWithTime();
   } catch (e: any) {
     return 'Cargando...';

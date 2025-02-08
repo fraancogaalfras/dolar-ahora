@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { BACKGROUND_COLOR, TAB_COLOR } from '@/constants/constants';
 import { LinearGradient } from 'expo-linear-gradient';
 

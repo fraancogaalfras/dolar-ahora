@@ -8,14 +8,13 @@ import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
 import LastUpdate from '@/components/header/LastUpdate';
-import Header from '@/components/header/Header';
 
 export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
-  const { data, isPending, isError, error, retryFn, refetchFn } = useDollarContext();
+  const { data, isError, error, retryFn, refetchFn } = useDollarContext();
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {
@@ -40,28 +39,18 @@ export default function DollarPage() {
     router.setParams({ refreshing: 'true' });
   }, []);
 
-  const renderItem = useCallback(({ item }: { item: IDollar }) => <Card data={item} />, [data]);
-  const keyExtractor = useCallback((item: IDollar) => item.casa, []);
-  const getItemLayout = useCallback((_: any, index: number) => ({ length: 125, offset: (125 + 30) * index, index }), []);
-  const contentContainerStyle: StyleProp<ViewStyle> = useMemo(() => {
-    return {
-      alignItems: 'center',
-      paddingTop: 20,
-    };
-  }, []);
+  const renderItem = useCallback(({ item }: { item: IDollar }) => <Card nombre={item.nombre} venta={item.venta} variacion={item.variacion} />, [data]);
+  const keyExtractor = useCallback((item: IDollar) => item.nombre, [data]);
+  const getItemLayout = useCallback((_: any, index: number) => ({ length: 95, offset: (95 + 30) * index, index }), []);
 
-  return isPending ? (
-    <Loading />
-  ) : isError ? (
-    <ErrorPage error={{ message: error.message, retry: retryFn }} />
-  ) : (
+  return data ? (
     <View style={styles.wrapper}>
       <SectionList
-        sections={[{ data: data as any }]}
+        sections={[{ data: data as IDollar[] }]}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         getItemLayout={getItemLayout}
-        contentContainerStyle={contentContainerStyle}
+        contentContainerStyle={styles.contentContainerStyle}
         showsVerticalScrollIndicator={false}
         initialNumToRender={7}
         refreshControl={
@@ -70,6 +59,10 @@ export default function DollarPage() {
         ListFooterComponent={<LastUpdate />}
       />
     </View>
+  ) : isError ? (
+    <ErrorPage customError={{ name: 'Error en pestaña de dólares', message: error.message }} retry={retryFn} />
+  ) : (
+    <Loading />
   );
 }
 
@@ -77,5 +70,9 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     marginBottom: MARGIN_TAB_BOTTOM,
+  },
+  contentContainerStyle: {
+    alignItems: 'center',
+    paddingTop: 20,
   },
 });

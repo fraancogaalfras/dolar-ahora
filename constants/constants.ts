@@ -1,7 +1,7 @@
 import { IColour } from '@/interfaces/IColour';
 
 export const TAB_COLOR = 'rgba(9,9,11,1)';
-export const BACKGROUND_COLOR = '#08090e';
+export const BACKGROUND_COLOR = 'rgba(8, 9, 14, 1)';
 export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 

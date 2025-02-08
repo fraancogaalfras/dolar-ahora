@@ -2,15 +2,16 @@ import { StyleSheet, View } from 'react-native';
 import Logo from './Logo';
 import { BACKGROUND_COLOR, LINE_COLOR } from '@/constants/constants';
 import Links from './Links';
+import { memo } from 'react';
 
-export default function Header() {
+const Header = () => {
   return (
     <View style={styles.header}>
       <Logo />
       <Links />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -25,3 +26,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default memo(Header);

@@ -10,7 +10,7 @@ export default function ConverterPage() {
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
-  const { data, isPending, isError, error, retryFn, refetchFn } = useDollarContext();
+  const { data, isError, error, retryFn, refetchFn } = useDollarContext();
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {
@@ -31,14 +31,14 @@ export default function ConverterPage() {
     }
   }, [appState]);
 
-  return isPending ? (
-    <Loading />
-  ) : isError ? (
-    <ErrorPage error={{ message: error.message, retry: retryFn }} />
-  ) : (
+  return data ? (
     <KeyboardAvoidingView style={styles.wrapper}>
       <Converter data={data} />
     </KeyboardAvoidingView>
+  ) : isError ? (
+    <ErrorPage customError={{ name: 'Error en pestaña de convertidor', message: error.message }} retry={retryFn} />
+  ) : (
+    <Loading />
   );
 }
 

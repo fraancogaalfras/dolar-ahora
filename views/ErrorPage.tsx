@@ -1,18 +1,24 @@
-import { MARGIN_TAB_BOTTOM } from '@/constants/constants';
-import { Ierror } from '@/interfaces/IError';
+import { IError } from '@/interfaces/IError';
+import { router } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function ErrorPage({ error }: { error: Ierror }) {
+export default function ErrorPage({ error, customError, retry }: IError) {
+  const handleCancel = () => {
+    router.navigate('/');
+  };
+
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>Ups! Algo salió mal</Text>
       </View>
       <View style={styles.errorContainer}>
-        <Text style={styles.errorMessage}>{error.message}</Text>
+        <Text textBreakStrategy={'balanced'} style={styles.errorMessage}>
+          {customError ? customError.message : 'Pero tranquilo, no es tu culpa, vuelve a intentar.'}
+        </Text>
       </View>
-      <TouchableOpacity onPress={error.retry}>
-        <Text style={{ color: '#fff', fontSize: 20 }}>Reintentar</Text>
+      <TouchableOpacity onPress={retry ? retry : handleCancel}>
+        <Text style={{ color: '#fff', fontSize: 20 }}>{retry ? 'Reintentar' : 'Volver'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -20,20 +26,18 @@ export default function ErrorPage({ error }: { error: Ierror }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 10,
-    paddingBottom: MARGIN_TAB_BOTTOM,
+    paddingHorizontal: 25,
+    gap: 20,
   },
   errorContainer: {
-    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 32,
     fontFamily: 'Rubik',
     color: '#fff',
   },
