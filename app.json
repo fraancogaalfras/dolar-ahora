@@ -14,10 +14,7 @@
     "userInterfaceStyle": "dark",
     "android": {
       "package": "com.fraancogaalfras.dolarahora",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon/foreground.png",
-        "backgroundColor": "#000000"
-      }
+      "icon": "./assets/images/icon.png"
     },
     "androidStatusBar": {
       "translucent": true
@@ -38,7 +35,7 @@
         {
           "image": "./assets/images/splash.png",
           "backgroundColor": "#000000",
-          "imageWidth": 300,
+          "imageWidth": 200,
           "resizeMode": "cover"
         }
       ]
