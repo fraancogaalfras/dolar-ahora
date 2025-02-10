@@ -31,7 +31,6 @@ export default function RootLayout() {
           <DollarProvider>
             <Stack screenOptions={{ headerShown: false, presentation: 'card' }}>
               <Stack.Screen name="(tabs)" />
-              <Stack.Screen name="detail/[dollar]" />
             </Stack>
           </DollarProvider>
         </Try>
