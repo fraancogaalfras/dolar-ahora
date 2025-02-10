@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import DetailHeader from './ui/DetailHeader';
 import DetailGraph from './ui/DetailGraph';
 import DetailFooter from './ui/DetailFooter';
@@ -11,18 +11,17 @@ export default function DetailComponent({ data, dollar, range }: { data: IHistor
   const historicDollarData = handleDetailData(data, range);
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <DetailHeader dollar={dollar} data={historicDollarData} />
       <DetailGraph data={historicDollarData} range={range} />
       <DetailFooter dollar={dollar} />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: 18,
-    flex: 1,
     gap: 20,
   },
 });

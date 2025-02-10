@@ -58,8 +58,9 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
         withVerticalLabels={true}
         withHorizontalLines={false}
         withVerticalLines={false}
-        xLabelsOffset={2}
+        xLabelsOffset={5}
         bezier
+        style={{marginLeft: -5}}
       />
     </View>
   );

@@ -56,7 +56,7 @@ export class HistoricDollar {
   }
 
   private _setFilters(range: TRange) {
-    if (range === '5y') {
+    if (range === '5y' || range === '1y') {
       this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateMonthYear());
     } else {
       this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateDayMonth());

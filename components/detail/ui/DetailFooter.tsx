@@ -6,8 +6,11 @@ export default function DetailFooter({ dollar }: { dollar: TCasa }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>¿Qué es el dólar {TRANSLATE_HOUSE_DESCRIPTION[dollar]}?</Text>
-      <Text style={styles.description} textBreakStrategy={'balanced'}>
-        {DOLLAR_DESCRIPTIONS[dollar]}
+      <Text style={styles.description} textBreakStrategy={'highQuality'}>
+        &#8226; {DOLLAR_DESCRIPTIONS[dollar][0]}
+      </Text>
+      <Text style={styles.description} textBreakStrategy={'highQuality'}>
+        &#8226; {DOLLAR_DESCRIPTIONS[dollar][1]}
       </Text>
     </View>
   );
@@ -15,16 +18,17 @@ export default function DetailFooter({ dollar }: { dollar: TCasa }) {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 10,
+    gap: 15,
   },
   title: {
     color: '#fff',
     fontFamily: 'Rubik_500Medium',
-    fontSize: 18,
+    fontSize: 21,
   },
   description: {
     color: COLOURS.grey,
     fontFamily: 'Rubik',
-    fontSize: 14,
+    fontSize: 15,
+    lineHeight: 20,
   },
 });
