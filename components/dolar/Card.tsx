@@ -9,7 +9,7 @@ import { router } from 'expo-router';
 const Card = ({ nombre = '', casa = '', venta = 0, variacion = 0 }) => {
   const handleOnPress = useCallback(() => {
     router.navigate({
-      pathname: '/detail/[dollar]',
+      pathname: '/(tabs)/detail/[dollar]',
       params: { dollar: casa },
     });
   }, []);

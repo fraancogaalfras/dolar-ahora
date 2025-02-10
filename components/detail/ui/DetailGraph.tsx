@@ -37,6 +37,9 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
       color: () => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative),
       labelColor: () => `#fff`,
       decimalPlaces: 1,
+      propsForLabels: {
+        fontFamily: 'Rubik',
+      },
     };
   }, [variation]);
 

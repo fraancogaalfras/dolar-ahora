@@ -69,6 +69,15 @@ export class HandleDate {
     return `${day} ${translateMonths[month]}`;
   }
 
+  getFormattedDateMonthYear(): string {
+    const date = this.date.toUTCString();
+
+    const month = date.slice(8, 11);
+    const year = date.slice(14, 17);
+
+    return `${translateMonths[month]} ${year}`;
+  }
+
   getFormattedDateDash(): string {
     const year = this.date.getFullYear();
     const month = String(this.date.getMonth() + 1).padStart(2, '0');

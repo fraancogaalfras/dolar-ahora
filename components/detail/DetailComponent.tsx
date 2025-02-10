@@ -14,14 +14,14 @@ export default function DetailComponent({ data, dollar, range }: { data: IHistor
     <View style={styles.container}>
       <DetailHeader dollar={dollar} data={historicDollarData} />
       <DetailGraph data={historicDollarData} range={range} />
-      <DetailFooter />
+      <DetailFooter dollar={dollar} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    padding: 18,
     flex: 1,
     gap: 20,
   },

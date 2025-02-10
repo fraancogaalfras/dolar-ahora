@@ -43,6 +43,7 @@ export default function TabLayout() {
           tabBarAccessibilityLabel: 'Conversor',
         }}
       />
+      <Tabs.Screen name="detail/[dollar]" options={{ href: null }} />
     </Tabs>
   );
 }

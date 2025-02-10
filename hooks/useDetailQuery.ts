@@ -7,13 +7,14 @@ export const useDetailQuery = (dollarName: TCasa, range: TRange) => {
   const queryClient = useQueryClient();
 
   const retryFn = () => {
-    queryClient.fetchQuery({ queryKey: ['detail', dollarName] });
+    queryClient.fetchQuery({ queryKey: ['detail', dollarName, range] });
   };
 
   const query = useQuery({
-    queryKey: ['detail', dollarName],
+    queryKey: ['detail', dollarName, range],
     queryFn: () => getDollarDetail(dollarName, range),
     refetchInterval: 900000,
+    placeholderData: keepPreviousData,
   });
 
   return { ...query, retryFn };

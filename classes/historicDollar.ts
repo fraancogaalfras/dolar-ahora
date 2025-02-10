@@ -50,9 +50,32 @@ export class HistoricDollar {
 
     this.data = this.data.toReversed();
     this.labels = this.labels.toReversed();
-    this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateDayMonth());
 
+    this._setFilters(range);
+    this._setVariation();
+  }
+
+  private _setFilters(range: TRange) {
+    if (range === '5y') {
+      this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateMonthYear());
+    } else {
+      this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateDayMonth());
+    }
+  }
+
+  private _setVariation() {
     this.variation = this._getVariation(this.data[this.data.length - 1].venta, this.data[0].venta);
+  }
+
+  private _filterData(days: number, interval: number) {
+    this.data = this.data.slice(0, days + 1);
+    const tempArray = [];
+
+    for (let i = 0; i < this.data.length; i += interval) {
+      tempArray.push(this.data[i]);
+    }
+
+    this.data = tempArray;
   }
 
   private _filterFiveDays() {
@@ -60,59 +83,31 @@ export class HistoricDollar {
   }
 
   private _filterOneMonth() {
-    const daysInSixMonths = 31;
+    const daysInOneMonth = 31;
     const interval = 5;
 
-    this.data = this.data.slice(0, daysInSixMonths + 1);
-    const tempArray = [];
-
-    for (let i = 0; i < this.data.length; i += interval) {
-      tempArray.push(this.data[i]);
-    }
-
-    this.data = tempArray;
+    this._filterData(daysInOneMonth, interval);
   }
 
   private _filterSixMonth() {
     const daysInSixMonths = 6 * 31;
     const interval = 28;
 
-    this.data = this.data.slice(0, daysInSixMonths + 1);
-    const tempArray = [];
-
-    for (let i = 0; i < this.data.length; i += interval) {
-      tempArray.push(this.data[i]);
-    }
-
-    this.data = tempArray;
+    this._filterData(daysInSixMonths, interval);
   }
 
   private _filterOneYear() {
     const daysInOneYear = 365;
     const interval = 60;
 
-    this.data = this.data.slice(0, daysInOneYear + 1);
-    const tempArray = [];
-
-    for (let i = 0; i < this.data.length; i += interval) {
-      tempArray.push(this.data[i]);
-    }
-
-    this.data = tempArray;
+    this._filterData(daysInOneYear, interval);
   }
 
   private _filterFiveYears() {
     const daysInFiveYears = 365 * 5;
     const interval = 300;
 
-    this.data = this.data.slice(0, daysInFiveYears + 1);
-    const tempArray = [];
-
-    for (let i = 0; i < this.data.length; i += interval) {
-      tempArray.push(this.data[i]);
-    }
-
-    this.data = tempArray;
+    this._filterData(daysInFiveYears, interval);
   }
 
   private _getVariation(firstPrice: number, secondPrice: number): number {

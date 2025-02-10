@@ -7,6 +7,8 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { DollarProvider } from '@/context/DollarContext';
 import { Try } from 'expo-router/build/views/Try';
 import ErrorPage from '@/views/ErrorPage';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Platform } from 'react-native';
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
@@ -24,6 +26,7 @@ export default function RootLayout() {
     >
       <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
       <QueryClientProvider client={queryClient}>
+        {Platform.OS == 'web' && <ReactQueryDevtools initialIsOpen={false} />}
         <Try catch={ErrorPage}>
           <DollarProvider>
             <Stack screenOptions={{ headerShown: false, presentation: 'card' }}>

@@ -1,4 +1,4 @@
-import { NetworkError } from '@/classes/customError';
+import { CustomError, NetworkError } from '@/classes/customError';
 import { HandleDate } from '@/classes/date';
 import { Dollar } from '@/classes/dollar';
 import { DOLLAR_API, HISTORIC_DOLLAR_API } from '@/constants/constants';
@@ -29,7 +29,7 @@ export const getDolarData = async () => {
     return data.getData();
   } catch (e: any) {
     if (e instanceof NetworkError) {
-      throw new Error(e.message);
+      throw new CustomError(e.message);
     }
     throw new Error('Compruebe su conexión e intente nuevamente');
   }

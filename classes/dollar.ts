@@ -1,4 +1,4 @@
-import { VALID_DOLLAR_HOUSES } from '@/constants/constants';
+import { TRANSLATE_HOUSE, VALID_DOLLAR_HOUSES } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCasa } from '@/types/TCasa';
 
@@ -24,8 +24,8 @@ export class Dollar {
     }
   }
 
-  public static isValidHouse(name: TCasa): boolean {
-    return VALID_DOLLAR_HOUSES.includes(name);
+  public static isValidHouse(string: TCasa): boolean {
+    return VALID_DOLLAR_HOUSES.includes(string);
   }
 
   public static formatNumber(number: number, minimumFractionDigits = 1, maximumFractionDigits = 1): string {
