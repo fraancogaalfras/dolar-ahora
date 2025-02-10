@@ -1,14 +1,12 @@
 import { NetworkError } from '@/classes/customError';
 import { HandleDate } from '@/classes/date';
-import { Dollar } from '@/classes/dolar';
+import { Dollar } from '@/classes/dollar';
+import { DOLLAR_API, HISTORIC_DOLLAR_API } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 
 export const getDolarData = async () => {
-  const DOLLAR_API = 'https://dolarapi.com/v1/dolares';
-  const HISTORIC_DOLLAR_API = 'https://api.argentinadatos.com/v1/cotizaciones/dolares';
-
   try {
-    const date: HandleDate = new HandleDate();
+    const date = new HandleDate();
     date.subtractDays(1);
 
     const todayResponse = await fetch(DOLLAR_API);
@@ -25,7 +23,7 @@ export const getDolarData = async () => {
       throw new NetworkError('Servicio temporalmente inactivo.');
     }
 
-    const data: Dollar = new Dollar(todayResult);
+    const data = new Dollar(todayResult);
     data.bindPreviousData(yesterdayResult);
 
     return data.getData();

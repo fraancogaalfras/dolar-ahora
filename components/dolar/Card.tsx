@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { memo } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { memo, useCallback } from 'react';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, CARD_HEIGHT, CARD_WIDTH, LINE_COLOR } from '@/constants/constants';
 import Variation from './Variation';
 import Graph from './Graph';
-import { Dollar } from '@/classes/dolar';
+import { Dollar } from '@/classes/dollar';
+import { router } from 'expo-router';
 
-const Card = ({ nombre = '', venta = 0, variacion = 0 }) => {
+const Card = ({ nombre = '', casa = '', venta = 0, variacion = 0 }) => {
+  const handleOnPress = useCallback(() => {
+    router.navigate({
+      pathname: '/detail/[dollar]',
+      params: { dollar: casa },
+    });
+  }, []);
+
   return (
-    <View key={nombre} style={styles.card}>
+    <TouchableOpacity key={nombre} style={styles.card} onPress={handleOnPress}>
       <View style={styles.left}>
         <View style={styles.stockTextContainer}>
           <Text style={styles.stockText}>{nombre}</Text>
@@ -23,7 +31,7 @@ const Card = ({ nombre = '', venta = 0, variacion = 0 }) => {
           <Variation variation={variacion} />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

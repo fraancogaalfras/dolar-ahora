@@ -26,8 +26,9 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <Try catch={ErrorPage}>
           <DollarProvider>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false, presentation: 'card' }} />
+            <Stack screenOptions={{ headerShown: false, presentation: 'card' }}>
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="detail/[dollar]" />
             </Stack>
           </DollarProvider>
         </Try>

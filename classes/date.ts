@@ -1,3 +1,18 @@
+const translateMonths: Record<string, string> = {
+  Jan: 'ene',
+  Feb: 'feb',
+  Mar: 'mar',
+  Apr: 'abr',
+  May: 'may',
+  Jun: 'jun',
+  Jul: 'jul',
+  Aug: 'ago',
+  Sep: 'sep',
+  Oct: 'oct',
+  Nov: 'nov',
+  Dec: 'dic',
+};
+
 export class HandleDate {
   date: Date;
   constructor(date: Date = new Date()) {
@@ -46,11 +61,19 @@ export class HandleDate {
     this.date = new Date(date);
   }
 
+  getFormattedDateDayMonth(): string {
+    const date = this.date.toUTCString();
+    const day = date.slice(5, 7);
+    const month = date.slice(8, 11);
+
+    return `${day} ${translateMonths[month]}`;
+  }
+
   getFormattedDateDash(): string {
     const year = this.date.getFullYear();
     const month = String(this.date.getMonth() + 1).padStart(2, '0');
     const day = String(this.date.getDate()).padStart(2, '0');
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   }
 
   getFormattedDateBar(): string {

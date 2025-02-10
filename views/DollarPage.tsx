@@ -39,7 +39,7 @@ export default function DollarPage() {
     router.setParams({ refreshing: 'true' });
   }, []);
 
-  const renderItem = useCallback(({ item }: { item: IDollar }) => <Card nombre={item.nombre} venta={item.venta} variacion={item.variacion} />, [data]);
+  const renderItem = useCallback(({ item }: { item: IDollar }) => <Card nombre={item.nombre} casa={item.casa} venta={item.venta} variacion={item.variacion} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.nombre, [data]);
   const getItemLayout = useCallback((_: any, index: number) => ({ length: 95, offset: (95 + 30) * index, index }), []);
 
