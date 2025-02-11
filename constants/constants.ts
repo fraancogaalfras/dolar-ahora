@@ -37,11 +37,11 @@ export const RANGES: IRangeRecord = {
 };
 
 export const RANGE_WIDTH: Record<TRange, number> = {
-  '5d': 15,
-  '1mo': -10,
-  '6mo': -10,
-  '1y': -10,
-  '5y': -10,
+  '5d': 10,
+  '1mo': -12,
+  '6mo': -12,
+  '1y': -12,
+  '5y': -12,
 };
 
 export const TRANSLATE_HOUSE: Record<TCasa, TCurrency> = {

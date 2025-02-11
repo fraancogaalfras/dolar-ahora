@@ -32,8 +32,6 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
       backgroundGradientToOpacity: 0,
       fillShadowGradientFrom: variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative,
       fillShadowGradientTo: '#000',
-      fillShadowGradientFromOpacity: 0.1,
-      fillShadowGradientToOpacity: 0,
       color: () => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative),
       labelColor: () => `#fff`,
       decimalPlaces: 1,
@@ -58,9 +56,9 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
         withVerticalLabels={true}
         withHorizontalLines={false}
         withVerticalLines={false}
-        xLabelsOffset={5}
+        xLabelsOffset={10}
         bezier
-        style={{marginLeft: -5}}
+        style={{ marginLeft: -5 }}
       />
     </View>
   );
@@ -69,7 +67,7 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    gap: 20,
+    gap: 25,
     width: 300,
   },
 });

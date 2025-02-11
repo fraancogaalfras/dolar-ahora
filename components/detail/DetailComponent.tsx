@@ -21,7 +21,8 @@ export default function DetailComponent({ data, dollar, range }: { data: IHistor
 
 const styles = StyleSheet.create({
   container: {
-    padding: 18,
+    padding: 20,
+    paddingHorizontal: 25,
     gap: 20,
   },
 });
