@@ -3,7 +3,7 @@ import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR 
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
@@ -20,68 +20,78 @@ export default function Converter({ data }: { data: IDollar[] }) {
   const [exchangeRate, setExchangeRate] = useState(1 / data[selectedIndex].venta);
   const [isReverse, setIsReverse] = useState(false);
 
-  const handleArsChange = (value: string) => {
-    if (value == '') {
-      value = '0';
-    }
-    value = value.replace(/\D/g, '');
-    setArsCurrency({
-      ...arsCurrency,
-      amount: parseFloat(value),
-    });
-    setUsdCurrency({
-      ...usdCurrency,
-      amount: parseFloat(value) * exchangeRate,
-    });
-  };
+  const handleArsChange = useCallback(
+    (value: string) => {
+      if (value == '') {
+        value = '0';
+      }
+      value = value.replace(/\D/g, '');
+      const amount = parseFloat(value);
+      setArsCurrency((prev) => ({
+        ...prev,
+        amount,
+      }));
+      setUsdCurrency((prev) => ({
+        ...prev,
+        amount: amount * exchangeRate,
+      }));
+    },
+    [exchangeRate]
+  );
 
-  const handleUsdChange = (value: string) => {
-    if (value == '') {
-      value = '0';
-    }
-    value = value.replace(/\D/g, '');
-    setUsdCurrency({
-      ...usdCurrency,
-      amount: parseFloat(value),
-    });
-    setArsCurrency({
-      ...arsCurrency,
-      amount: parseFloat(value) / exchangeRate,
-    });
-  };
+  const handleUsdChange = useCallback(
+    (value: string) => {
+      if (value == '') {
+        value = '0';
+      }
+      value = value.replace(/\D/g, '');
+      const amount = parseFloat(value);
+      setUsdCurrency((prev) => ({
+        ...prev,
+        amount,
+      }));
+      setArsCurrency((prev) => ({
+        ...prev,
+        amount: amount / exchangeRate,
+      }));
+    },
+    [exchangeRate]
+  );
 
-  const handleSelectorChange = (index: number) => {
-    const newExchangeRate = 1 / data[index].venta;
-    const newSelectedIndex = index;
+  const handleSelectorChange = useCallback(
+    (index: number) => {
+      const newExchangeRate = 1 / data[index].venta;
+      const newSelectedIndex = index;
 
-    setSelectedIndex(newSelectedIndex);
-    setExchangeRate(newExchangeRate);
+      setSelectedIndex(newSelectedIndex);
+      setExchangeRate(newExchangeRate);
 
-    if (!isReverse) {
-      setUsdCurrency({
-        amount: arsCurrency.amount * newExchangeRate,
-        name: data[newSelectedIndex].nombre,
-      });
-    } else {
-      setUsdCurrency({
-        ...usdCurrency,
-        name: data[newSelectedIndex].nombre,
-      });
-      setArsCurrency({
-        amount: usdCurrency.amount / newExchangeRate,
-        name: 'ARS',
-      });
-    }
-  };
+      if (!isReverse) {
+        setUsdCurrency((prev) => ({
+          amount: arsCurrency.amount * newExchangeRate,
+          name: data[newSelectedIndex].nombre,
+        }));
+      } else {
+        setUsdCurrency((prev) => ({
+          ...prev,
+          name: data[newSelectedIndex].nombre,
+        }));
+        setArsCurrency((prev) => ({
+          amount: usdCurrency.amount / newExchangeRate,
+          name: 'ARS',
+        }));
+      }
+    },
+    [arsCurrency.amount, usdCurrency.amount, isReverse, data]
+  );
 
-  const handleReverse = () => {
-    setIsReverse(!isReverse);
-  };
+  const handleReverse = useCallback(() => {
+    setIsReverse((prev) => !prev);
+  }, []);
 
   const wheelOptions = useMemo(() => {
-    const options: TCurrency[] = data.map((dollar) => dollar.nombre as TCurrency);
-    return options;
-  }, []);
+    return data.map((dollar) => dollar.nombre as TCurrency);
+  }, [data]);
 
   const staticWheelProps = useMemo(
     () => ({
@@ -92,12 +102,10 @@ export default function Converter({ data }: { data: IDollar[] }) {
       flatListProps: { nestedScrollEnabled: true },
       options: wheelOptions,
     }),
-    []
+    [wheelOptions]
   );
 
-  const emptyArray = useMemo(() => {
-    return [];
-  }, []);
+  const emptyArray = useMemo(() => [], []);
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewWrapper} showsVerticalScrollIndicator={true}>
@@ -159,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   headContainer: {
-    marginTop: 50,
+    marginTop: 30,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',

@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     paddingHorizontal: 0,
-    gap: 20,
+    gap: 15,
   },
 });

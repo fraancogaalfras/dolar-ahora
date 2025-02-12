@@ -41,6 +41,7 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => IconConverter({ opacity: focused ? 1 : 0.5 }),
           tabBarLabel: 'Conversor',
           tabBarAccessibilityLabel: 'Conversor',
+          tabBarHideOnKeyboard: true,
         }}
       />
     </Tabs>

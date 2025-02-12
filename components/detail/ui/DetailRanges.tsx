@@ -22,6 +22,7 @@ export default function DetailRanges({ rangeSelected }: { rangeSelected: TRange 
 const styles = StyleSheet.create({
   container: {
     marginLeft: 2,
+    marginTop: 15,
     flexDirection: 'row',
     gap: 15,
     paddingHorizontal: 25,
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
   rangeText: {
     fontFamily: 'Rubik',
     color: '#fff',
-    fontSize: 16,
+    fontSize: 17,
   },
 });

@@ -12,7 +12,7 @@ export const BACKGROUND_COLOR = 'rgba(8, 9, 14, 1)';
 export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 
-export const CARD_BACKGROUND_COLOR = '#191d27';
+export const CARD_BACKGROUND_COLOR = 'rgb(30, 35, 46)';
 export const CARD_SHADOW_COLOR = 'rgba(47, 51, 54, 0.3)';
 export const CARD_BOX_SHADOW = '0px 0px 10px ' + CARD_SHADOW_COLOR;
 export const CARD_BORDER_RADIUS = 20;

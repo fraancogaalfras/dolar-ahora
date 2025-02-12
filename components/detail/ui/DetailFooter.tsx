@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
   container: {
     gap: 15,
     paddingHorizontal: 25,
-
+    paddingTop: 8,
   },
   title: {
     color: '#fff',
     fontFamily: 'Rubik_500Medium',
-    fontSize: 21,
+    fontSize: 22,
   },
   description: {
     color: COLOURS.grey,

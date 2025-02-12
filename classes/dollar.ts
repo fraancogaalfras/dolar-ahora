@@ -29,7 +29,7 @@ export class Dollar {
   }
 
   public static formatNumber(number: number, minimumFractionDigits = 1, maximumFractionDigits = 1): string {
-    return number.toLocaleString('de-DE', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits });
+    return number?.toLocaleString('de-DE', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits }) || '';
   }
 
   private _getVariation(priceToday: number, priceYesterday: number): number {

@@ -45,6 +45,6 @@ export default function ConverterPage() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    marginBottom: MARGIN_TAB_BOTTOM,
+    // marginBottom: MARGIN_TAB_BOTTOM,
   },
 });

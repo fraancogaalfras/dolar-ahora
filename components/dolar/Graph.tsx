@@ -1,58 +1,34 @@
-import { LineChart } from 'react-native-chart-kit';
-import { useMemo } from 'react';
 import { COLOURS } from '@/constants/constants';
+import { useMemo } from 'react';
+import { View } from 'react-native';
+import { CartesianChart, Line } from 'victory-native';
 
 export default function Graph({ variation }: { variation: number }) {
-  
-  const getValues = useMemo(() => {
-    if (variation < 0) {
-      return [100, 80, 60, 40, 20];
-    } else if (variation == 0) {
-      return [50, 50, 50, 50, 50];
-    } else {
-      return [20, 40, 60, 80, 100];
-    }
+
+  const chartDataset = useMemo(() => {
+    return Array.from({ length: 5 }, (_, i) => ({
+      label: i,
+      value: variation > 0 ? 0 + i * 20 : variation < 0 ? 100 - i * 20 : 50,
+    }));
   }, [variation]);
 
-  const chartConfig = useMemo(() => {
-    return {
-      backgroundGradientFromOpacity: 0,
-      backgroundGradientToOpacity: 0,
-      fillShadowGradientFrom: 'transparent',
-      fillShadowGradientTo: 'transparent',
-      fillShadowGradientFromOpacity: 0,
-      fillShadowGradientToOpacity: 0,
-      color: () => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative),
-    };
-  }, [variation]);
+  const lineColor = useMemo(() => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative), [variation]);
 
   return (
-    <LineChart
-      data={{
-        labels: [],
-        datasets: [
-          {
-            data: getValues,
-          },
-          {
-            data: [0],
-          },
-          {
-            data: [100],
-          },
-        ],
-      }}
-      width={80}
-      height={70}
-      fromZero={variation == 0}
-      withHorizontalLines={false}
-      withHorizontalLabels={false}
-      withVerticalLines={false}
-      withVerticalLabels={false}
-      withDots={false}
-      chartConfig={chartConfig}
-      style={{ paddingRight: 0, paddingLeft: 4, marginTop: 5, marginLeft: 0, marginBottom: 12 }}
-      bezier
-    />
+    <View style={{ height: 50 }}>
+      <CartesianChart
+        data={chartDataset}
+        xKey="label"
+        yKeys={['value']}
+        domainPadding={{ top: 5, bottom: 5, left: 5, right: 10 }}
+        axisOptions={{
+          labelOffset: { x: 5, y: 0 },
+          lineWidth: 0,
+        }}
+        frame={{ lineWidth: 0 }}
+      >
+        {({ points }) => <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'bumpX'} />}
+      </CartesianChart>
+    </View>
   );
 }
