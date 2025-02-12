@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     flexDirection: 'row',
     gap: 15,
+    paddingHorizontal: 25,
   },
   rangeTextContainer: {
     paddingVertical: 5,

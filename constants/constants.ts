@@ -24,6 +24,9 @@ export const COLOURS: IColour = {
   positive: '#22c55e',
   equal: 'rgba(255,255,255,0.6)',
   grey: 'rgba(255,255,255,0.7)',
+  areaPositive: 'rgba(34, 197, 94, 0.2)',
+  areaNegative: 'rgba(239, 68, 68, 0.2)',
+  areaEqual: 'rgba(255,255,255, 0.2)',
 };
 
 export const VALID_DOLLAR_HOUSES: TCasa[] = ['oficial', 'blue', 'contadoconliqui', 'bolsa', 'mayorista', 'cripto', 'tarjeta'];

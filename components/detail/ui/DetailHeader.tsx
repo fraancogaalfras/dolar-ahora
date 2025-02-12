@@ -33,6 +33,7 @@ export default function DetailHeader({ dollar, data }: { dollar: TCasa; data: Hi
 const styles = StyleSheet.create({
   container: {
     gap: 8,
+    paddingHorizontal: 25,
   },
   title: {
     color: '#fff',
@@ -51,10 +52,10 @@ const styles = StyleSheet.create({
   },
   variationContainer: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 8,
   },
   variationText: {
     fontFamily: 'Rubik_500Medium',
-    fontSize: 16,
+    fontSize: 14,
   },
 });

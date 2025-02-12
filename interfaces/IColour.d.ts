@@ -3,4 +3,7 @@ export interface IColour {
   positive: string;
   equal: string;
   grey: string;
+  areaPositive: string;
+  areaNegative: string;
+  areaEqual: string;
 }

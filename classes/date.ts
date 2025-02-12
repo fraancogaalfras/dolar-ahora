@@ -73,7 +73,7 @@ export class HandleDate {
     const date = this.date.toUTCString();
 
     const month = date.slice(8, 11);
-    const year = date.slice(14, 17);
+    const year = date.slice(14, 16);
 
     return `${translateMonths[month]} ${year}`;
   }
