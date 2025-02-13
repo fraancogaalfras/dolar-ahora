@@ -9,8 +9,8 @@
     "scheme": "dolarahora",
     "icon": "./assets/images/icon.png",
     "orientation": "portrait",
-    "primaryColor": "#000000",
-    "backgroundColor": "#000000",
+    "primaryColor": "#08090e",
+    "backgroundColor": "#08090e",
     "userInterfaceStyle": "dark",
     "android": {
       "package": "com.fraancogaalfras.dolarahora",
@@ -20,7 +20,7 @@
       "translucent": true
     },
     "androidNavigationBar": {
-      "backgroundColor": "#000000"
+      "backgroundColor": "#08090e"
     },
     "web": {
       "bundler": "metro",

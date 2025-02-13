@@ -1,17 +1,11 @@
-import { router } from 'expo-router';
-import { useCallback } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 export default function Logo() {
-  const handleOnClick = useCallback(() => {
-    router.navigate('/');
-  }, []);
-
   return (
     <View style={styles.logoContainer}>
-      <TouchableOpacity accessible={true} accessibilityLabel={'Dolar ahora'} onPress={handleOnClick}>
+      <View>
         <Image style={styles.logo} resizeMode="cover" source={require('@/assets/images/isologo.png')}></Image>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
