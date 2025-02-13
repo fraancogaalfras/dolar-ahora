@@ -1,13 +1,8 @@
-import { StyleSheet } from 'react-native';
-import { BACKGROUND_COLOR, TAB_COLOR } from '@/constants/constants';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View } from 'react-native';
+import { BACKGROUND_COLOR } from '@/constants/constants';
 
 export default function MainWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <LinearGradient colors={[BACKGROUND_COLOR, TAB_COLOR]} style={styles.mainWrapper}>
-      {children}
-    </LinearGradient>
-  );
+  return <View style={styles.mainWrapper}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -15,5 +10,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
+    backgroundColor: BACKGROUND_COLOR,
   },
 });

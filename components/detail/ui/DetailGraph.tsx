@@ -3,7 +3,7 @@ import { TRange } from '@/types/TRange';
 import { StyleSheet, View } from 'react-native';
 import { Area, CartesianChart, Line } from 'victory-native';
 import DetailRanges from './DetailRanges';
-import { useFont } from '@shopify/react-native-skia';
+import { LinearGradient, useFont, vec } from '@shopify/react-native-skia';
 import { Rubik_400Regular } from '@expo-google-fonts/rubik';
 import { COLOURS } from '@/constants/constants';
 import { HandleDate } from '@/classes/date';
@@ -25,7 +25,10 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
 
   const lineColor = useMemo(() => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative), [variation]);
 
-  const areaColor = useMemo(() => (variation > 0 ? COLOURS.areaPositive : variation == 0 ? COLOURS.areaEqual : COLOURS.areaNegative), [variation]);
+  const areaColor = useMemo(
+    () => (variation > 0 ? [COLOURS.areaPositive, COLOURS.areaPositiveLow] : variation == 0 ? [COLOURS.areaEqual, COLOURS.areaEqualLow] : [COLOURS.areaNegative, COLOURS.areaNegativeLow]),
+    [variation]
+  );
 
   const formatYLabel = useMemo(() => (label: number) => `$${Dollar.formatNumber(label, 1, 1)}`, []);
 
@@ -34,8 +37,9 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
       ({ points, chartBounds }: { points: any; chartBounds: any }) =>
         (
           <>
-            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: 'timing', duration: 300 }} />
-            <Area points={points.value} y0={chartBounds.bottom} color={areaColor} curveType={'cardinal'} animate={{ type: 'timing', duration: 300 }} />
+            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} />
+            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} />
+            <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
           </>
         ),
     [lineColor, areaColor]
@@ -44,20 +48,20 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
   return (
     <View style={[styles.container]}>
       <DetailRanges rangeSelected={range} />
-      <View style={{ height: 230 }}>
+      <View style={{ height: 275 }}>
         <CartesianChart
           data={chartDataset}
           xKey="label"
           yKeys={['value']}
-          padding={{ top: 10, bottom: 20, left: 25, right: 25 }}
+          padding={{ top: 10, bottom: 20, left: 20, right: 25 }}
           domainPadding={{ top: 20, bottom: 20, left: 15, right: 25 }}
           axisOptions={{
-            labelColor: '#fff',
+            labelColor: 'rgba(255,255,255, 0.8)',
             font: font,
             axisSide: { y: 'left', x: 'bottom' },
             labelOffset: { x: 10, y: 0 },
             formatYLabel: formatYLabel,
-            tickCount: { x: 4, y: 7 },
+            tickCount: { x: 4, y: 5 },
             lineWidth: 0,
           }}
           frame={{ lineWidth: 0 }}
@@ -74,5 +78,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 25,
     width: '100%',
+    marginBottom: 10,
   },
 });

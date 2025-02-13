@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    borderWidth: 1,
     width: 140,
     height: 50,
   },

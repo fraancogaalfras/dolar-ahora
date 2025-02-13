@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     flexDirection: 'row',
     gap: 15,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
   },
   rangeTextContainer: {
     paddingVertical: 5,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   rangeText: {
     fontFamily: 'Rubik',
-    color: '#fff',
+    color: 'rgba(255,255,255, 0.8)',
     fontSize: 17,
   },
 });

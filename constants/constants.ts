@@ -13,7 +13,7 @@ export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 
 export const CARD_BACKGROUND_COLOR = 'rgb(30, 35, 46)';
-export const CARD_SHADOW_COLOR = 'rgba(47, 51, 54, 0.3)';
+export const CARD_SHADOW_COLOR = 'rgba(47, 51, 54, 0.4)';
 export const CARD_BOX_SHADOW = '0px 0px 10px ' + CARD_SHADOW_COLOR;
 export const CARD_BORDER_RADIUS = 20;
 export const CARD_WIDTH = 325;
@@ -25,8 +25,11 @@ export const COLOURS: IColour = {
   equal: 'rgba(255,255,255,0.6)',
   grey: 'rgba(255,255,255,0.7)',
   areaPositive: 'rgba(34, 197, 94, 0.2)',
+  areaPositiveLow: 'rgba(34, 197, 94, 0)',
   areaNegative: 'rgba(239, 68, 68, 0.2)',
+  areaNegativeLow: 'rgba(239, 68, 68, 0)',
   areaEqual: 'rgba(255,255,255, 0.2)',
+  areaEqualLow: 'rgba(255,255,255, 0)',
 };
 
 export const VALID_DOLLAR_HOUSES: TCasa[] = ['oficial', 'blue', 'contadoconliqui', 'bolsa', 'mayorista', 'cripto', 'tarjeta'];

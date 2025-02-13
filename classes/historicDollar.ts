@@ -1,15 +1,12 @@
 import { IHistoricDollar } from '@/interfaces/IHistoricDollar';
 import { TRange } from '@/types/TRange';
-import { HandleDate } from './date';
 
 export class HistoricDollar {
   data: IHistoricDollar[];
-  labels: string[];
   variation: number;
 
   constructor(data: IHistoricDollar[]) {
     this.data = data;
-    this.labels = [];
     this.variation = 0;
   }
 
@@ -21,9 +18,6 @@ export class HistoricDollar {
     return this.variation;
   }
 
-  public getLabels() {
-    return this.labels;
-  }
 
   public filterByRange(range: TRange) {
     this.data = this.data.toReversed();
@@ -49,19 +43,9 @@ export class HistoricDollar {
     }
 
     this.data = this.data.toReversed();
-    this.labels = this.labels.toReversed();
-
-    this._setFilters(range);
     this._setVariation();
   }
 
-  private _setFilters(range: TRange) {
-    if (range === '5y' || range === '1y') {
-      this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateMonthYear());
-    } else {
-      this.labels = this.data.map((day) => new HandleDate(new Date(day.fecha)).getFormattedDateDayMonth());
-    }
-  }
 
   private _setVariation() {
     this.variation = this._getVariation(this.data[this.data.length - 1].venta, this.data[0].venta);

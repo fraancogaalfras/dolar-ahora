@@ -1,15 +1,41 @@
+import * as SplashScreen from 'expo-splash-screen';
 import { BACKGROUND_COLOR } from '@/constants/constants';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DollarProvider } from '@/context/DollarContext';
 import { Try } from 'expo-router/build/views/Try';
 import ErrorPage from '@/views/ErrorPage';
+import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik, Rubik_500Medium } from '@expo-google-fonts/rubik';
+
+SplashScreen.preventAutoHideAsync();
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
+
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
   const [queryClient] = useState<QueryClient>(() => new QueryClient());
+
+  const [loaded, error] = useFonts({
+    Rubik_Light,
+    Rubik,
+    Rubik_500Medium,
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hide();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
     <SafeAreaProvider

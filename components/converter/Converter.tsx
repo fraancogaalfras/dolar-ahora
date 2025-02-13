@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     gap: 30,
   },
   title: {
-    fontFamily: 'Rubik',
+    fontFamily: 'Rubik_500Medium',
     color: '#fff',
     fontSize: 25,
   },

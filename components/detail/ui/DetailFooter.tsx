@@ -19,7 +19,7 @@ export default function DetailFooter({ dollar }: { dollar: TCasa }) {
 const styles = StyleSheet.create({
   container: {
     gap: 15,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     paddingTop: 8,
   },
   title: {
