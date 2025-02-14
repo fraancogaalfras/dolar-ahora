@@ -6,6 +6,7 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { DollarProvider } from '@/context/DollarContext';
 import { Try } from 'expo-router/build/views/Try';
 import ErrorPage from '@/views/ErrorPage';
+import { StatusBar } from 'react-native';
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
@@ -24,7 +25,8 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <Try catch={ErrorPage}>
           <DollarProvider>
-            <Stack screenOptions={{ headerShown: false, statusBarBackgroundColor: BACKGROUND_COLOR, statusBarTranslucent: true }}>
+            <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
+            <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen name="detail/[dollar]" />
             </Stack>
