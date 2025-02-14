@@ -37,8 +37,8 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
       ({ points, chartBounds }: { points: any; chartBounds: any }) =>
         (
           <>
-            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: "timing", duration: 0 }} />
-            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} animate={{ type: "timing", duration: 0 }} />
+            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
+            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
             <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
           </>
         ),
@@ -54,15 +54,23 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
           xKey="label"
           yKeys={['value']}
           padding={{ top: 10, bottom: 20, left: 20, right: 25 }}
-          domainPadding={{ top: 20, bottom: 20, left: 15, right: 25 }}
-          axisOptions={{
+          domainPadding={{ top: 20, bottom: 20, left: 5, right: 5 }}
+          xAxis={{
+            font,
             labelColor: 'rgba(255,255,255, 0.8)',
-            font: font,
-            labelOffset: { x: 10, y: 0 },
-            formatYLabel: formatYLabel,
-            tickCount: { x: 4, y: 6 },
+            labelOffset: 10,
+            tickCount: 5,
             lineWidth: 0,
           }}
+          yAxis={[
+            {
+              font,
+              labelColor: 'rgba(255,255,255, 0.8)',
+              formatYLabel: formatYLabel,
+              tickCount: 6,
+              lineWidth: 0,
+            },
+          ]}
           frame={{ lineWidth: 0 }}
         >
           {renderChart}
