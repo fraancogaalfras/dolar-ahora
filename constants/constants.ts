@@ -82,7 +82,7 @@ export const DOLLAR_DESCRIPTIONS: Record<TCasa, string[]> = {
   ],
   bolsa: ['Se obtiene comprando bonos en pesos y vendiéndolos en dólares dentro del mercado local.', 'Es legal y no requiere autorización del BCRA.'],
   contadoconliqui: [
-    'Es un tipo de cambio legal que permite comprar dólares en el exterior mediante la compra y venta de bonos o acciones entre mercados locales e internacionales.',
+    'Es un tipo de cambio legal que permite comprar dólares en el exterior mediante la compra y venta de bonos o acciones.',
     'Es usado por empresas e inversores para girar divisas al extranjero.',
   ],
   mayorista: ['Es el dólar que se negocia en el mercado interbancario bajo regulación del BCRA.', 'Se usa para operaciones comerciales y pagos de importaciones.'],

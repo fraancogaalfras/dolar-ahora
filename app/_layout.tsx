@@ -1,7 +1,6 @@
 import { BACKGROUND_COLOR } from '@/constants/constants';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DollarProvider } from '@/context/DollarContext';
@@ -22,11 +21,10 @@ export default function RootLayout() {
         paddingRight: insets.right,
       }}
     >
-      <StatusBar backgroundColor={BACKGROUND_COLOR} translucent={true} />
       <QueryClientProvider client={queryClient}>
         <Try catch={ErrorPage}>
           <DollarProvider>
-            <Stack screenOptions={{ headerShown: false, presentation: 'card' }}>
+            <Stack screenOptions={{ headerShown: false, statusBarBackgroundColor: BACKGROUND_COLOR, statusBarTranslucent: true }}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen name="detail/[dollar]" />
             </Stack>

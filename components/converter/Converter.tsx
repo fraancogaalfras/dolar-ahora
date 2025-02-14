@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   headContainer: {
-    marginTop: 30,
+    marginTop: 50,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',

@@ -37,8 +37,8 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
       ({ points, chartBounds }: { points: any; chartBounds: any }) =>
         (
           <>
-            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} />
-            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} />
+            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: "timing", duration: 0 }} />
+            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} animate={{ type: "timing", duration: 0 }} />
             <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
           </>
         ),
@@ -58,10 +58,9 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
           axisOptions={{
             labelColor: 'rgba(255,255,255, 0.8)',
             font: font,
-            axisSide: { y: 'left', x: 'bottom' },
             labelOffset: { x: 10, y: 0 },
             formatYLabel: formatYLabel,
-            tickCount: { x: 4, y: 5 },
+            tickCount: { x: 4, y: 6 },
             lineWidth: 0,
           }}
           frame={{ lineWidth: 0 }}
