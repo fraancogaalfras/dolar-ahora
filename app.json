@@ -16,6 +16,9 @@
       "package": "com.fraancogaalfras.dolarahora",
       "icon": "./assets/images/icon.png"
     },
+    "androidStatusBar": {
+      "translucent": "true"
+    },
     "androidNavigationBar": {
       "backgroundColor": "#08090e"
     },

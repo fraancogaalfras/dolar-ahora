@@ -4,13 +4,16 @@ import DollarPage from '@/views/DollarPage';
 import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik, Rubik_500Medium } from '@expo-google-fonts/rubik';
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
+import * as SystemUI from 'expo-system-ui';
+import { BACKGROUND_COLOR } from '@/constants/constants';
 
 SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
-  duration: 1200,
   fade: true,
 });
+
+SystemUI.setBackgroundColorAsync(BACKGROUND_COLOR);
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -41,10 +44,10 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <MainWrapper>
+    <MainWrapper>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <DollarPage />
-      </MainWrapper>
-    </View>
+      </View>
+    </MainWrapper>
   );
 }
