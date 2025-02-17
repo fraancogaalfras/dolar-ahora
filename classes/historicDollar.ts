@@ -75,14 +75,14 @@ export class HistoricDollar {
 
   private _filterSixMonth() {
     const daysInSixMonths = 6 * 31;
-    const interval = 30;
+    const interval = 10;
 
     this._filterData(daysInSixMonths, interval);
   }
 
   private _filterOneYear() {
     const daysInOneYear = 365;
-    const interval = 10;
+    const interval = 5;
 
     this._filterData(daysInOneYear, interval);
   }

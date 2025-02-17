@@ -3,7 +3,9 @@ import { HistoricDollar } from '@/classes/historicDollar';
 import Variation from '@/components/dolar/Variation';
 import { COLOURS, TRANSLATE_HOUSE } from '@/constants/constants';
 import { TCasa } from '@/types/TCasa';
+import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
+import { useChartPressState } from 'victory-native';
 
 export default function DetailHeader({ dollar, data }: { dollar: TCasa; data: HistoricDollar }) {
   const variation = data.getVariation();

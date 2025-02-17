@@ -1,6 +1,7 @@
-import { AppState, Platform, RefreshControl, SectionList, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { AppState, Platform, RefreshControl, SectionList, StyleSheet, View } from 'react-native';
 import Card from '@/components/dolar/Card';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
 import { COLOURS, MARGIN_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
@@ -9,12 +10,18 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
 import LastUpdate from '@/components/header/LastUpdate';
 
-export default function DollarPage() {
+export default function DollarPage({ appIsReady }: { appIsReady: boolean }) {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
   const { data, isError, error, retryFn, refetchFn } = useDollarContext();
+
+  useEffect(() => {
+    if (appIsReady) {
+      SplashScreen.hide();
+    }
+  }, [appIsReady]);
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {

@@ -2,7 +2,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import MainWrapper from '@/components/main/MainWrapper';
 import DollarPage from '@/views/DollarPage';
 import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik, Rubik_500Medium } from '@expo-google-fonts/rubik';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as SystemUI from 'expo-system-ui';
 import { BACKGROUND_COLOR } from '@/constants/constants';
@@ -29,12 +29,6 @@ export default function App() {
     }
   }, [loaded, error]);
 
-  const onLayoutRootView = useCallback(() => {
-    if (appIsReady) {
-      SplashScreen.hide();
-    }
-  }, [appIsReady]);
-
   if (!appIsReady) {
     return null;
   }
@@ -45,8 +39,8 @@ export default function App() {
 
   return (
     <MainWrapper>
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-        <DollarPage />
+      <View style={{ flex: 1 }}>
+        <DollarPage appIsReady={appIsReady} />
       </View>
     </MainWrapper>
   );

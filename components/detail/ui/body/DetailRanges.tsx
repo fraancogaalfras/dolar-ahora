@@ -12,7 +12,7 @@ export default function DetailRanges({ rangeSelected }: { rangeSelected: TRange 
     <View style={styles.container}>
       {Object.keys(RANGES).map((range) => (
         <TouchableOpacity onPress={() => handleOnPress(range as TRange)} style={[styles.rangeTextContainer, range === rangeSelected && { borderColor: '#fff' }]} key={range}>
-          <Text style={styles.rangeText}>{RANGES[range as TRange]}</Text>
+          <Text style={[styles.rangeText, range === rangeSelected && { fontFamily: 'Rubik_500Medium' }]}>{RANGES[range as TRange]}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -22,10 +22,13 @@ export default function DetailRanges({ rangeSelected }: { rangeSelected: TRange 
 const styles = StyleSheet.create({
   container: {
     marginLeft: 2,
-    marginTop: 15,
+    paddingVertical: 10,
     flexDirection: 'row',
     gap: 15,
     paddingHorizontal: 20,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgb(65, 70, 73)',
   },
   rangeTextContainer: {
     paddingVertical: 5,

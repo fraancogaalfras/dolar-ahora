@@ -8,13 +8,12 @@ export const DOLLAR_API = 'https://dolarapi.com/v1/dolares';
 export const HISTORIC_DOLLAR_API = 'https://api.argentinadatos.com/v1/cotizaciones/dolares';
 
 export const TAB_COLOR = 'rgba(9,9,11,1)';
-export const BACKGROUND_COLOR = 'rgba(8, 9, 14, 1)';
+export const BACKGROUND_COLOR = 'rgb(12, 13, 20)';
 export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 
 export const CARD_BACKGROUND_COLOR = 'rgb(30, 35, 46)';
-export const CARD_SHADOW_COLOR = 'rgba(47, 51, 54, 0.4)';
-export const CARD_BOX_SHADOW = '0px 0px 10px ' + CARD_SHADOW_COLOR;
+export const CARD_BOX_SHADOW = '0px 4px 12px rgba(24, 24, 24, 0.15)';
 export const CARD_BORDER_RADIUS = 20;
 export const CARD_WIDTH = 325;
 export const CARD_HEIGHT = 95;
@@ -77,7 +76,7 @@ export const DOLLAR_DESCRIPTIONS: Record<TCasa, string[]> = {
   ],
 
   blue: [
-    'Es el tipo de cambio informal que se negocia en el mercado paralelo, sin intervención del BCRA',
+    'Es el tipo de cambio informal que se negocia en el mercado paralelo, sin intervención del BCRA.',
     'Suele ser más alto que el oficial debido a la demanda de dólares fuera del sistema regulado.',
   ],
   bolsa: ['Se obtiene comprando bonos en pesos y vendiéndolos en dólares dentro del mercado local.', 'Es legal y no requiere autorización del BCRA.'],
