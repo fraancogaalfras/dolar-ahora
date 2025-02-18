@@ -1,17 +1,4 @@
-const translateMonths: Record<string, string> = {
-  Jan: 'ene',
-  Feb: 'feb',
-  Mar: 'mar',
-  Apr: 'abr',
-  May: 'may',
-  Jun: 'jun',
-  Jul: 'jul',
-  Aug: 'ago',
-  Sep: 'sep',
-  Oct: 'oct',
-  Nov: 'nov',
-  Dec: 'dic',
-};
+import { TRANSLATE_MONTHS } from '@/constants/constants';
 
 export class HandleDate {
   date: Date;
@@ -66,16 +53,16 @@ export class HandleDate {
     const day = date.slice(5, 7);
     const month = date.slice(8, 11);
 
-    return `${day} ${translateMonths[month]}`;
+    return `${day}-${TRANSLATE_MONTHS[month]}`;
   }
 
   getFormattedDateMonthYear(): string {
     const date = this.date.toUTCString();
-
+    
     const month = date.slice(8, 11);
     const year = date.slice(14, 16);
 
-    return `${translateMonths[month]} ${year}`;
+    return `${TRANSLATE_MONTHS[month]}-${year}`;
   }
 
   getFormattedDateDash(): string {

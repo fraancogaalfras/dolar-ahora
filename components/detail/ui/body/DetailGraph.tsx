@@ -1,19 +1,19 @@
 import { HistoricDollar } from '@/classes/historicDollar';
 import { TRange } from '@/types/TRange';
-import { StyleSheet, View } from 'react-native';
-import { Area, CartesianChart, Line, useChartPressState, useChartTransformState } from 'victory-native';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Area, CartesianChart, ChartPressState, Line, useChartPressState, useChartTransformState } from 'victory-native';
 import { LinearGradient, useFont, vec } from '@shopify/react-native-skia';
 import { Rubik_400Regular } from '@expo-google-fonts/rubik';
-import { COLOURS, LINE_COLOR } from '@/constants/constants';
+import { COLOURS } from '@/constants/constants';
 import { HandleDate } from '@/classes/date';
 import { Dollar } from '@/classes/dollar';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import ToolTip from './Tooltip';
-import { router } from 'expo-router';
 
 export default function DetailGraph({ data, range }: { data: HistoricDollar; range: TRange }) {
   const font = useFont(Rubik_400Regular, 13);
   const { state, isActive } = useChartPressState({ x: 0, y: { value: 0 } });
+  const { width } = useWindowDimensions();
 
   const variation = useMemo(() => data.getVariation(), [data]);
   const historicDollarData = useMemo(() => data.getData(), [data]);
@@ -32,37 +32,24 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
     [variation]
   );
 
-  const formatYLabel = useMemo(() => (label: number) => `${Dollar.formatNumber(label, 1, 1)}`, []);
-
-  // const renderChart = useMemo(
-  //   () =>
-  //     ({ points, chartBounds }: { points: any; chartBounds: any }) =>
-  //       (
-  //         <>
-  //           <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
-  //           <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
-  //           <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
-  //           {isActive ? <ToolTip x={state.x.position} y={state.y.value.position} /> : null}
-  //         </>
-  //       ),
-  //   [lineColor, areaColor]
-  // );
+  const formatYLabel = useMemo(() => (label: number) => `${Dollar.formatNumber(label, 0, 0)}`, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: width }]}>
       <CartesianChart
-        chartPressState={state as any}
+        chartPressState={state as ChartPressState<any>}
         data={chartDataset}
         xKey="label"
         yKeys={['value']}
-        padding={{ left: 15, bottom: 25 }}
-        domainPadding={{ left: 20, right: 30, top: 70, bottom: 70 }}
+        padding={{ left: 0, bottom: 25 }}
+        domainPadding={{ left: 1, right: 2, top: 70, bottom: 70 }}
         xAxis={{
           font,
           labelColor: 'rgba(255,255,255, 0.8)',
           labelOffset: 10,
           lineWidth: 0,
-          tickCount: 5,
+          tickCount: 2,
+          tickValues: [0, chartDataset.length - 1],
         }}
         yAxis={[
           {
@@ -71,18 +58,18 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
             formatYLabel: formatYLabel,
             tickCount: 6,
             lineWidth: 0,
-            axisSide: 'left',
-            labelPosition: 'outset',
+            axisSide: 'right',
+            labelPosition: 'inset',
           },
         ]}
         frame={{ lineWidth: 0 }}
       >
         {({ points, chartBounds }: { points: any; chartBounds: any }) => (
           <>
-            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
-            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} animate={{ type: 'timing', duration: 0 }} />
+            <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} connectMissingData={true} />
+            <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} />
             <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
-            {isActive ? <ToolTip x={state.x.position} y={state.y.value.position} color={lineColor} /> : null}
+            {isActive ? <ToolTip x={state.x.position} y={state.y.value.position} chartBounds={chartBounds} color={lineColor} /> : null}
           </>
         )}
       </CartesianChart>
@@ -93,7 +80,6 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
 const styles = StyleSheet.create({
   container: {
     height: 305,
-    width: '100%',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgb(65, 70, 73)',
   },

@@ -12,8 +12,8 @@ export const BACKGROUND_COLOR = 'rgb(12, 13, 20)';
 export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 
-export const CARD_BACKGROUND_COLOR = 'rgb(30, 35, 46)';
-export const CARD_BOX_SHADOW = '0px 4px 12px rgba(24, 24, 24, 0.15)';
+export const CARD_BACKGROUND_COLOR = 'rgb(34, 40, 51)';
+export const CARD_BOX_SHADOW = '0px 4px 12px rgba(32, 32, 32, 0.5)';
 export const CARD_BORDER_RADIUS = 20;
 export const CARD_WIDTH = 325;
 export const CARD_HEIGHT = 95;
@@ -90,4 +90,19 @@ export const DOLLAR_DESCRIPTIONS: Record<TCasa, string[]> = {
     'Suele estar en línea con el blue o el CCL, y permite acceder a dólares sin restricciones oficiales.',
   ],
   tarjeta: ['Es el tipo de cambio que se aplica a compras en dólares con tarjetas de crédito o débito en el exterior.', 'Se calcula sumando impuestos al dólar oficial (Percepción de Ganancias).'],
+};
+
+export const TRANSLATE_MONTHS: Record<string, string> = {
+  Jan: '01',
+  Feb: '02',
+  Mar: '03',
+  Apr: '04',
+  May: '05',
+  Jun: '06',
+  Jul: '07',
+  Aug: '08',
+  Sep: '09',
+  Oct: '10',
+  Nov: '11',
+  Dec: '12',
 };
