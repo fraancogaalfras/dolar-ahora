@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     gap: 15,
     paddingHorizontal: 20,
-    paddingTop: 8,
+    paddingTop: 10,
   },
   title: {
     color: '#fff',

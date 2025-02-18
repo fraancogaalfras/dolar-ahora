@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import DetailHeader from './ui/header/DetailHeader';
 import DetailFooter from './ui/footer/DetailFooter';
 import { handleDetailData } from '@/services/getDollarDetail';
@@ -6,14 +6,16 @@ import { TRange } from '@/types/TRange';
 import { IHistoricDollar } from '@/interfaces/IHistoricDollar';
 import { TCasa } from '@/types/TCasa';
 import DetailBody from './ui/body/DetailBody';
+import { useChartPressState } from 'victory-native';
 
 export default function DetailComponent({ data, dollar, range }: { data: IHistoricDollar[]; dollar: TCasa; range: TRange }) {
   const historicDollarData = handleDetailData(data, range);
+  const { state: chartPressState, isActive: chartPressIsActive } = useChartPressState({ x: 0, y: { value: 0 } });
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <DetailHeader dollar={dollar} data={historicDollarData} />
-      <DetailBody data={historicDollarData} range={range} />
+      <DetailHeader dollar={dollar} data={historicDollarData} chartPressState={chartPressState} chartPressIsActive={chartPressIsActive} />
+      <DetailBody data={historicDollarData} range={range} chartPressState={chartPressState} chartPressIsActive={chartPressIsActive} />
       <DetailFooter dollar={dollar} />
     </ScrollView>
   );

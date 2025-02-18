@@ -10,9 +10,23 @@ import { Dollar } from '@/classes/dollar';
 import { useMemo } from 'react';
 import ToolTip from './Tooltip';
 
-export default function DetailGraph({ data, range }: { data: HistoricDollar; range: TRange }) {
+export default function DetailGraph({
+  data,
+  range,
+  chartPressState,
+  chartPressIsActive,
+}: {
+  data: HistoricDollar;
+  range: TRange;
+  chartPressState: ChartPressState<{
+    x: number;
+    y: {
+      value: number;
+    };
+  }>;
+  chartPressIsActive: boolean;
+}) {
   const font = useFont(Rubik_400Regular, 13);
-  const { state, isActive } = useChartPressState({ x: 0, y: { value: 0 } });
   const { width } = useWindowDimensions();
 
   const variation = useMemo(() => data.getVariation(), [data]);
@@ -37,7 +51,7 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
   return (
     <View style={[styles.container, { width: width }]}>
       <CartesianChart
-        chartPressState={state as ChartPressState<any>}
+        chartPressState={chartPressState as ChartPressState<any>}
         data={chartDataset}
         xKey="label"
         yKeys={['value']}
@@ -69,7 +83,7 @@ export default function DetailGraph({ data, range }: { data: HistoricDollar; ran
             <Line points={points.value} color={lineColor} strokeWidth={3} curveType={'cardinal'} connectMissingData={true} />
             <Area points={points.value} y0={chartBounds.bottom} curveType={'cardinal'} />
             <LinearGradient start={vec(chartBounds.bottom, chartBounds.top)} end={vec(chartBounds.bottom, chartBounds.bottom)} colors={areaColor} />
-            {isActive ? <ToolTip x={state.x.position} y={state.y.value.position} chartBounds={chartBounds} color={lineColor} /> : null}
+            {chartPressIsActive ? <ToolTip x={chartPressState.x.position} y={chartPressState.y.value.position} chartBounds={chartBounds} color={lineColor} /> : null}
           </>
         )}
       </CartesianChart>
