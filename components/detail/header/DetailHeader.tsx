@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   priceInfoText: {
-    color: COLOURS.grey,
+    color: '#fff',
     fontFamily: 'Rubik',
     fontSize: 21,
   },
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     color: COLOURS.grey,
     fontFamily: 'Rubik',
     fontSize: 14,
-    marginTop: 3,
+    marginTop: 4,
   },
   animatedText: {
     padding: 0,

@@ -48,7 +48,7 @@ export default function DollarPage({ appIsReady }: { appIsReady: boolean }) {
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card nombre={item.nombre} casa={item.casa} venta={item.venta} variacion={item.variacion} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.nombre, [data]);
-  const getItemLayout = useCallback((_: any, index: number) => ({ length: 95, offset: (95 + 30) * index, index }), []);
+  // const getItemLayout = useCallback((_: any, index: number) => ({ length: 95, offset: (95 + 30) * index, index }), []);
 
   return data ? (
     <View style={styles.wrapper}>
@@ -56,7 +56,7 @@ export default function DollarPage({ appIsReady }: { appIsReady: boolean }) {
         sections={[{ data: data as IDollar[] }]}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
-        getItemLayout={getItemLayout}
+        // getItemLayout={getItemLayout}
         contentContainerStyle={styles.contentContainerStyle}
         showsVerticalScrollIndicator={false}
         initialNumToRender={7}
