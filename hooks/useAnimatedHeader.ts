@@ -8,6 +8,7 @@ export const useAnimatedHeader = ({
   minPriceData,
   maxPrice,
   variationData,
+  minDate,
 }: {
   minPriceData: number;
   maxPrice: number;
@@ -19,8 +20,9 @@ export const useAnimatedHeader = ({
     };
   }>;
   chartPressIsActive: boolean;
+  minDate: string;
 }) => {
-  const date = useDerivedValue(() => `${chartPressState.x.value.value}`);
+  const date = useDerivedValue(() => (chartPressIsActive ? `${chartPressState.x.value.value}` : minDate));
 
   const minPrice = useDerivedValue(() =>
     chartPressIsActive

@@ -24,7 +24,7 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <Try catch={ErrorPage}>
           <DollarProvider>
-            <Stack screenOptions={{ headerShown: false, presentation: 'transparentModal', animation: 'flip'}}>
+            <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen name="detail/[dollar]" />
             </Stack>

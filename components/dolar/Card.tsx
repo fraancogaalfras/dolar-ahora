@@ -12,7 +12,7 @@ const Card = ({ nombre = '', casa = '', venta = 0, variacion = 0 }) => {
       pathname: '/detail/[dollar]',
       params: { dollar: casa },
     });
-  }, []);
+  }, [nombre, casa]);
 
   return (
     <TouchableOpacity key={nombre} style={styles.card} onPress={handleOnPress}>

@@ -1,3 +1,4 @@
+import { HandleDate } from '@/classes/date';
 import { Dollar } from '@/classes/dollar';
 import { HistoricDollar } from '@/classes/historicDollar';
 import { AnimatedText } from '@/components/animated/AnimatedText';
@@ -27,6 +28,8 @@ export default function DetailHeader({
   const historicDollarData = data.getData();
   const minPriceData = historicDollarData[0].venta;
   const maxPrice = historicDollarData[historicDollarData.length - 1].venta;
+  const minDate = new HandleDate(new Date(historicDollarData[0].fecha)).getFormattedDateDash();
+  const maxDate = new HandleDate(new Date(historicDollarData[historicDollarData.length - 1].fecha)).getFormattedDateDash();
 
   const { minPrice, diffPrice, date, variation, animatedStyles } = useAnimatedHeader({
     chartPressState: chartPressState,
@@ -34,15 +37,16 @@ export default function DetailHeader({
     maxPrice: maxPrice,
     minPriceData: minPriceData,
     variationData: variationData,
+    minDate: minDate,
   });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dólar {TRANSLATE_HOUSE[dollar]}</Text>
+      <Text style={styles.title} >Dólar {TRANSLATE_HOUSE[dollar]}</Text>
       <View style={styles.pricesInfoContainer}>
         <View style={styles.historicPricesContainer}>
           <AnimatedText style={[styles.priceInfoText, styles.animatedText]} text={minPrice} />
-          <Text style={[styles.priceInfoText]}>-</Text>
+          <Text style={styles.priceInfoText}>-</Text>
           <Text style={styles.priceInfoText}>${Dollar.formatNumber(maxPrice)}</Text>
         </View>
         <View style={styles.variationContainer}>
@@ -52,6 +56,8 @@ export default function DetailHeader({
       </View>
       <View style={styles.dateInfoContainer}>
         <AnimatedText style={[styles.dateInfoText, styles.animatedText]} text={date} />
+        <Text style={styles.dateInfoText}>-</Text>
+        <Text style={styles.dateInfoText}>{maxDate}</Text>
       </View>
     </View>
   );
@@ -84,7 +90,7 @@ const styles = StyleSheet.create({
   variationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 8,
   },
   variationAbsoluteContainer: {
     flexDirection: 'row',
@@ -92,14 +98,18 @@ const styles = StyleSheet.create({
   },
   variationText: {
     fontFamily: 'Rubik_500Medium',
-    fontSize: 15,
+    fontSize: 16,
   },
-  dateInfoContainer: {},
+  dateInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
   dateInfoText: {
     color: COLOURS.grey,
     fontFamily: 'Rubik',
-    fontSize: 15,
-    marginTop: 5,
+    fontSize: 14,
+    marginTop: 3,
   },
   animatedText: {
     padding: 0,

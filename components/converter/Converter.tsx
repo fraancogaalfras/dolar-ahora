@@ -1,14 +1,15 @@
-import { IconArrowRight, IconReverse } from '@/assets/icons/Icons';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
-import { TCurrency } from '@/types/TCurrency';
-import { useCallback, useMemo, useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import WheelPicker from 'react-native-wheely';
+import { useCallback, useState } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
+import ConverterHeader from './header/ConverterHeader';
+import ConverterBody from './body/ConverterBody';
+import ConverterFooter from './footer/ConverterFooter';
 
 export default function Converter({ data }: { data: IDollar[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isReverse, setIsReverse] = useState(false);
   const [arsCurrency, setArsCurrency] = useState<ICurrency>({
     amount: 1000,
     name: 'ARS',
@@ -18,7 +19,6 @@ export default function Converter({ data }: { data: IDollar[] }) {
     name: data[selectedIndex].nombre,
   });
   const [exchangeRate, setExchangeRate] = useState(1 / data[selectedIndex].venta);
-  const [isReverse, setIsReverse] = useState(false);
 
   const handleArsChange = useCallback(
     (value: string) => {
@@ -89,68 +89,11 @@ export default function Converter({ data }: { data: IDollar[] }) {
     setIsReverse((prev) => !prev);
   }, []);
 
-  const wheelOptions = useMemo(() => {
-    return data.map((dollar) => dollar.nombre as TCurrency);
-  }, [data]);
-
-  const staticWheelProps = useMemo(
-    () => ({
-      itemStyle: { backgroundColor: 'rgba(0,0,0,0)', padding: 0 },
-      itemTextStyle: { fontSize: 25, color: '#fff', fontFamily: 'Rubik_500Medium', padding: 0, margin: 0 },
-      containerStyle: { padding: 0, margin: 0 },
-      selectedIndicatorStyle: { backgroundColor: 'rgba(0,0,0,0)', borderRadius: 0, padding: 0, margin: 0 },
-      flatListProps: { nestedScrollEnabled: true },
-      options: wheelOptions,
-    }),
-    [wheelOptions]
-  );
-
-  const emptyArray = useMemo(() => [], []);
-
   return (
     <ScrollView contentContainerStyle={styles.scrollViewWrapper} showsVerticalScrollIndicator={true}>
-      <View style={styles.headContainer}>
-        <Text style={styles.title}>{arsCurrency.name}</Text>
-        <View style={[styles.arrowRight, isReverse ? { transform: [{ rotate: '180deg' }] } : undefined]}>
-          <IconArrowRight />
-        </View>
-        <FlatList
-          scrollEnabled={false}
-          horizontal
-          data={emptyArray}
-          renderItem={null}
-          ListEmptyComponent={<WheelPicker {...staticWheelProps} onChange={handleSelectorChange} selectedIndex={selectedIndex} />}
-          style={{ flexGrow: 0 }}
-        />
-      </View>
-      <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            inputMode="numeric"
-            value={(isReverse ? usdCurrency.amount : arsCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-            onChangeText={isReverse ? handleUsdChange : handleArsChange}
-          />
-          <Text style={styles.currencyInsideInput}>{isReverse ? `${usdCurrency.name}` : `${arsCurrency.name}`}</Text>
-        </View>
-        <TouchableOpacity accessible={true} accessibilityLabel={'Cambiar orden de conversion'} onPress={handleReverse}>
-          <IconReverse />
-        </TouchableOpacity>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            inputMode="numeric"
-            value={(isReverse ? arsCurrency.amount : usdCurrency.amount).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-            onChangeText={isReverse ? handleArsChange : handleUsdChange}
-          />
-          <Text style={styles.currencyInsideInput}>{isReverse ? `${arsCurrency.name}` : `${usdCurrency.name}`}</Text>
-        </View>
-        <View style={styles.conversionContainer}>
-          <Text style={styles.textConversion}>
-            1 USD {usdCurrency.name} = {data[selectedIndex].venta.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ARS
-          </Text>
-        </View>
-      </View>
+      <ConverterHeader data={data} arsCurrencyName={arsCurrency.name} isReverse={isReverse} selectedIndex={selectedIndex} handleSelectorChange={handleSelectorChange} />
+      <ConverterBody arsCurrency={arsCurrency} usdCurrency={usdCurrency} isReverse={isReverse} handleArsChange={handleArsChange} handleUsdChange={handleUsdChange} handleReverse={handleReverse} />
+      <ConverterFooter data={data} selectedIndex={selectedIndex} usdCurrencyName={usdCurrency.name} />
     </ScrollView>
   );
 }

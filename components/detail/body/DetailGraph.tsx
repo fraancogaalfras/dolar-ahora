@@ -35,7 +35,7 @@ export default function DetailGraph({
   const chartDataset = useMemo(() => {
     return historicDollarData.map((day) => ({
       value: day.venta,
-      label: range === '1y' || range === '5y' ? new HandleDate(new Date(day.fecha)).getFormattedDateMonthYear() : new HandleDate(new Date(day.fecha)).getFormattedDateDayMonth(),
+      label: new HandleDate(new Date(day.fecha)).getFormattedDateDash(),
     }));
   }, [historicDollarData, range]);
 
@@ -46,7 +46,7 @@ export default function DetailGraph({
     [variation]
   );
 
-  const formatYLabel = useMemo(() => (label: number) => `${Dollar.formatNumber(label, 0, 0)}`, []);
+  const formatYLabel = useMemo(() => (label: number) => `$${Dollar.formatNumber(label, 0, 0)}`, []);
 
   return (
     <View style={[styles.container, { width: width }]}>
