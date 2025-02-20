@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   dateInfoText: {
     color: COLOURS.grey,
-    fontFamily: 'Rubik',
+    fontFamily: 'Rubik_500Medium',
     fontSize: 14,
     marginTop: 4,
   },

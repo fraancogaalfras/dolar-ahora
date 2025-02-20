@@ -4,7 +4,7 @@
     "name": "Dólar Ahora",
     "description": "'Dólar Ahora' te permite conocer al instante el valor de los distintos dólares financieros en Argentina. Además, cuenta con un convertidor integrado para calcular fácilmente montos en distintas cotizaciones. Simple, rápida y siempre actualizada.",
     "slug": "dolar-ahora",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "platforms": ["android", "web"],
     "scheme": "dolarahora",
     "icon": "./assets/images/icon.png",
@@ -17,7 +17,7 @@
       "icon": "./assets/images/icon.png"
     },
     "androidStatusBar": {
-      "translucent": "true"
+      "backgroundColor": "#0c0d14"
     },
     "androidNavigationBar": {
       "backgroundColor": "#0c0d14"

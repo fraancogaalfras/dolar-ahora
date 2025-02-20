@@ -5,15 +5,10 @@ import { useFonts, Rubik_300Light as Rubik_Light, Rubik_400Regular as Rubik, Rub
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as SystemUI from 'expo-system-ui';
-import { BACKGROUND_COLOR } from '@/constants/constants';
 
 SplashScreen.preventAutoHideAsync();
 
-SplashScreen.setOptions({
-  fade: true,
-});
-
-SystemUI.setBackgroundColorAsync(BACKGROUND_COLOR);
+SystemUI.setBackgroundColorAsync('rgba(0,0,0,0)');
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);

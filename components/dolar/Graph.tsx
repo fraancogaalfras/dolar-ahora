@@ -14,7 +14,7 @@ export default function Graph({ variation }: { variation: number }) {
   const lineColor = useMemo(() => (variation > 0 ? COLOURS.positive : variation == 0 ? COLOURS.equal : COLOURS.negative), [variation]);
 
   return (
-    <View style={{ height: 50 }}>
+    <View style={{ height: 50 }} pointerEvents={'none'}>
       <CartesianChart
         data={chartDataset}
         xKey="label"
