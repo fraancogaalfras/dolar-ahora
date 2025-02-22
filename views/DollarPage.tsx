@@ -1,5 +1,4 @@
-import * as SplashScreen from 'expo-splash-screen';
-import { AppState, Platform, RefreshControl, SectionList, StyleSheet, View } from 'react-native';
+import { AppState, FlatList, Platform, RefreshControl, SectionList, StyleSheet, View } from 'react-native';
 import Card from '@/components/dolar/Card';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Loading from '@/components/loading/Loading';
@@ -10,21 +9,12 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
 import LastUpdate from '@/components/header/LastUpdate';
 
-export default function DollarPage({ appIsReady }: { appIsReady: boolean }) {
+export default function DollarPage() {
   const { refreshing = false } = useLocalSearchParams<{ refreshing: string }>();
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
   const { data, isError, error, retryFn, refetchFn } = useDollarContext();
-
-  useEffect(() => {
-    const hideSplash = async () => {
-      await SplashScreen.hideAsync();
-    };
-    if (appIsReady) {
-      hideSplash();
-    }
-  }, [appIsReady]);
 
   useEffect(() => {
     const appStateListener = AppState.addEventListener('change', (changedState) => {
@@ -55,8 +45,8 @@ export default function DollarPage({ appIsReady }: { appIsReady: boolean }) {
 
   return data ? (
     <View style={styles.wrapper}>
-      <SectionList
-        sections={[{ data: data as IDollar[] }]}
+      <FlatList
+        data={data}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         getItemLayout={getItemLayout}

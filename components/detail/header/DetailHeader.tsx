@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   dateInfoText: {
-    color: COLOURS.grey,
-    fontFamily: 'Rubik_500Medium',
+    color: 'rgba(255,255,255,0.8)',
+    fontFamily: 'Rubik',
     fontSize: 14,
     marginTop: 4,
   },

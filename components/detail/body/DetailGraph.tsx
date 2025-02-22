@@ -3,7 +3,7 @@ import { TRange } from '@/types/TRange';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Area, CartesianChart, ChartPressState, Line, useChartPressState, useChartTransformState } from 'victory-native';
 import { LinearGradient, useFont, vec } from '@shopify/react-native-skia';
-import { Rubik_400Regular } from '@expo-google-fonts/rubik';
+import { Rubik_500Medium } from '@expo-google-fonts/rubik';
 import { COLOURS } from '@/constants/constants';
 import { HandleDate } from '@/classes/date';
 import { Dollar } from '@/classes/dollar';
@@ -26,7 +26,7 @@ export default function DetailGraph({
   }>;
   chartPressIsActive: boolean;
 }) {
-  const font = useFont(Rubik_400Regular, 13);
+  const font = useFont(Rubik_500Medium, 13);
   const { width } = useWindowDimensions();
 
   const variation = useMemo(() => data.getVariation(), [data]);
