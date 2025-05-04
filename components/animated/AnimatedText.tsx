@@ -13,7 +13,6 @@ export function AnimatedText({ text, ...rest }: AnimatedTextProps) {
   const animProps = useAnimatedProps(() => {
     return {
       text: text.value,
-      // text: text.value,
     };
   });
 

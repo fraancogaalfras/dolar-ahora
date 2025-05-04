@@ -1,8 +1,10 @@
+import { MARGIN_TAB_BOTTOM } from '@/constants/constants';
 import { IError } from '@/interfaces/IError';
 import { router } from 'expo-router';
+import { memo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function ErrorPage({ error, customError, retry }: IError) {
+function ErrorPage({ error, customError, retry }: IError) {
   const handleCancel = () => {
     router.navigate('/');
   };
@@ -30,7 +32,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 25,
-    gap: 20,
+    gap: 10,
+    marginBottom: MARGIN_TAB_BOTTOM,
   },
   errorContainer: {
     alignItems: 'center',
@@ -49,3 +52,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default memo(ErrorPage);

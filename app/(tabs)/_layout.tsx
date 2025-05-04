@@ -15,7 +15,7 @@ export default function TabLayout() {
           justifyContent: 'space-between',
           paddingHorizontal: 50,
           borderColor: LINE_COLOR,
-          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopWidth: 1,
         },
         tabBarIconStyle: {
           marginTop: 15,

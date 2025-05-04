@@ -1,13 +1,13 @@
 import { HistoricDollar } from '@/classes/historicDollar';
 import { TRange } from '@/types/TRange';
-import React from 'react';
+import React, { memo } from 'react';
 import DetailGraph from './DetailGraph';
 import DetailRanges from './DetailRanges';
 import { StyleSheet, View } from 'react-native';
-import { CARD_BOX_SHADOW } from '@/constants/constants';
+import { CARD_BACKGROUND_COLOR } from '@/constants/constants';
 import { ChartPressState } from 'victory-native';
 
-export default function DetailBody({
+function DetailBody({
   data,
   range,
   chartPressState,
@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     gap: 0,
-    backgroundColor: 'rgb(9, 10, 15)',
-    boxShadow: CARD_BOX_SHADOW,
+    backgroundColor: CARD_BACKGROUND_COLOR,
+    boxShadow: '0px 2px 20px rgba(41, 41, 41, 0.2)',
   },
 });
+
+export default memo(DetailBody);

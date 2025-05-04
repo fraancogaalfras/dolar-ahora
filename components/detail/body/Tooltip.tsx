@@ -1,7 +1,8 @@
 import { Circle, Group, Line, vec } from '@shopify/react-native-skia';
+import { memo } from 'react';
 import { SharedValue, useDerivedValue } from 'react-native-reanimated';
 
-export default function ToolTip({ x, y, color, chartBounds }: { x: SharedValue<number>; y: SharedValue<number>; color: string; chartBounds: any }) {
+function ToolTip({ x, y, color, chartBounds }: { x: SharedValue<number>; y: SharedValue<number>; color: string; chartBounds: any }) {
   const p1 = useDerivedValue(() => vec(x.value, 0));
   const p2 = useDerivedValue(() => vec(x.value, chartBounds.bottom));
 
@@ -12,3 +13,5 @@ export default function ToolTip({ x, y, color, chartBounds }: { x: SharedValue<n
     </Group>
   );
 }
+
+export default memo(ToolTip);

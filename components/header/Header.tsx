@@ -15,7 +15,7 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: 1,
     borderBottomColor: LINE_COLOR,
     backgroundColor: BACKGROUND_COLOR,
     height: 70,

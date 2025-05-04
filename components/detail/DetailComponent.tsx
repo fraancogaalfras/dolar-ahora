@@ -7,13 +7,14 @@ import { IHistoricDollar } from '@/interfaces/IHistoricDollar';
 import { TCasa } from '@/types/TCasa';
 import DetailBody from './body/DetailBody';
 import { useChartPressState } from 'victory-native';
+import { memo } from 'react';
 
-export default function DetailComponent({ data, dollar, range }: { data: IHistoricDollar[]; dollar: TCasa; range: TRange }) {
+function DetailComponent({ data, dollar, range }: { data: IHistoricDollar[]; dollar: TCasa; range: TRange }) {
   const historicDollarData = handleDetailData(data, range);
   const { state: chartPressState, isActive: chartPressIsActive } = useChartPressState({ x: 0, y: { value: 0 } });
 
   return (
-    <ScrollView contentContainerStyle={styles.container} scrollEnabled={!chartPressIsActive}>
+    <ScrollView contentContainerStyle={styles.container} scrollEnabled={!chartPressIsActive} showsVerticalScrollIndicator={false}>
       <DetailHeader dollar={dollar} data={historicDollarData} chartPressState={chartPressState} chartPressIsActive={chartPressIsActive} />
       <DetailBody data={historicDollarData} range={range} chartPressState={chartPressState} chartPressIsActive={chartPressIsActive} />
       <DetailFooter dollar={dollar} />
@@ -28,3 +29,5 @@ const styles = StyleSheet.create({
     gap: 20,
   },
 });
+
+export default memo(DetailComponent);

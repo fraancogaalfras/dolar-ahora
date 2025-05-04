@@ -1,9 +1,9 @@
 import { IconCoffee, IconGithub } from '@/assets/icons/Icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as Linking from 'expo-linking';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 
-export default function Links() {
+function Links() {
   const handleCafecitoPress = useCallback(() => {
     Linking.openURL('https://cafecito.app/fraancogaalfras');
   }, []);
@@ -32,3 +32,5 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 });
+
+export default memo(Links);

@@ -1,13 +1,13 @@
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
 import { IDollar } from '@/interfaces/IDollar';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import ConverterHeader from './header/ConverterHeader';
 import ConverterBody from './body/ConverterBody';
 import ConverterFooter from './footer/ConverterFooter';
 
-export default function Converter({ data }: { data: IDollar[] }) {
+function Converter({ data }: { data: IDollar[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isReverse, setIsReverse] = useState(false);
   const [arsCurrency, setArsCurrency] = useState<ICurrency>({
@@ -90,7 +90,7 @@ export default function Converter({ data }: { data: IDollar[] }) {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewWrapper} showsVerticalScrollIndicator={true}>
+    <ScrollView contentContainerStyle={styles.scrollViewWrapper} showsVerticalScrollIndicator={true} keyboardShouldPersistTaps="always">
       <ConverterHeader data={data} arsCurrencyName={arsCurrency.name} isReverse={isReverse} selectedIndex={selectedIndex} handleSelectorChange={handleSelectorChange} />
       <ConverterBody arsCurrency={arsCurrency} usdCurrency={usdCurrency} isReverse={isReverse} handleArsChange={handleArsChange} handleUsdChange={handleUsdChange} handleReverse={handleReverse} />
       <ConverterFooter data={data} selectedIndex={selectedIndex} usdCurrencyName={usdCurrency.name} />
@@ -162,3 +162,5 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 });
+
+export default memo(Converter);

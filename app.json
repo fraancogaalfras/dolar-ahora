@@ -9,8 +9,8 @@
     "scheme": "dolarahora",
     "icon": "./assets/images/icon.png",
     "orientation": "portrait",
-    "primaryColor": "#0c0d14",
-    "backgroundColor": "#0c0d14",
+    "primaryColor": "#1f2630",
+    "backgroundColor": "#1f2630",
     "userInterfaceStyle": "dark",
     "android": {
       "package": "com.fraancogaalfras.dolarahora",
@@ -18,10 +18,10 @@
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.fraancogaalfras.dolarahora&hl=es_419"
     },
     "androidStatusBar": {
-      "backgroundColor": "#0c0d14"
+      "backgroundColor": "#1f2630"
     },
     "androidNavigationBar": {
-      "backgroundColor": "#0c0d14"
+      "backgroundColor": "#1f2630"
     },
     "plugins": [
       ["expo-router"],

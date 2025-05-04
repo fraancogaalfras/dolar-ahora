@@ -5,10 +5,11 @@ import { AnimatedText } from '@/components/animated/AnimatedText';
 import { COLOURS, TRANSLATE_HOUSE } from '@/constants/constants';
 import { useAnimatedHeader } from '@/hooks/useAnimatedHeader';
 import { TCasa } from '@/types/TCasa';
+import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ChartPressState } from 'victory-native';
 
-export default function DetailHeader({
+function DetailHeader({
   dollar,
   data,
   chartPressState,
@@ -42,7 +43,7 @@ export default function DetailHeader({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title} >Dólar {TRANSLATE_HOUSE[dollar]}</Text>
+      <Text style={styles.title}>Dólar {TRANSLATE_HOUSE[dollar]}</Text>
       <View style={styles.pricesInfoContainer}>
         <View style={styles.historicPricesContainer}>
           <AnimatedText style={[styles.priceInfoText, styles.animatedText]} text={minPrice} />
@@ -65,7 +66,7 @@ export default function DetailHeader({
 const styles = StyleSheet.create({
   container: {
     gap: 5,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
   },
   title: {
     color: '#fff',
@@ -116,3 +117,5 @@ const styles = StyleSheet.create({
     margin: 0,
   },
 });
+
+export default memo(DetailHeader);

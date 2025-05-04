@@ -1,11 +1,11 @@
 import { IconArrowRight } from '@/assets/icons/Icons';
 import { IDollar } from '@/interfaces/IDollar';
 import { TCurrency } from '@/types/TCurrency';
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
-export default function ConverterHeader({
+function ConverterHeader({
   data,
   arsCurrencyName,
   selectedIndex,
@@ -72,3 +72,5 @@ const styles = StyleSheet.create({
     marginRight: -2,
   },
 });
+
+export default memo(ConverterHeader);

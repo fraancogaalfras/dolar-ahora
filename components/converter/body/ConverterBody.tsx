@@ -1,10 +1,10 @@
 import { IconReverse } from '@/assets/icons/Icons';
 import { CARD_BACKGROUND_COLOR, CARD_BORDER_RADIUS, CARD_BOX_SHADOW, LINE_COLOR } from '@/constants/constants';
 import { ICurrency } from '@/interfaces/ICurrency';
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function ConverterBody({
+function ConverterBody({
   usdCurrency,
   arsCurrency,
   isReverse,
@@ -59,8 +59,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    borderWidth: 1,
-    borderColor: LINE_COLOR,
     boxShadow: CARD_BOX_SHADOW,
     paddingLeft: 15,
   },
@@ -79,3 +77,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default memo(ConverterBody);

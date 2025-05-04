@@ -1,8 +1,9 @@
 import { COLOURS, DOLLAR_DESCRIPTIONS, DOLLAR_MEANING, TRANSLATE_HOUSE_DESCRIPTION } from '@/constants/constants';
 import { TCasa } from '@/types/TCasa';
+import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function DetailFooter({ dollar }: { dollar: TCasa }) {
+function DetailFooter({ dollar }: { dollar: TCasa }) {
   const translated_house = TRANSLATE_HOUSE_DESCRIPTION[dollar];
   const dollar_meaning = DOLLAR_MEANING[dollar];
   const dollar_descriptions = DOLLAR_DESCRIPTIONS[dollar];
@@ -26,8 +27,9 @@ export default function DetailFooter({ dollar }: { dollar: TCasa }) {
 const styles = StyleSheet.create({
   container: {
     gap: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
     paddingTop: 10,
+    paddingBottom: 15,
   },
   title: {
     color: '#fff',
@@ -41,3 +43,5 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 });
+
+export default memo(DetailFooter);

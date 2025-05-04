@@ -2,11 +2,11 @@ import Loading from '@/components/loading/Loading';
 import { AppState, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import ErrorPage from './ErrorPage';
 import { MARGIN_TAB_BOTTOM } from '@/constants/constants';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Converter from '@/components/converter/Converter';
 import { useDollarContext } from '@/context/DollarContext';
 
-export default function ConverterPage() {
+function ConverterPage() {
   const currentState = useRef(AppState.currentState);
   const [appState, setAppState] = useState(currentState.current);
 
@@ -48,3 +48,5 @@ const styles = StyleSheet.create({
     marginBottom: MARGIN_TAB_BOTTOM,
   },
 });
+
+export default memo(ConverterPage);

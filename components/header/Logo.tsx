@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-export default function Logo() {
+function Logo() {
   return (
     <View style={styles.logoContainer}>
       <View>
@@ -20,3 +21,5 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
+
+export default memo(Logo);

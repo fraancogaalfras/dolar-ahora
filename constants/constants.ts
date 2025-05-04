@@ -8,12 +8,12 @@ export const DOLLAR_API = 'https://dolarapi.com/v1/dolares';
 export const HISTORIC_DOLLAR_API = 'https://api.argentinadatos.com/v1/cotizaciones/dolares';
 
 export const TAB_COLOR = 'rgba(9,9,11,1)';
-export const BACKGROUND_COLOR = 'rgb(12, 13, 20)';
+export const BACKGROUND_COLOR = '#1f2630';
 export const LINE_COLOR = '#2f3336';
 export const MARGIN_TAB_BOTTOM = 70;
 
-export const CARD_BACKGROUND_COLOR = 'rgb(34, 40, 51)';
-export const CARD_BOX_SHADOW = '0px 4px 12px rgba(32, 32, 32, 0.5)';
+export const CARD_BACKGROUND_COLOR = 'rgba(41, 49, 60, 1)';
+export const CARD_BOX_SHADOW = '0px 8px 15px rgba(15, 15, 15, 0.2)';
 export const CARD_BORDER_RADIUS = 20;
 export const CARD_WIDTH = 325;
 export const CARD_HEIGHT = 95;
@@ -62,71 +62,76 @@ export const TRANSLATE_HOUSE: Record<TCasa, TCurrency> = {
 export const TRANSLATE_HOUSE_DESCRIPTION: Record<TCasa, string> = {
   oficial: 'oficial',
   blue: 'blue',
-  bolsa: 'MEP (Mercado Electrónico de Pagos)',
-  contadoconliqui: 'CCL (Contado con liquidación)',
-  mayorista: 'MULC (Mayorista)',
+  bolsa: 'MEP',
+  contadoconliqui: 'CCL',
+  mayorista: 'MULC',
   cripto: 'cripto',
   tarjeta: 'tarjeta',
 };
 
 export const DOLLAR_MEANING: Record<TCasa, string> = {
-  oficial: 'Es el tipo de cambio regulado y fijado por el Banco Central de la República Argentina (BCRA), utilizado como referencia para operaciones comerciales y financieras en el país.',
-  blue: 'Es el tipo de cambio informal que surge del mercado paralelo y se negocia sin intervención del Banco Central de la República Argentina (BCRA).',
-  bolsa: 'También conocido como dólar bolsa, es un tipo de cambio legal que se obtiene mediante la compra de bonos en pesos y su venta en dólares dentro del mercado financiero argentino.',
-  contadoconliqui: 'Es un tipo de cambio financiero similar al MEP, pero con la diferencia de que permite transferir dólares al exterior.',
-  mayorista: 'Es el tipo de cambio utilizado en transacciones mayoristas entre bancos, grandes empresas, exportadores e importadores.',
+  oficial: 'Es el tipo de cambio regulado por el Banco Central de la República Argentina (BCRA), utilizado como referencia para operaciones comerciales y financieras.',
+  blue: 'Es el tipo de cambio informal que surge del mercado paralelo y se negocia sin intervención del BCRA.',
+  bolsa:
+    'Es un tipo de cambio legal que se obtiene mediante la compra de bonos en pesos y su venta en dólares dentro del mercado financiero argentino. Permite acceder a divisas sin restricciones y sin intervención del BCRA.',
+  contadoconliqui:
+    'Es un tipo de cambio financiero que se obtiene comprando bonos en pesos en Argentina y vendiéndolos en dólares en el extranjero. Es utilizado principalmente por empresas e inversores que desean dolarizarse y girar divisas fuera del país.',
+  mayorista:
+    'Es el tipo de cambio utilizado en transacciones mayoristas entre bancos, grandes empresas, exportadores e importadores.',
   cripto:
-    'Es el tipo de cambio basado en la compra de stablecoins (criptomonedas estables) como USDT, DAI o USDC, que equivalen a un dólar y pueden adquirirse sin intervención del Banco Central de la República Argentina (BCRA).',
-  tarjeta: 'Es el tipo de cambio que se aplica a compras y pagos en dólares realizados con tarjeta de crédito o débito en el exterior o en plataformas internacionales.',
+    'Es el tipo de cambio basado en la compra de stablecoins (criptomonedas estables) como USDT, DAI o USDC, que equivalen a un dólar y pueden adquirirse sin intervención del BCRA. Su cotización suele seguir de cerca al dólar blue.',
+  tarjeta:
+    'Es el tipo de cambio que se aplica a compras y pagos en dólares realizados con tarjeta de crédito o débito en el exterior o en plataformas internacionales.',
 };
 
 export const DOLLAR_DESCRIPTIONS: Record<TCasa, string[]> = {
   oficial: [
-    'Su cotización es determinada por el gobierno y se actualiza de manera controlada.',
-    'Solo se puede comprar en bancos y casas de cambio autorizadas.',
-    'Está sujeto a restricciones como el cepo cambiario, con un límite de USD 200 mensuales por persona.',
-    'Es la base para otros tipos de cambio que incluyen impuestos adicionales.',
-    'Se usa en operaciones de comercio exterior, importaciones y exportaciones.',
+    'Opera dentro de una banda de flotación entre $1.000 y $1.400 por dólar, establecida en abril de 2025.',
+    'El BCRA interviene solo si la cotización alcanza alguno de los extremos de la banda.',
+    'Se eliminó el límite mensual de USD 200 para la compra de dólares por personas físicas.',
+    'Disponible para la compra en bancos y casas de cambio autorizadas sin restricciones.',
+    'Utilizado como referencia para operaciones comerciales, importaciones y exportaciones.',
   ],
   blue: [
-    'Su precio varía según oferta/demanda, contexto político o especulación.',
+    'Cotiza en el mercado informal sin intervención del BCRA.',
+    'Tras la eliminación del cepo cambiario, su brecha con el dólar oficial se ha reducido significativamente.',
     'Se opera en efectivo, en cuevas o corredores informales.',
-    'Surge por restricciones al acceso legal de divisas.',
-    'Suele tener una cotización más alta que el oficial debido a la escasez de divisas y restricciones cambiarias.',
-    'Es utilizado como un termómetro de la economía y la confianza en el peso argentino.',
+    'Refleja la percepción del mercado sobre la economía y la confianza en el peso argentino.',
+    'Su cotización puede variar según la oferta y demanda, y el contexto político y económico.',
   ],
   bolsa: [
-    'Se opera a través de la Bolsa de Valores, sin intervención directa del Banco Central de la República Argentina (BCRA).',
-    'No tiene restricciones de cantidad, lo que lo convierte en una opción para dolarizarse sin pasar por el mercado informal.',
+    'Se obtiene mediante la compra de bonos en pesos y su venta en dólares dentro del mercado financiero argentino.',
+    'Permite acceder a dólares sin restricciones y sin intervención del BCRA.',
+    'No tiene límites de compra ni percepciones impositivas adicionales.',
     'Su valor fluctúa según la oferta y demanda de los bonos utilizados en la operación.',
-    "Puede implicar costos adicionales, como comisiones y el 'parking' (plazo mínimo de tenencia del bono antes de venderlo en dólares).",
-    'Es una alternativa segura y regulada para acceder a dólares sin cepo cambiario.',
+    'Es una alternativa legal y segura para dolarizarse sin pasar por el mercado informal.',
   ],
   contadoconliqui: [
     'Se obtiene comprando bonos en pesos en Argentina y vendiéndolos en dólares en el extranjero.',
-    'Es utilizado principalmente por empresas e inversores que desean dolarizarse y girar divisas fuera del país.',
-    'Su cotización es generalmente más alta que la del MEP debido a la mayor demanda.',
-    'Está sujeto a regulaciones que pueden afectar su disponibilidad y costo.',
+    'Utilizado principalmente por empresas e inversores para girar divisas fuera del país.',
+    'No está sujeto a restricciones ni percepciones impositivas adicionales.',
+    'Su cotización puede ser más alta que la del MEP debido a la demanda para transferencias al exterior.',
     'Es una herramienta clave para el comercio internacional y la protección de capitales frente a la devaluación del peso.',
   ],
   mayorista: [
-    'Es controlado directamente por el Banco Central de la República Argentina (BCRA) y su acceso está restringido a operadores financieros autorizados.',
-    'Su cotización es más baja que la del dólar oficial minorista, ya que no incluye impuestos ni percepciones.',
+    'Tipo de cambio utilizado en transacciones mayoristas entre bancos, grandes empresas, exportadores e importadores.',
+    'Opera dentro de la banda de flotación establecida por el gobierno desde abril de 2025.',
     'No está disponible para la compra del público en general.',
-    'Se usa como referencia para operaciones comerciales de gran volumen, como importaciones y exportaciones.',
-    'Es una variable clave en la economía, ya que impacta en los costos de los productos y servicios del país.',
+    'Su cotización es más baja que la del dólar oficial minorista, ya que no incluye impuestos ni percepciones.',
+    'Impacta en los costos de los productos y servicios del país, siendo una variable clave en la economía.',
   ],
   cripto: [
     'Se opera en exchanges y plataformas de criptomonedas como Binance, Lemon Cash o Ripio.',
     'Su cotización fluctúa según la oferta y demanda, pero generalmente sigue el valor del dólar blue.',
-    'No tiene restricciones de compra, lo que lo hace atractivo para dolarizarse sin cepo.',
+    'No tiene restricciones de compra ni percepciones impositivas adicionales.',
     'Permite transferencias de dinero a nivel global sin pasar por bancos o entidades financieras.',
     'Es una opción cada vez más popular para quienes buscan estabilidad en un contexto de alta inflación y devaluación del peso.',
   ],
   tarjeta: [
-    'Parte del dólar oficial, pero se le suma 30% en concepto de percepción a cuenta de Ganancias.',
-    'Se aplica a pagos de servicios internacionales como Netflix, Spotify, Amazon, y también a compras en el extranjero.',
-    'Puede ser más barato que el dólar blue dependiendo de la posibilidad de recuperar las percepciones en la declaración de impuestos.',
+    'Se aplica a compras y pagos en dólares realizados con tarjeta de crédito o débito en el exterior o en plataformas internacionales.',
+    'Desde abril de 2025, se eliminó el Impuesto PAIS, pero se mantiene una percepción del 30% a cuenta de los impuestos a las Ganancias y Bienes Personales.',
+    'Si los consumos en dólares se pagan con dólares propios en cuenta, no se aplica la percepción impositiva.',
+    'Es importante considerar esta percepción al calcular el costo total de las compras en dólares.',
     'Afecta a quienes viajan fuera del país o realizan compras en moneda extranjera sin tener dólares en efectivo.',
   ],
 };

@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { BACKGROUND_COLOR } from '@/constants/constants';
+import { memo } from 'react';
 
-export default function MainWrapper({ children }: { children: React.ReactNode }) {
+function MainWrapper({ children }: { children: React.ReactNode }) {
   return <View style={styles.mainWrapper}>{children}</View>;
 }
 
@@ -13,3 +14,5 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR,
   },
 });
+
+export default memo(MainWrapper);

@@ -45,9 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: LINE_COLOR,
     boxShadow: CARD_BOX_SHADOW,
   },
   left: {

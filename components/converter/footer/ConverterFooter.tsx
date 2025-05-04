@@ -1,7 +1,8 @@
 import { IDollar } from '@/interfaces/IDollar';
+import { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function ConverterFooter({ data, selectedIndex, usdCurrencyName }: { data: IDollar[]; selectedIndex: number; usdCurrencyName: string }) {
+function ConverterFooter({ data, selectedIndex, usdCurrencyName }: { data: IDollar[]; selectedIndex: number; usdCurrencyName: string }) {
   return (
     <View style={styles.conversionContainer}>
       <Text style={styles.textConversion}>
@@ -22,3 +23,5 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 });
+
+export default memo(ConverterFooter);

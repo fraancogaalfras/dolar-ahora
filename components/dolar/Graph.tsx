@@ -1,9 +1,9 @@
 import { COLOURS } from '@/constants/constants';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { View } from 'react-native';
 import { CartesianChart, Line } from 'victory-native';
 
-export default function Graph({ variation }: { variation: number }) {
+function Graph({ variation }: { variation: number }) {
   const chartDataset = useMemo(() => {
     return Array.from({ length: 5 }, (_, i) => ({
       label: i,
@@ -31,3 +31,5 @@ export default function Graph({ variation }: { variation: number }) {
     </View>
   );
 }
+
+export default memo(Graph);

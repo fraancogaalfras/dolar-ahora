@@ -1,9 +1,10 @@
 import { RANGES } from '@/constants/constants';
 import { TRange } from '@/types/TRange';
 import { router } from 'expo-router';
+import { memo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function DetailRanges({ rangeSelected }: { rangeSelected: TRange }) {
+function DetailRanges({ rangeSelected }: { rangeSelected: TRange }) {
   const handleOnPress = (range: TRange) => {
     router.setParams({ range: range });
   };
@@ -24,11 +25,11 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     paddingVertical: 10,
     flexDirection: 'row',
-    gap: 15,
-    paddingHorizontal: 20,
-    borderTopWidth: StyleSheet.hairlineWidth,
+    gap: 20,
+    paddingHorizontal: 9,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgb(65, 70, 73)',
+    justifyContent: 'space-evenly'
   },
   rangeTextContainer: {
     paddingVertical: 5,
@@ -38,6 +39,8 @@ const styles = StyleSheet.create({
   rangeText: {
     fontFamily: 'Rubik',
     color: 'rgba(255,255,255, 0.8)',
-    fontSize: 17,
+    fontSize: 16,
   },
 });
+
+export default memo(DetailRanges);

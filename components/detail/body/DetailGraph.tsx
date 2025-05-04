@@ -7,10 +7,10 @@ import { Rubik_500Medium } from '@expo-google-fonts/rubik';
 import { COLOURS } from '@/constants/constants';
 import { HandleDate } from '@/classes/date';
 import { Dollar } from '@/classes/dollar';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import ToolTip from './Tooltip';
 
-export default function DetailGraph({
+function DetailGraph({
   data,
   range,
   chartPressState,
@@ -94,7 +94,9 @@ export default function DetailGraph({
 const styles = StyleSheet.create({
   container: {
     height: 305,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgb(65, 70, 73)',
+    // borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderColor: 'rgb(65, 70, 73)',
   },
 });
+
+export default memo(DetailGraph);

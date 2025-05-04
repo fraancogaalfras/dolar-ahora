@@ -1,9 +1,9 @@
 import { useDollarContext } from '@/context/DollarContext';
 import { getLastUpdate } from '@/services/getLastUpdate';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function LastUpdate() {
+function LastUpdate() {
   const { data, isPending } = useDollarContext();
 
   const lastUpdate = useMemo(() => {
@@ -20,7 +20,6 @@ export default function LastUpdate() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: -10,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -33,3 +32,5 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 });
+
+export default memo(LastUpdate);

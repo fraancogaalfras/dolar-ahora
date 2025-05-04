@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import SpinningBills from './SpinningBills';
+import { memo } from 'react';
 
-export default function Loading() {
+function Loading() {
   return (
     <View style={styles.loadingWrapper}>
       <SpinningBills />
@@ -19,3 +20,5 @@ const styles = StyleSheet.create({
     paddingBottom: 70,
   },
 });
+
+export default memo(Loading);
