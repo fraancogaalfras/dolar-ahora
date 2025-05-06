@@ -2,7 +2,7 @@ import { AppState, FlatList, Platform, RefreshControl, SectionList, StyleSheet, 
 import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Loading from '@/components/loading/Loading';
 import ErrorPage from '@/views/ErrorPage';
-import { COLOURS, MARGIN_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
+import { CARD_HEIGHT, COLOURS, MARGIN_TAB_BOTTOM, TAB_COLOR } from '@/constants/constants';
 import { IDollar } from '@/interfaces/IDollar';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useDollarContext } from '@/context/DollarContext';
@@ -41,7 +41,7 @@ function DollarPage() {
 
   const renderItem = useCallback(({ item }: { item: IDollar }) => <Card nombre={item.nombre} casa={item.casa} venta={item.venta} variacion={item.variacion} />, [data]);
   const keyExtractor = useCallback((item: IDollar) => item.nombre, [data]);
-  const getItemLayout = useCallback((_: any, index: number) => ({ length: 100, offset: (95 + 30) * index, index }), []);
+  const getItemLayout = useCallback((_: any, index: number) => ({ length: CARD_HEIGHT, offset: (CARD_HEIGHT + 15) * index, index }), []);
 
   return data ? (
     <View style={styles.wrapper}>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   contentContainerStyle: {
     alignItems: 'center',
     paddingTop: 20,
-    gap: 20,
+    gap: 15,
   },
 });
 

@@ -2,7 +2,6 @@ import { IconConverter, IconDollar } from '@/assets/icons/Icons';
 import Header from '@/components/header/Header';
 import { BACKGROUND_COLOR, LINE_COLOR, MARGIN_TAB_BOTTOM } from '@/constants/constants';
 import { Tabs } from 'expo-router';
-import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
   return (
