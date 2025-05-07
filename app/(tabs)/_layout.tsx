@@ -2,6 +2,7 @@ import { IconConverter, IconDollar } from '@/assets/icons/Icons';
 import Header from '@/components/header/Header';
 import { BACKGROUND_COLOR, LINE_COLOR, MARGIN_TAB_BOTTOM } from '@/constants/constants';
 import { Tabs } from 'expo-router';
+import { Pressable } from 'react-native';
 
 export default function TabLayout() {
   return (
@@ -17,7 +18,7 @@ export default function TabLayout() {
           borderTopWidth: 1,
         },
         tabBarIconStyle: {
-          marginTop: 15,
+          marginTop: 10,
         },
         header: () => <Header />,
         headerStyle: {
@@ -30,6 +31,7 @@ export default function TabLayout() {
         name="index"
         options={{
           tabBarIcon: ({ focused }) => IconDollar({ opacity: focused ? 1 : 0.5 }),
+          tabBarButton: (props) => <Pressable {...props} android_ripple={{ color: 'transparent' }} />,
           tabBarLabel: 'Inicio',
           tabBarAccessibilityLabel: 'Inicio',
         }}
@@ -38,6 +40,7 @@ export default function TabLayout() {
         name="converter/index"
         options={{
           tabBarIcon: ({ focused }) => IconConverter({ opacity: focused ? 1 : 0.5 }),
+          tabBarButton: (props) => <Pressable {...props} android_ripple={{ color: 'transparent' }} />,
           tabBarLabel: 'Conversor',
           tabBarAccessibilityLabel: 'Conversor',
         }}
